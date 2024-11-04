@@ -35,7 +35,7 @@ const projects = [
 ];
 
 function ProjectPage() {
-  const [isPanelOpen,setIsPanelOpen] = useState(true);
+  const [isPanelOpen,setIsPanelOpen] = useState(false);
   return (
     <div className="bg-white rounded-lg shadow">
       <div className="p-2 border-b flex flex-col">
