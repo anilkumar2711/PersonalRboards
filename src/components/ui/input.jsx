@@ -1,10 +1,65 @@
 import React from 'react';
+import { TextField } from '@mui/material';
+import { styled } from '@mui/system';
+
+const StyledTextField = styled(TextField)(({ theme }) => ({
+  '& .MuiInputBase-root': {
+    height: '40px',
+    borderRadius: theme.shape?.borderRadius ?? 4,
+    backgroundColor: theme.palette?.background?.paper ?? '#fff',
+    transition: theme.transitions?.create?.([
+      'border-color',
+      'background-color',
+      'box-shadow',
+    ], {
+      duration: theme.transitions?.duration?.short ?? 250,
+    }),
+    '&:hover': {
+      backgroundColor: theme.palette?.action?.hover ?? 'rgba(0, 0, 0, 0.04)',
+    },
+    '&.Mui-focused': {
+      backgroundColor: theme.palette?.background?.paper ?? '#fff',
+      boxShadow: `0 0 0 2px ${theme.palette?.primary?.main ?? '#1976d2'}`,
+    },
+  },
+  '& .MuiInputBase-input': {
+    padding: '10px 12px',
+    fontSize: theme.typography?.fontSize ?? '0.875rem',
+    '&::placeholder': {
+      color: theme.palette?.text?.secondary ?? 'rgba(0, 0, 0, 0.6)',
+      opacity: '1',
+    },
+  },
+  '& .MuiOutlinedInput-notchedOutline': {
+    borderColor: theme.palette?.divider ?? 'rgba(0, 0, 0, 0.23)',
+  },
+  '&:hover .MuiOutlinedInput-notchedOutline': {
+    borderColor: theme.palette?.text?.primary ?? 'rgba(0, 0, 0, 0.87)',
+  },
+  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+    borderColor: theme.palette?.primary?.main ?? '#1976d2',
+    borderWidth: '2px',
+  },
+  '&.Mui-disabled': {
+    opacity: 0.5,
+    cursor: 'not-allowed',
+    '& .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.palette?.action?.disabledBackground ?? 'rgba(0, 0, 0, 0.12)',
+    },
+  },
+}));
 
 const Input = React.forwardRef(({ className = '', ...props }, ref) => {
   return (
-    <input
-      className={`flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
-      ref={ref}
+    <StyledTextField
+      variant="outlined"
+      fullWidth
+      inputRef={ref}
+      InputProps={{
+        classes: {
+          root: className,
+        },
+      }}
       {...props}
     />
   );

@@ -1,7 +1,14 @@
 import React from 'react';
+import { 
+  Card as MuiCard, 
+  CardHeader as MuiCardHeader, 
+  CardContent as MuiCardContent, 
+  CardActions as MuiCardActions, 
+  Typography
+} from '@mui/material';
 
 const Card = React.forwardRef(({ className, ...props }, ref) => (
-  <div
+  <MuiCard
     ref={ref}
     className={`rounded-lg border bg-card text-card-foreground shadow-sm ${className}`}
     {...props}
@@ -9,7 +16,7 @@ const Card = React.forwardRef(({ className, ...props }, ref) => (
 ));
 
 const CardHeader = React.forwardRef(({ className, ...props }, ref) => (
-  <div
+  <MuiCardHeader
     ref={ref}
     className={`flex flex-col space-y-1.5 p-6 ${className}`}
     {...props}
@@ -17,27 +24,30 @@ const CardHeader = React.forwardRef(({ className, ...props }, ref) => (
 ));
 
 const CardTitle = React.forwardRef(({ className, ...props }, ref) => (
-  <h3
+  <Typography
     ref={ref}
+    variant="h3"
+    component="h3"
     className={`text-2xl font-semibold leading-none tracking-tight ${className}`}
     {...props}
   />
 ));
 
 const CardDescription = React.forwardRef(({ className, ...props }, ref) => (
-  <p
+  <Typography
     ref={ref}
+    variant="body2"
     className={`text-sm text-muted-foreground ${className}`}
     {...props}
   />
 ));
 
 const CardContent = React.forwardRef(({ className, ...props }, ref) => (
-  <div ref={ref} className={`p-6 pt-0 ${className}`} {...props} />
+  <MuiCardContent ref={ref} className={`p-6 pt-0 ${className}`} {...props} />
 ));
 
 const CardFooter = React.forwardRef(({ className, ...props }, ref) => (
-  <div
+  <MuiCardActions
     ref={ref}
     className={`flex items-center p-6 pt-0 ${className}`}
     {...props}
@@ -52,5 +62,3 @@ CardContent.displayName = 'CardContent';
 CardFooter.displayName = 'CardFooter';
 
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
-
-

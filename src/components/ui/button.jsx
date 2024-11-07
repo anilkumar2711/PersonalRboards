@@ -1,30 +1,78 @@
 import React from 'react';
+import { Button as MuiButton } from '@mui/material';
+import { styled } from '@mui/system';
 
-const Button = React.forwardRef(({ className = '', variant = 'default', size = 'default', ...props }, ref) => {
-  const baseStyles = 'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';
-  
-  const variants = {
-    default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-    destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-    outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
-    secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-    ghost: 'hover:bg-accent hover:text-accent-foreground',
-    link: 'text-primary underline-offset-4 hover:underline',
+const StyledButton = styled(MuiButton)(({ theme, size, variant }) => {
+  const defaultFontSize = 14;
+  const defaultBorderRadius = 4;
+
+  return {
+    borderRadius: theme.shape?.borderRadius ?? defaultBorderRadius,
+    textTransform: 'none',
+    fontWeight: theme.typography?.fontWeightMedium ?? 500,
+    fontSize: theme.typography?.pxToRem?.(defaultFontSize) ?? `${defaultFontSize}px`,
+    transition: theme.transitions?.create?.(['background-color', 'box-shadow', 'border-color', 'color'], {
+      duration: theme.transitions?.duration?.short ?? 250,
+    }),
+    '&:focus-visible': {
+      outline: 'none',
+      boxShadow: `0 0 0 2px ${theme.palette?.background?.paper ?? '#fff'}, 0 0 0 4px ${theme.palette?.primary?.main ?? '#1976d2'}`,
+    },
+    '&:disabled': {
+      opacity: 0.5,
+      pointerEvents: 'none',
+    },
+    ...(size === 'sm' && {
+      padding: '4px 8px',
+      fontSize: theme.typography?.pxToRem?.(13) ?? '13px',
+    }),
+    ...(size === 'lg' && {
+      padding: '8px 16px',
+      fontSize: theme.typography?.pxToRem?.(16) ?? '16px',
+    }),
+    ...(size === 'icon' && {
+      minWidth: 40,
+      width: 40,
+      height: 40,
+      padding: 0,
+    }),
+    ...(variant === 'ghost' && {
+      backgroundColor: 'transparent',
+      '&:hover': {
+        backgroundColor: theme.palette?.action?.hover ?? 'rgba(0, 0, 0, 0.04)',
+      },
+    }),
+    ...(variant === 'link' && {
+      backgroundColor: 'transparent',
+      textDecoration: 'underline',
+      '&:hover': {
+        textDecoration: 'none',
+      },
+    }),
   };
+});
 
-  const sizes = {
-    default: 'h-10 px-4 py-2',
-    sm: 'h-9 rounded-md px-3',
-    lg: 'h-11 rounded-md px-8',
-    icon: 'h-10 w-10',
-  };
+const Button = React.forwardRef(({ className = '', variant = 'contained', size = 'medium', ...props }, ref) => {
+  const muiVariant = variant === 'default' ? 'contained' : 
+                     variant === 'destructive' ? 'contained' :
+                     variant === 'outline' ? 'outlined' :
+                     variant === 'secondary' ? 'contained' :
+                     variant === 'ghost' ? 'text' :
+                     variant === 'link' ? 'text' : variant;
 
-  const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
+  const muiColor = variant === 'destructive' ? 'error' : 'primary';
+
+  const muiSize = size === 'sm' ? 'small' :
+                  size === 'lg' ? 'large' :
+                  size === 'icon' ? 'medium' : size;
 
   return (
-    <button
-      className={classes}
+    <StyledButton
+      className={className}
       ref={ref}
+      variant={muiVariant}
+      color={muiColor}
+      size={muiSize}
       {...props}
     />
   );
