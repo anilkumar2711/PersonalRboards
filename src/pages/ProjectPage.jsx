@@ -36,6 +36,11 @@ const projects = [
 
 function ProjectPage() {
   const [isPanelOpen,setIsPanelOpen] = useState(false);
+  const [selectedProject,setSelectedProject] = useState({});
+  const handleProjectSelect = (project) =>{
+   setSelectedProject(project);
+   setIsPanelOpen(true);
+  }
   return (
     <div className="bg-white rounded-lg shadow">
       <div className="p-2 border-b flex flex-col">
@@ -60,16 +65,17 @@ function ProjectPage() {
       <ProjectDetailsPanel 
         isOpen={isPanelOpen} 
         onClose={() => setIsPanelOpen(false)}
-        project={{
-          name: "Sample Project: Biology Research",
-          owner: "Dr. Divakar Sadan",
-          status: "Planning",
-          completion: 30,
-          goals: "Research Goal",
-          priority: "Medium",
-          label: "Biology",
-          summary: "Detailed project summary goes here..."
-        }}
+        project={selectedProject}
+        // project={{
+        //   name: "Sample Project: Biology Research",
+        //   owner: "Dr. Divakar Sadan",
+        //   status: "Planning",
+        //   completion: 30,
+        //   goals: "Research Goal",
+        //   priority: "Medium",
+        //   label: "Biology",
+        //   summary: "Detailed project summary goes here..."
+        // }}
       />
       <Table>
         <TableHeader>
@@ -105,6 +111,7 @@ function ProjectPage() {
                 <div className='flex flex-row items-center text-base font-semibold text-txtblack'>
                   <img src={project.image} className="h-4 w-4 mr-2" alt={project.name} />
                   {project.name}
+                 <button><img src="button_image.png" className='ml-2' onClick={()=>handleProjectSelect(project)}/></button> 
                 </div>
               </TableCell>
               {/* <TableCell>
