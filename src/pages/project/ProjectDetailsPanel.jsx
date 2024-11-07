@@ -3,6 +3,7 @@
 import { Button } from "../../components/ui/button"
 import { Input } from "../../components/ui/input"
 import { Badge } from "../../components/ui/badge"
+import "./ProjectDetailsPanel";
 // import { ProgressInput} from "../../components/ui/ProgressInput"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "../../components/ui/table"
 import {  User, Flag, CalendarDays, Clock, Text ,ChevronsRight, MoveDiagonal2,ChevronsUpDown} from "lucide-react"
