@@ -5,7 +5,7 @@ import Header from './ui/Header';
 function Layout({ children }) {
   return (<>
     <Header />
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-in-screen bg-gray-100">
       <Sidebar />
       <div className="flex-1 flex flex-col" >
 

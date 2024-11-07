@@ -15,9 +15,10 @@ module.exports = {
         'inprog'  : '#BFC5D2',
         'doneblu' : '#C9DEFF',
         'plnng'   : '#FDD13A47',
-        
-        
       },
+      height: {
+        'in-screen': 'calc(100vh - 58px)',
+      }
     },
   },
   plugins: [],
