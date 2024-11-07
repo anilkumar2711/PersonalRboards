@@ -1,27 +1,62 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { 
+  Button, 
+  Menu, 
+  MenuItem, 
+  Typography, 
+  Link,
+  ClickAwayListener
+} from '@mui/material';
+import { styled } from '@mui/system';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
-const Dropdown = (props) => {
-  const { options, placeholder, hasDropIcon=true,optionTag="button",tarnsperent=true } = props;
-  const [isOpen, setIsOpen] = useState(false);
+const StyledButton = styled(Button)(({ theme, transparent }) => ({
+  justifyContent: 'space-between',
+  width: '100%',
+  padding: theme?.spacing?.(1, 2) ?? '8px 16px',
+  color: theme?.palette?.text?.primary ?? '#000',
+  backgroundColor: transparent ? 'transparent' : (theme?.palette?.background?.paper ?? '#fff'),
+  border: transparent ? 'none' : `1px solid ${theme?.palette?.divider ?? '#e0e0e0'}`,
+  '&:hover': {
+    backgroundColor: transparent ? 'rgba(0, 0, 0, 0.04)' : (theme?.palette?.action?.hover ?? '#f5f5f5'),
+  },
+  '&:focus': {
+    outline: 'none',
+    boxShadow: `0 0 0 2px ${theme?.palette?.primary?.main ?? '#1976d2'}`,
+  },
+}));
+
+const Dropdown = ({ 
+  options = [], 
+  placeholder = 'Select an option', 
+  hasDropIcon = true, 
+  optionTag = "button", 
+  transparent = true 
+}) => {
+  const [anchorEl, setAnchorEl] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
-  const dropdownRef = useRef(null);
+  const buttonRef = useRef(null);
 
-  const toggleDropdown = () => {
-    setIsOpen((prev) => !prev);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
-    setIsOpen(false);
-  };
-
-  const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsOpen(false);
-    }
+    handleClose();
   };
 
   useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (buttonRef.current && !buttonRef.current.contains(event.target)) {
+        handleClose();
+      }
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -29,40 +64,54 @@ const Dropdown = (props) => {
   }, []);
 
   return (
-    <div className="relative inline-block text-left" ref={dropdownRef}>
+    <ClickAwayListener onClickAway={handleClose}>
       <div>
-        <button
-          onClick={toggleDropdown}
-          className={`inline-flex justify-between w-full rounded-md shadow-sm px-4 py-2 ${tarnsperent?'':'bg-white border border-gray-300 '}text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+        <StyledButton
+          ref={buttonRef}
+          onClick={handleClick}
+          endIcon={hasDropIcon ? <KeyboardArrowDownIcon /> : null}
+          transparent={transparent}
         >
-          {selectedOption ? selectedOption.label : placeholder}
-          {
-             hasDropIcon && <svg className="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-             <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06-.02L10 10.793l3.71-3.61a.75.75 0 111.04 1.08l-4.25 4.25a.75.75 0 01-1.06 0l-4.25-4.25a.75.75 0 01-.02-1.06z" clipRule="evenodd" />
-           </svg>
-          }
-        </button>
-      </div>
-
-      {isOpen && (
-        <div className={"absolute right-0 z-10 mt-2 w-full min-w-fit rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"}>
-          <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-            {options.map((option) => (
-              optionTag=="button"?
-              <button
-                key={option.value}
+          <Typography variant="body2">
+            {selectedOption ? selectedOption.label : placeholder}
+          </Typography>
+        </StyledButton>
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+        >
+          {Array.isArray(options) && options.map((option) => (
+            optionTag === "button" ? (
+              <MenuItem 
+                key={option.value} 
                 onClick={() => handleOptionClick(option)}
-                className="whitespace-nowrap block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                role="menuitem"
+                sx={{ whiteSpace: 'nowrap' }}
               >
                 {option.label}
-              </button>:
-              <a className="whitespace-nowrap block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left" href={option.value} >{option.label}</a>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
+              </MenuItem>
+            ) : (
+              <MenuItem 
+                key={option.value}
+                component={Link}
+                href={option.value}
+                sx={{ whiteSpace: 'nowrap' }}
+              >
+                {option.label}
+              </MenuItem>
+            )
+          ))}
+        </Menu>
+      </div>
+    </ClickAwayListener>
   );
 };
 
