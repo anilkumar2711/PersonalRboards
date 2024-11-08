@@ -31,7 +31,8 @@ const Dropdown = ({
   placeholder = 'Select an option', 
   hasDropIcon = true, 
   optionTag = "button", 
-  transparent = true 
+  transparent = true,
+  renderOption
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -63,6 +64,16 @@ const Dropdown = ({
     };
   }, []);
 
+  const renderOptionContent = (option) => {
+    if (renderOption) {
+      return renderOption(option);
+    }
+    if (typeof option.label === 'string') {
+      return <span dangerouslySetInnerHTML={{ __html: option.label }} />;
+    }
+    return option.label;
+  };
+
   return (
     <ClickAwayListener onClickAway={handleClose}>
       <div>
@@ -73,7 +84,7 @@ const Dropdown = ({
           transparent={transparent}
         >
           <Typography variant="body2">
-            {selectedOption ? selectedOption.label : placeholder}
+            {selectedOption ? renderOptionContent(selectedOption) : placeholder}
           </Typography>
         </StyledButton>
         <Menu
@@ -96,7 +107,7 @@ const Dropdown = ({
                 onClick={() => handleOptionClick(option)}
                 sx={{ whiteSpace: 'nowrap' }}
               >
-                {option.label}
+                {renderOptionContent(option)}
               </MenuItem>
             ) : (
               <MenuItem 
@@ -105,7 +116,7 @@ const Dropdown = ({
                 href={option.value}
                 sx={{ whiteSpace: 'nowrap' }}
               >
-                {option.label}
+                {renderOptionContent(option)}
               </MenuItem>
             )
           ))}
