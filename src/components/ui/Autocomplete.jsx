@@ -9,7 +9,7 @@ const StyledAutocomplete = styled(MuiAutocomplete)(({ theme }) => ({
   '& .MuiInputBase-root': {
     height: '40px',
     borderRadius: theme.shape?.borderRadius ?? 4,
-    backgroundColor: theme.palette?.background?.paper ?? '#fff',
+    // backgroundColor: theme.palette?.background?.paper ?? '#fff',
     transition: theme.transitions?.create?.([
       'border-color',
       'background-color',
@@ -18,7 +18,7 @@ const StyledAutocomplete = styled(MuiAutocomplete)(({ theme }) => ({
       duration: theme.transitions?.duration?.short ?? 250,
     }),
     '&:hover': {
-      backgroundColor: theme.palette?.action?.hover ?? 'rgba(0, 0, 0, 0.04)',
+      // backgroundColor: theme.palette?.action?.hover ?? 'rgba(0, 0, 0, 0.04)',
     },
     '&.Mui-focused': {
       backgroundColor: theme.palette?.background?.paper ?? '#fff',
@@ -45,6 +45,9 @@ const StyledAutocomplete = styled(MuiAutocomplete)(({ theme }) => ({
   },
 }));
 
+const getOptionValue = (option,attrib='value')=>(typeof option == "string"?option:option[attrib]);
+const getOption = (options,value)=>(options.find(v => typeof v=='string'? v==value : v.value == value));
+
 const Autocomplete = React.forwardRef(({ 
   className = '', 
   options = [], 
@@ -57,10 +60,13 @@ const Autocomplete = React.forwardRef(({
 }, ref) => {
   const [localValue, setLocalValue] = useState(propValue ?? null);
   const [localInputValue, setLocalInputValue] = useState(propInputValue ?? '');
-
+  const [selectedOption, setSelectedOption] = useState(getOption(options,propValue)||{});
+  const placeholderColor = getOptionValue(selectedOption,'color');
+  console.log({placeholderColor});
   useEffect(() => {
     if (propValue !== undefined) {
       setLocalValue(propValue);
+      setSelectedOption(getOption(options,propValue));
     }
   }, [propValue]);
 
@@ -73,6 +79,7 @@ const Autocomplete = React.forwardRef(({
   const handleChange = (event, newValue) => {
     let selectedValue = typeof newValue === "string" ? newValue : newValue.value;
     setLocalValue(selectedValue);
+    setSelectedOption(newValue);
     propOnChange && propOnChange(event, selectedValue,newValue);
   };
 
@@ -90,7 +97,7 @@ const Autocomplete = React.forwardRef(({
   return (
     <StyledAutocomplete
       options={options}
-      renderInput={(params) => <TextField {...params} {...props} />}
+      renderInput={(params) => <TextField {...params} {...props} sx={{backgroundColor:placeholderColor}} />}
       renderOption={renderOption || defaultRenderOption}
       value={localValue}
       onChange={handleChange}

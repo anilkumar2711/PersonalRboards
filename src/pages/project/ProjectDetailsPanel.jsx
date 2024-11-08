@@ -30,7 +30,10 @@ export default function ProjectDetailsPanel(props) {
             {option.label}
         </li>
     );
-    const priorityOptions = ["High","Medium","Low"]
+    const priorityOptions = [  {value:"High",label:"High", color:"#BFC5D2"},
+        {value:"Medium",label:"Medium", color:"#C9DEFF"},
+        {value:"Low",label:"Low", color:"#FDD13A47"}]
+
     const [relatedProjects] = useState([
         { name: "Sample Project 1", status: "In Progress", owner: "Dr. Divakar Sadan", priority: "Medium",},
         { name: "Sample Project 2", status: "Planning", owner: "Dr. Divakar Sadan", priority: "Medium",},
@@ -114,7 +117,7 @@ export default function ProjectDetailsPanel(props) {
                                 <div className="flex items-center gap-2">
                                     <Flag className="h-4 w-4 text-muted-foreground" />
                                     <span className="text-sm w-24">Priority</span>
-                                    <Input name="priority" type="search" options={priorityOptions} value={project.priority} className="h-8 text-sm" />
+                                    <Input name="priority" type="search" options={priorityOptions} renderOption={renderStatusOption}  value={project.priority} className="h-8 text-sm" />
                                 </div>
 
                                 <div className="flex items-center gap-2">
