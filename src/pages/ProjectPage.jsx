@@ -12,7 +12,7 @@ const projects = [
     owner: "Dr. Divakar Sada...",
     dates: "July 3, 2024 to August 30",
     priority: "Medium",
-    completion: 0
+    completion: 30
   },
   {
     image:"research.png",

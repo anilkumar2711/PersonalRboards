@@ -11,6 +11,13 @@ import { useState } from "react"
 import { BsLayoutSidebarInsetReverse } from "react-icons/bs";
 import { PiChartPieSliceFill } from "react-icons/pi";
 import { MdOutlineLabel } from "react-icons/md";
+import { Autocomplete, TextField } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateRangePicker, SingleInputDateRangeField } from '@mui/x-date-pickers-pro';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+// import { CalendarDays } from '@mui/icons-material';
+import dayjs from 'dayjs';
 
 
 export default function ProjectDetailsPanel(props) {
@@ -35,8 +42,29 @@ export default function ProjectDetailsPanel(props) {
         { name: "Sample Project 4", status: "Planning", owner: "Dr. Divakar Sadan",priority: "Medium", },
         { name: "Sample Project 5", status: "Planning", owner: "Dr. Divakar Sadan",priority: "Medium", },
     ]) 
+    const statusColors = {
+        "In Progress": "#BFC5D2",
+        "Done": "#C9DEFF",
+        "Planning": "#FDD13A47",
+        
+      };
+    // const [status, setStatus] = useState(project.status);
+    // const statusOptions = ["In Progress", "Completed", "Planning", "On Hold"];
+      const [status, setStatus] = useState(project.status);
+      const statusOptions = ["In Progress", "Done", "Planning"];
+      const [selectedDates, setSelectedDates] = useState(project.dates || [null, null]);
 
+      const handleDateChange = (newDates) => {
+        setSelectedDates(newDates);
     
+        // Format selected dates into a readable string
+        const formattedDates = newDates[0] && newDates[1]
+          ? `${dayjs(newDates[0]).format('MM/DD/YYYY')} - ${dayjs(newDates[1]).format('MM/DD/YYYY')}`
+          : '';
+          
+        // Optionally, update `project.dates` if needed
+        project.dates = formattedDates;
+      };
     return (
         <>
             {/* Backdrop */}
@@ -78,12 +106,51 @@ export default function ProjectDetailsPanel(props) {
                                 <div className="flex items-center gap-2">
                                     <Clock className="h-4 w-4 text-muted-foreground" />
                                     <span className="text-sm w-24">Status</span>
-                                    <Input value={project.status} className="h-8 text-sm bg-pjctblue" />
-                                </div>
+                                    {/* <Input value={project.status} className="h-8 text-sm bg-pjctblue" /> */}
+                                   
+                                    <Autocomplete className="text-sm" value={status}
+                                          onChange={(event, newValue) => {
+                                          setStatus(newValue);
+                                         }}
+                                          options={statusOptions} disableClearable popupIcon={null}
+                                          renderInput={(params) => (
+                                         <TextField {...params} variant="outlined"sx={{ height: "30px",
+                                             width: "200px",
+                                             backgroundColor: statusColors[status] || "#fff", // Set background based on status
+                                             "& .MuiOutlinedInput-root": {
+                                              padding: "4px 8px",
+                                              fontSize: "0.875rem", },
+                                            "& .MuiInputBase-root": {height: "100%", },}}/>
+                                             )}
+                                             renderOption={(props, option) => (
+                                            <li
+                                             {...props}
+                                             style={{
+                                             backgroundColor: statusColors[option] || "#fff",
+                                             fontSize: "0.875rem",
+                                             padding: "8px 16px",
+                                             }}
+                                             >
+                                              {option}
+                                               </li>
+                                                 )}
+                                                />
+                                            </div>
 
                                 <div className="flex items-center gap-2">
                                     <PiChartPieSliceFill className="h-4 w-4 text-muted-foreground" />
                                     <span className="text-sm w-24">Completion</span>
+                                    <div className="completion-text flex flex-row items-center" style={{ marginTop: "5px", color: "#565656" }}>
+                                          {project.completion}%
+                                           
+                                         <div className="completion-bar ml-2" style={{
+                                        width: project.completion,
+                                        backgroundColor: "#24A249",
+                                        height: "10px",
+                                        borderRadius: "10px"
+                                        }} />
+                                </div>
+                                        
                                     {/* <div className="flex-1">
                                         <div className="w-full bg-gray-200 rounded-full h-2">
                                             <div
@@ -96,11 +163,33 @@ export default function ProjectDetailsPanel(props) {
                                 </div>
 
                                 <div className="flex items-center gap-2">
-                                    <CalendarDays className="h-4 w-4 text-muted-foreground" />
-                                    <span className="text-sm w-24">Dates</span>
-                                    <Input value={project.dates} className="h-8  text-sm" />
-                                </div>
-
+      <CalendarDays className="h-4 w-4 text-muted-foreground" />
+      <span className="text-sm w-24">Dates</span>
+      
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DemoContainer components={['SingleInputDateRangeField']}>
+          <DateRangePicker
+            value={selectedDates}
+            onChange={handleDateChange}
+            slots={{ field: SingleInputDateRangeField }} // Use SingleInputDateRangeField for one input
+            slotProps={{
+              textField: { size: 'small' },
+            }}
+          />
+        </DemoContainer>
+      </LocalizationProvider>
+      
+      {/* Display the selected date range in Input field */}
+      {/* <Input
+        value={
+          selectedDates[0] && selectedDates[1]
+            ? `${dayjs(selectedDates[0]).format('MM/DD/YYYY')} - ${dayjs(selectedDates[1]).format('MM/DD/YYYY')}`
+            : ''
+        }
+        className="h-8 text-sm"
+        readOnly
+      /> */}
+    </div>
                                 <div className="flex items-center gap-2">
                                     <Flag className="h-4 w-4 text-muted-foreground" />
                                     <span className="text-sm w-24">Priority</span>
