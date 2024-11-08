@@ -30,9 +30,11 @@ export default function ProjectDetailsPanel(props) {
             {option.label}
         </li>
     );
-    const priorityOptions = [  {value:"High",label:"High", color:"#BFC5D2"},
-        {value:"Medium",label:"Medium", color:"#C9DEFF"},
-        {value:"Low",label:"Low", color:"#FDD13A47"}]
+    const priorityOptions = [  {value:"Urgent",label:"Urgent", color:"#F81111"},
+        {value:"High",label:"High", color:"#24A249"},
+        {value:"Medium",label:"Medium", color:"#9266F5"},
+        {value:"Low",label:"Low", color:"#B3ABAB"}
+    ]
 
     const [relatedProjects] = useState([
         { name: "Sample Project 1", status: "In Progress", owner: "Dr. Divakar Sadan", priority: "Medium",},
