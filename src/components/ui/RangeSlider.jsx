@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Slider, Typography, Box } from '@mui/material';
-import { styled, width } from '@mui/system';
+import { styled } from '@mui/system';
 
 const StyledSlider = styled(Slider)(({ theme }) => ({
   color: theme.palette?.primary?.main ?? '#1976d2',
@@ -46,23 +46,44 @@ const StyledSlider = styled(Slider)(({ theme }) => ({
   },
 }));
 
+const ValueTag = styled(Typography)(({ theme }) => ({
+  display: 'inline-block',
+  padding: '2px 6px',
+  borderRadius: '4px',
+  backgroundColor: theme.palette?.primary?.main ?? '#1976d2',
+  color: theme.palette?.primary?.contrastText ?? '#ffffff',
+  fontSize: '0.75rem',
+  fontWeight: 'bold',
+  marginTop: '8px',
+}));
+
 const RangeSlider = React.forwardRef(({ 
   className = '', 
   label,
   min = 0,
   max = 100,
   step = 1,
-  value:defaultValue = [min, max],
+  value: defaultValue = [min, max],
+  onChange,
   ...props 
 }, ref) => {
-  const [value,setValue] = useState(defaultValue);
-  useEffect(()=>{
-    setValue(defaultValue);
-  },[defaultValue]);
+  const [value, setValue] = useState(defaultValue);
 
+  useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    onChange && onChange(event, newValue);
+  };
+
+  const calculatePercentage = (val) => {
+    return Math.round(((val - min) / (max - min)) * 100);
+  };
 
   return (
-    <Box className={className} style={{width:'100%'}}>
+    <Box className={className} style={{width: '100%'}}>
       {label && (
         <Typography id="range-slider" gutterBottom>
           {label}
@@ -75,9 +96,14 @@ const RangeSlider = React.forwardRef(({
         step={step}
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
-        {...props}
         value={value}
+        onChange={handleChange}
+        {...props}
       />
+      <Box display="flex" justifyContent="space-between">
+          {min !=value[0] &&  <ValueTag>{calculatePercentage(value[0])}%</ValueTag> }
+          {max !=value[1] &&  <ValueTag>{calculatePercentage(value[1])}%</ValueTag> }
+      </Box>
     </Box>
   );
 });
