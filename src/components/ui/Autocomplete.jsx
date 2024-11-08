@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { TextField } from '@mui/material';
-import { styled } from '@mui/system';
-import Autocomplete from './Autocomplete';
-import DateRangePicker from './DateRangePicker';
-import Textarea from './Textarea';
+import React, { useState, useEffect } from 'react';
+import { Autocomplete as MuiAutocomplete, TextField } from '@mui/material';
+import { styled, width } from '@mui/system';
 
-const StyledTextField = styled(TextField)(({ theme }) => ({
+const StyledAutocomplete = styled(MuiAutocomplete)(({ theme }) => ({
+  '&': {
+    width:'100%'
+  },
   '& .MuiInputBase-root': {
     height: '40px',
     borderRadius: theme.shape?.borderRadius ?? 4,
@@ -43,57 +43,53 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
     borderColor: theme.palette?.primary?.main ?? '#1976d2',
     borderWidth: '2px',
   },
-  '&.Mui-disabled': {
-    opacity: 0.5,
-    cursor: 'not-allowed',
-    '& .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette?.action?.disabledBackground ?? 'rgba(0, 0, 0, 0.12)',
-    },
-  },
 }));
 
-const Input = React.forwardRef(({ className = '', type = 'text', ...props }, ref) => {
+const Autocomplete = React.forwardRef(({ 
+  className = '', 
+  options = [], 
+  renderOption,
+  ...props 
+}, ref) => {
   const [value, setValue] = useState(props.value);
-
-  const handleChange = (e) => {
-    setValue(e.target.value);
-    props.onChange && props.onChange(e);
-  };
+  const [inputValue, setInputValue] = useState(props.value);
 
   useEffect(() => {
     setValue(props.value);
+    setInputValue(props.value);
   }, [props.value]);
 
-  if (type === 'search') {
-    return <Autocomplete {...props} ref={ref} />;
-  }
-
-  if (type === 'daterange') {
-    return <DateRangePicker {...props} ref={ref} />;
-  }
-
-  if (type === 'textarea') {
-    return <Textarea {...props} ref={ref} />;
-  }
+  const defaultRenderOption = (props, option) => (
+    <li {...props}>
+        {typeof option == "string"? option: option.label}
+    </li>
+  );
 
   return (
-    <StyledTextField
-      variant="outlined"
-      fullWidth
-      inputRef={ref}
-      InputProps={{
-        classes: {
-          root: className,
-        },
-      }}
-      {...props}
-      onChange={(...args)=>handleChange(...args)}
+    <StyledAutocomplete
+      options={options}
+      renderInput={(params) => <TextField {...params} {...props} />}
+      renderOption={renderOption || defaultRenderOption}
       value={value}
-      type={type}
+      onChange={(event, newValue) => {
+        setValue(newValue);
+        if (props.onChange) {
+          props.onChange(event, newValue);
+        }
+      }}
+      inputValue={inputValue}
+      onInputChange={(event, newInputValue) => {
+        setInputValue(newInputValue);
+        if (props.onInputChange) {
+          props.onInputChange(event, newInputValue);
+        }
+      }}
+      ref={ref}
+      {...props}
     />
   );
 });
 
-Input.displayName = 'Input';
+Autocomplete.displayName = 'Autocomplete';
 
-export { Input };
+export default Autocomplete;

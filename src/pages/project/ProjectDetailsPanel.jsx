@@ -18,6 +18,17 @@ export default function ProjectDetailsPanel(props) {
         onClose,
         project
     } = props;
+    const statusOptions = [
+        {value:"In Progress",label:"In Progress", color:"#BFC5D2"},
+        {value:"Done",label:"Done", color:"#C9DEFF"},
+        {value:"Planning",label:"Planning", color:"#FDD13A47"}
+    ];
+    const renderStatusOption = (props, option) => (
+        <li {...props} style={{backgroundColor:option.color}} >
+            {option.label}
+        </li>
+    );
+    const priorityOptions = ["High","Medium","Low"]
     const [relatedProjects] = useState([
         { name: "Sample Project 1", status: "In Progress", owner: "Dr. Divakar Sadan", priority: "Medium",},
         { name: "Sample Project 2", status: "Planning", owner: "Dr. Divakar Sadan", priority: "Medium",},
@@ -45,9 +56,9 @@ export default function ProjectDetailsPanel(props) {
                     {/* Header */}
                     <div className="flex flex-row px-4 mt-4 gap-1">
                       <button> <ChevronsRight className="w-8 h-8" onClick={onClose}></ChevronsRight></button>  
-                     <MoveDiagonal2 className="w-6 h-8 items-center"></MoveDiagonal2>
+                     {/* <MoveDiagonal2 className="w-6 h-8 items-center"></MoveDiagonal2>
                      <BsLayoutSidebarInsetReverse className="w-6 h-8 ml-2  items-center"></BsLayoutSidebarInsetReverse>
-                     <ChevronsUpDown className="w-6 h-8 ml-2  items-center"> </ChevronsUpDown>
+                     <ChevronsUpDown className="w-6 h-8 ml-2  items-center"> </ChevronsUpDown> */}
                     </div>
                     <div className="p-4 border-b flex items-center justify-between">
                         <h2 className="text-lg font-semibold">{project.name}</h2>
@@ -70,7 +81,7 @@ export default function ProjectDetailsPanel(props) {
                                 <div className="flex items-center gap-2">
                                     <Clock className="h-4 w-4 text-muted-foreground" />
                                     <span className="text-sm w-24">Status</span>
-                                    <Input value={project.status} className="h-8 text-sm bg-pjctblue" />
+                                    <Input type="search" options={statusOptions} renderOption={renderStatusOption} value={project.status} className="h-8 text-sm bg-pjctblue" />
                                 </div>
 
                                 <div className="flex items-center gap-2">
@@ -90,13 +101,13 @@ export default function ProjectDetailsPanel(props) {
                                 <div className="flex items-center gap-2">
                                     <CalendarDays className="h-4 w-4 text-muted-foreground" />
                                     <span className="text-sm w-24">Dates</span>
-                                    <Input value={project.dates} className="h-8  text-sm" />
+                                    <Input type="daterange" value={project.dates} className="h-8 text-sm w-100" />
                                 </div>
 
                                 <div className="flex items-center gap-2">
                                     <Flag className="h-4 w-4 text-muted-foreground" />
                                     <span className="text-sm w-24">Priority</span>
-                                    <Input value={project.priority} className="h-8 text-sm" />
+                                    <Input type="search" options={priorityOptions} value={project.priority} className="h-8 text-sm" />
                                 </div>
 
                                 <div className="flex items-center gap-2">
@@ -110,7 +121,7 @@ export default function ProjectDetailsPanel(props) {
                                         <Text className="h-4 w-4 text-muted-foreground" />
                                         <span className="text-sm">Summary</span>
                                     </div>
-                                    <Input value={project.summary} className="h-20  text-sm" />
+                                    <Input type="textarea" value={project.summary} className="h-20  text-sm" />
                                 </div>
                             </div>
 
