@@ -77,7 +77,7 @@ export default function ProjectDetailsPanel(props) {
                     <div className="flex-1 overflow-auto py-2 px-4">
                         <div className="space-y-2">
                             {/* Project Details */}
-                            <Form className="space-y-4" onSubmit={handleSubmit}>
+                            <Form onSubmit={handleSubmit}>
                                 <div className="flex items-center gap-2">
                                     <User className="h-4 w-4 text-muted-foreground" />
                                     <span className="text-sm w-24">Owner</span>
@@ -160,9 +160,9 @@ export default function ProjectDetailsPanel(props) {
                                                 <TableCell>{project.owner}</TableCell>
                                                 <TableCell>{project.priority}</TableCell>
                                                 <TableCell>
-                                                    <Button className="flex flex-row h-8 px-2 bg-actgrey justify-center items-center ">
-                                                    <BsLayoutSidebarInsetReverse className="w-8 h-6"/>
-                                                    <span className="px-2 ">OPEN</span>
+                                                    <Button className="w-full flex flex-row h-8 px-2 bg-actgrey justify-center items-center ">
+                                                        <BsLayoutSidebarInsetReverse className="w-8 h-6"/>
+                                                        <span className="px-2 ">OPEN</span>
                                                     </Button>
                                                 
                                                 {/* <img src="button_image.png" alt="priority"/> */}
