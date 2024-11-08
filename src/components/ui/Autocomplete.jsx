@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Autocomplete as MuiAutocomplete, TextField } from '@mui/material';
-import { styled, width } from '@mui/system';
+import { styled } from '@mui/system';
 
 const StyledAutocomplete = styled(MuiAutocomplete)(({ theme }) => ({
   '&': {
@@ -49,19 +49,41 @@ const Autocomplete = React.forwardRef(({
   className = '', 
   options = [], 
   renderOption,
+  value: propValue,
+  onChange: propOnChange,
+  inputValue: propInputValue,
+  onInputChange: propOnInputChange,
   ...props 
 }, ref) => {
-  const [value, setValue] = useState(props.value);
-  const [inputValue, setInputValue] = useState(props.value);
+  const [localValue, setLocalValue] = useState(propValue ?? null);
+  const [localInputValue, setLocalInputValue] = useState(propInputValue ?? '');
 
   useEffect(() => {
-    setValue(props.value);
-    setInputValue(props.value);
-  }, [props.value]);
+    if (propValue !== undefined) {
+      setLocalValue(propValue);
+    }
+  }, [propValue]);
+
+  useEffect(() => {
+    if (propInputValue !== undefined) {
+      setLocalInputValue(propInputValue);
+    }
+  }, [propInputValue]);
+
+  const handleChange = (event, newValue) => {
+    let selectedValue = typeof newValue === "string" ? newValue : newValue.value;
+    setLocalValue(selectedValue);
+    propOnChange && propOnChange(event, selectedValue,newValue);
+  };
+
+  const handleInputChange = (event, newInputValue) => {
+    setLocalInputValue(newInputValue);
+    propOnInputChange && propOnInputChange(event, newInputValue);
+  };
 
   const defaultRenderOption = (props, option) => (
     <li {...props}>
-        {typeof option == "string"? option: option.label}
+      {typeof option == "string"? option: option.label}
     </li>
   );
 
@@ -70,21 +92,10 @@ const Autocomplete = React.forwardRef(({
       options={options}
       renderInput={(params) => <TextField {...params} {...props} />}
       renderOption={renderOption || defaultRenderOption}
-      value={value}
-      onChange={(event, newValue,...args) => {
-        let selectedValue = typeof newValue === "string" ? newValue : newValue.value;
-        setValue(selectedValue);
-        if (props.onChange) {
-          props.onChange(event, selectedValue,newValue);
-        }
-      }}
-      inputValue={inputValue}
-      onInputChange={(event, newInputValue,...args) => {
-        setInputValue(newInputValue);
-        if (props.onInputChange) {
-          props.onInputChange(event, newInputValue);
-        }
-      }}
+      value={localValue}
+      onChange={handleChange}
+      inputValue={localInputValue}
+      onInputChange={handleInputChange}
       ref={ref}
       {...props}
     />
