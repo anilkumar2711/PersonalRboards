@@ -7,7 +7,7 @@ import { Form } from "../../components/ui/Form";
 
 // import { ProgressInput} from "../../components/ui/ProgressInput"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "../../components/ui/table"
-import {  User, Flag, CalendarDays, Clock, Text ,ChevronsRight, MoveDiagonal2,ChevronsUpDown} from "lucide-react"
+import {  User, Flag,Ellipsis,Plus, CalendarDays, Clock, Search,Text ,ChevronsRight, MoveDiagonal2,ChevronsUpDown} from "lucide-react"
 import { useState } from "react"
 import { BsLayoutSidebarInsetReverse } from "react-icons/bs";
 import { PiChartPieSliceFill } from "react-icons/pi";
@@ -143,8 +143,18 @@ export default function ProjectDetailsPanel(props) {
                             </Form>
 
                             {/* Related Projects */}
-                            <div className="space-y-2">
-                                <h3 className="text-sm font-medium">Related Projects</h3>
+                            <div className="space-y-3">
+                                <div className=" flex flex-row justify-between">
+                                    <div className=" flex flex-row items-center">
+                                    <img src="correctTask.png" alt="correct"/>
+                                    <h5 className="pl-4 text-txtblack text-base font-semibold"> Tasks </h5>
+                                    </div>
+                                    <div className="flex flex-row items-center h-14 w-14" >
+                                        <Search/>
+                                        <Plus />
+                                        <Ellipsis/>
+                                    </div>
+                                </div>
                                 <Table>
                                     {/* <TableHeader>
                                         <TableRow>
@@ -158,17 +168,19 @@ export default function ProjectDetailsPanel(props) {
                                     <TableBody>
                                         {relatedProjects.map((project, index) => (
                                             <TableRow key={index}>
-                                                <TableCell>{project.name}</TableCell>
+                                                <TableCell><div  className="text-txtblack text-sm font-medium">{project.name}</div></TableCell>
                                                 <TableCell>
-                                                    <Badge variant="secondary">{project.status}</Badge>
+                                                    <Badge variant="secondary"  className="text-txtblack text-base font-medium">{project.status}</Badge>
                                                 </TableCell>
-                                                <TableCell>{project.owner}</TableCell>
-                                                <TableCell>{project.priority}</TableCell>
+                                                <TableCell >
+                                                    <div  className="text-txtblack text-base font-medium">{project.owner}</div></TableCell>
                                                 <TableCell>
-                                                    <Button className="w-full flex flex-row h-8 px-2 bg-actgrey justify-center items-center ">
+                                                    <div  className="text-txtblack text-sm font-medium">{project.priority}</div></TableCell>
+                                                <TableCell>
+                                                    <div className="w-full flex flex-row h-8 px-2 bg-lgtgrey justify-center items-center rounded-md ">
                                                         <BsLayoutSidebarInsetReverse className="w-8 h-6"/>
-                                                        <span className="px-2 ">OPEN</span>
-                                                    </Button>
+                                                        <span className="text-txtblack text-base font-medium">OPEN</span>
+                                                    </div>
                                                 
                                                 {/* <img src="button_image.png" alt="priority"/> */}
                                                 </TableCell>
