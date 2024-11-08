@@ -67,9 +67,9 @@ export default function ProjectDetailsPanel(props) {
                     {/* Header */}
                     <div className="flex flex-row px-4 mt-4 gap-1">
                       <button> <ChevronsRight className="w-8 h-8" onClick={onClose}></ChevronsRight></button>  
-                     {/* <MoveDiagonal2 className="w-6 h-8 items-center"></MoveDiagonal2>
+                     <MoveDiagonal2 className="w-6 h-8 items-center"></MoveDiagonal2>
                      <BsLayoutSidebarInsetReverse className="w-6 h-8 ml-2  items-center"></BsLayoutSidebarInsetReverse>
-                     <ChevronsUpDown className="w-6 h-8 ml-2  items-center"> </ChevronsUpDown> */}
+                     <ChevronsUpDown className="w-6 h-8 ml-2  items-center"> </ChevronsUpDown>
                     </div>
                     <div className="p-4 border-b flex items-center justify-between">
                         <h2 className="text-lg font-semibold">{project.name}</h2>
