@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Slider, Typography, Box } from '@mui/material';
-import { styled } from '@mui/system';
+import { styled, width } from '@mui/system';
 
 const StyledSlider = styled(Slider)(({ theme }) => ({
   color: theme.palette?.primary?.main ?? '#1976d2',
@@ -52,11 +52,17 @@ const RangeSlider = React.forwardRef(({
   min = 0,
   max = 100,
   step = 1,
-  defaultValue = [min, max],
+  value:defaultValue = [min, max],
   ...props 
 }, ref) => {
+  const [value,setValue] = useState(defaultValue);
+  useEffect(()=>{
+    setValue(defaultValue);
+  },[defaultValue]);
+
+
   return (
-    <Box className={className}>
+    <Box className={className} style={{width:'100%'}}>
       {label && (
         <Typography id="range-slider" gutterBottom>
           {label}
@@ -67,10 +73,10 @@ const RangeSlider = React.forwardRef(({
         min={min}
         max={max}
         step={step}
-        defaultValue={defaultValue}
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         {...props}
+        value={value}
       />
     </Box>
   );

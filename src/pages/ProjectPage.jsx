@@ -12,7 +12,7 @@ const projects = [
     owner: "Dr. Divakar Sada...",
     dates: "July 3, 2024 to August 30",
     priority: "Medium",
-    completion: 0
+    completion: 10
   },
   {
     image:"research.png",
@@ -21,7 +21,7 @@ const projects = [
     owner: "Dr. Pavan Pindi",
     dates: "July 10, 2024 to July 30",
     priority: "High",
-    completion: 100
+    completion: 80
   },
   {
     image:"market-research.png",

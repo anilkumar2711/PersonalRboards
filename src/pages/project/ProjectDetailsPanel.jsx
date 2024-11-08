@@ -3,6 +3,8 @@
 import { Button } from "../../components/ui/button"
 import { Input } from "../../components/ui/input"
 import { Badge } from "../../components/ui/badge"
+import { Form } from "../../components/ui/Form";
+
 // import { ProgressInput} from "../../components/ui/ProgressInput"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "../../components/ui/table"
 import {  User, Flag, CalendarDays, Clock, Text ,ChevronsRight, MoveDiagonal2,ChevronsUpDown} from "lucide-react"
@@ -36,6 +38,10 @@ export default function ProjectDetailsPanel(props) {
         { name: "Sample Project 4", status: "Planning", owner: "Dr. Divakar Sadan",priority: "Medium", },
         { name: "Sample Project 5", status: "Planning", owner: "Dr. Divakar Sadan",priority: "Medium", },
     ]);
+
+    const handleSubmit = (data,event) => {
+        console.log({data,event});
+    };
 
     console.log({project});
 
@@ -71,22 +77,23 @@ export default function ProjectDetailsPanel(props) {
                     <div className="flex-1 overflow-auto py-2 px-4">
                         <div className="space-y-2">
                             {/* Project Details */}
-                            <div className="space-y-4">
+                            <Form className="space-y-4" onSubmit={handleSubmit}>
                                 <div className="flex items-center gap-2">
                                     <User className="h-4 w-4 text-muted-foreground" />
                                     <span className="text-sm w-24">Owner</span>
-                                    <Input value={project.owner} className="h-8 text-sm " />
+                                    <Input name="owner" value={project.owner} className="h-8 text-sm " />
                                 </div>
 
                                 <div className="flex items-center gap-2">
                                     <Clock className="h-4 w-4 text-muted-foreground" />
                                     <span className="text-sm w-24">Status</span>
-                                    <Input type="search" options={statusOptions} renderOption={renderStatusOption} value={project.status} className="h-8 text-sm bg-pjctblue" />
+                                    <Input name="status" type="search" options={statusOptions} renderOption={renderStatusOption} value={project.status} className="h-8 text-sm bg-pjctblue" />
                                 </div>
 
                                 <div className="flex items-center gap-2">
                                     <PiChartPieSliceFill className="h-4 w-4 text-muted-foreground" />
                                     <span className="text-sm w-24">Completion</span>
+                                    <Input name="completion" type="range" value={[0,project.completion]} className="h-8 text-sm w-100" />
                                     {/* <div className="flex-1">
                                         <div className="w-full bg-gray-200 rounded-full h-2">
                                             <div
@@ -101,19 +108,19 @@ export default function ProjectDetailsPanel(props) {
                                 <div className="flex items-center gap-2">
                                     <CalendarDays className="h-4 w-4 text-muted-foreground" />
                                     <span className="text-sm w-24">Dates</span>
-                                    <Input type="daterange" value={project.dates} className="h-8 text-sm w-100" />
+                                    <Input name="dates" type="daterange" value={project.dates} className="h-8 text-sm w-100" />
                                 </div>
 
                                 <div className="flex items-center gap-2">
                                     <Flag className="h-4 w-4 text-muted-foreground" />
                                     <span className="text-sm w-24">Priority</span>
-                                    <Input type="search" options={priorityOptions} value={project.priority} className="h-8 text-sm" />
+                                    <Input name="priority" type="search" options={priorityOptions} value={project.priority} className="h-8 text-sm" />
                                 </div>
 
                                 <div className="flex items-center gap-2">
                                     <MdOutlineLabel className="h-5 w-5 text-muted-foreground" />
                                     <span className="text-sm w-24">Label</span>
-                                    <Input value={project.label} className="h-8  text-sm" />
+                                    <Input name="label" value={project.label} className="h-8  text-sm" />
                                 </div>
 
                                 <div className="space-y-2">
@@ -121,9 +128,14 @@ export default function ProjectDetailsPanel(props) {
                                         <Text className="h-4 w-4 text-muted-foreground" />
                                         <span className="text-sm">Summary</span>
                                     </div>
-                                    <Input type="textarea" value={project.summary} className="h-20  text-sm" />
+                                    <Input  name="summary" type="textarea" value={project.summary} className="h-20  text-sm" />
                                 </div>
-                            </div>
+                                <div className="space-y-2 flex justify-end" >
+                                    <Button type="submit" className="flex flex-row h-8 px-2 bg-actgrey justify-center items-center ">
+                                        <span className="px-2 ">SAVE</span>
+                                    </Button>
+                                </div>
+                            </Form>
 
                             {/* Related Projects */}
                             <div className="space-y-2">

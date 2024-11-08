@@ -80,6 +80,7 @@ const DateRangePicker = React.forwardRef(({ className = '', ...props }, ref) => 
           )}
           {...props}
         />
+        <input type='hidden' name={props.name} value={value.map(v=>v && v.toLocaleDateString('in'))} disabled={props.disabled} readOnly={props.readOnly} />
       </Box>
     </LocalizationProvider>
   );
