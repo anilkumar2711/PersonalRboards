@@ -6,18 +6,19 @@ import { Badge } from "../../components/ui/badge"
 import "./ProjectDetailsPanel";
 // import { ProgressInput} from "../../components/ui/ProgressInput"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "../../components/ui/table"
-import {  User, Flag, CalendarDays, Clock, Text ,ChevronsRight, MoveDiagonal2,ChevronsUpDown} from "lucide-react"
+import { Search, ListFilter, User, Flag, CalendarDays, Clock, Text ,ChevronsRight, MoveDiagonal2,ChevronsUpDown} from "lucide-react"
 import { useState } from "react"
 import { BsLayoutSidebarInsetReverse } from "react-icons/bs";
 import { PiChartPieSliceFill } from "react-icons/pi";
 import { MdOutlineLabel } from "react-icons/md";
-import { Autocomplete, TextField } from '@mui/material';
+import { Autocomplete, TextField, Box, Typography  } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateRangePicker, SingleInputDateRangeField } from '@mui/x-date-pickers-pro';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 // import { CalendarDays } from '@mui/icons-material';
 import dayjs from 'dayjs';
+import { Directions } from "@mui/icons-material";
 
 
 export default function ProjectDetailsPanel(props) {
@@ -42,18 +43,27 @@ export default function ProjectDetailsPanel(props) {
         { name: "Sample Project 4", status: "Planning", owner: "Dr. Divakar Sadan",priority: "Medium", },
         { name: "Sample Project 5", status: "Planning", owner: "Dr. Divakar Sadan",priority: "Medium", },
     ]) 
+    
+
+
     const statusColors = {
         "In Progress": "#BFC5D2",
         "Done": "#C9DEFF",
         "Planning": "#FDD13A47",
         
       };
+      const priorityOptions = [
+        { label: 'High', color: '#F81111' },
+        { label: 'Medium', color: '#24A249' },
+        { label: 'Low', color: '#B3ABAB' },
+        { label: 'Normal', color: '#9266F5' },
+      ];
     // const [status, setStatus] = useState(project.status);
     // const statusOptions = ["In Progress", "Completed", "Planning", "On Hold"];
       const [status, setStatus] = useState(project.status);
       const statusOptions = ["In Progress", "Done", "Planning"];
       const [selectedDates, setSelectedDates] = useState(project.dates || [null, null]);
-
+      const [priority, setPriority] = useState(project.priority);
       const handleDateChange = (newDates) => {
         setSelectedDates(newDates);
     
@@ -190,18 +200,78 @@ export default function ProjectDetailsPanel(props) {
         readOnly
       /> */}
     </div>
-                                <div className="flex items-center gap-2">
-                                    <Flag className="h-4 w-4 text-muted-foreground" />
-                                    <span className="text-sm w-24">Priority</span>
-                                    <Input value={project.priority} className="h-8 text-sm" />
-                                </div>
+    <div className="flex items-center gap-2">
+  <Flag className="h-4 w-4 text-muted-foreground" />
+  <span className="text-sm w-24">Priority</span>
+  <Autocomplete
+    sx={{ height: "25px", width: "150px" }}
+    options={priorityOptions}
+    disableClearable
+    popupIcon={null}
+    getOptionLabel={(option) => option.label}
+    value={priority}
+    onChange={(event, newValue) => setPriority(newValue)}
+    renderInput={(params) => (
+      <TextField
+        {...params}
+        variant="outlined"
+        placeholder="Select Priority"
+        fullWidth
+        sx={{
+            "& .MuiOutlinedInput-root": {
+              padding: "9px",                  // Set padding to match the provided style
+              height: "30px",                  // Set height as per the provided style
+              boxSizing: "border-box",         // Ensures consistent sizing with padding
+            },
+            "& .MuiInputBase-input": {
+              fontSize: "0.875rem",            // Adjusts font size
+              padding: "0",                    // Removes additional padding inside the input element
+              height: "100%",                  // Ensures the input takes up the full height
+              display: "flex",
+              alignItems: "center",           // Aligns the input text vertically
+            },
+          }}
+      />
+    )}
+    renderOption={(props, option) => (
+      <Box component="li" {...props} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Box
+          sx={{
+            width: "10px",
+            height: "10px",
+            backgroundColor: option.color,
+            borderRadius: '0%', // Circular color box
+          }}
+        />
+        <Typography>{option.label}</Typography>
+      </Box>
+    )}
+    renderValue={(selected) => (
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        {selected && (
+          <Box
+            sx={{
+              width: 10,
+              height: 10,
+              backgroundColor: selected.color,  // Use the selected color
+              borderRadius: '50%',  // Circular color box
+              marginRight: "8px",   // Space between the color box and text
+            }}
+          />
+        )}
+        {selected ? selected.label : "Select Priority"}
+      </Box>
+    )}
+  />
+</div>
 
-                                <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2">
                                     <MdOutlineLabel className="h-5 w-5 text-muted-foreground" />
                                     <span className="text-sm w-24">Label</span>
                                     <Input value={project.label} className="h-8  text-sm" />
                                 </div>
-
+                   {/* <Input value={project.label} className="h-8  text-sm" /> */}
+                                
                                 <div className="space-y-2">
                                     <div className="flex items-center gap-2">
                                         <Text className="h-4 w-4 text-muted-foreground" />
@@ -213,7 +283,15 @@ export default function ProjectDetailsPanel(props) {
 
                             {/* Related Projects */}
                             <div className="space-y-2">
-                                <h3 className="text-sm font-medium">Related Projects</h3>
+                                <div className="flex flex-row justify-between">
+                                    <div className="flex flex-row items-center ">
+                                        <img src="correctTask.png" className="w-4 h-4"/>
+                                        <h5 className="pl-2 text-#565656">Task</h5>
+                                    </div>
+                                    <div>
+                                        <Search/>
+                                    </div>
+                                </div>
                                 <Table>
                                     {/* <TableHeader>
                                         <TableRow>
@@ -234,10 +312,10 @@ export default function ProjectDetailsPanel(props) {
                                                 <TableCell>{project.owner}</TableCell>
                                                 <TableCell>{project.priority}</TableCell>
                                                 <TableCell>
-                                                    <Button className="flex flex-row h-8 px-2 bg-actgrey justify-center items-center ">
+                                                    <div className="flex flex-row h-8  bg-lgtgrey justify-center items-center rounded-md">
                                                     <BsLayoutSidebarInsetReverse className="w-8 h-6"/>
                                                     <span className="px-2 ">OPEN</span>
-                                                    </Button>
+                                                    </div>
                                                 
                                                 {/* <img src="button_image.png" alt="priority"/> */}
                                                 </TableCell>
