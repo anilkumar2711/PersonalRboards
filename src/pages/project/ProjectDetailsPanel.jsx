@@ -24,7 +24,7 @@ export default function ProjectDetailsPanel(props) {
         {value:"Planning",label:"Planning", color:"#FDD13A47"}
     ];
     const renderStatusOption = (props, option) => (
-        <li {...props} style={{backgroundColor:option.color}} >
+        <li {...props} key={option.value} style={{backgroundColor:option.color}} >
             {option.label}
         </li>
     );

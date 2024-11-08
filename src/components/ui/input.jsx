@@ -4,6 +4,7 @@ import { styled } from '@mui/system';
 import Autocomplete from './Autocomplete';
 import DateRangePicker from './DateRangePicker';
 import Textarea from './Textarea';
+import RangeSlider from './RangeSlider';
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
   '& .MuiInputBase-root': {
@@ -74,6 +75,10 @@ const Input = React.forwardRef(({ className = '', type = 'text', ...props }, ref
 
   if (type === 'textarea') {
     return <Textarea {...props} ref={ref} />;
+  }
+
+  if (type === 'range') {
+    return <RangeSlider {...props} ref={ref} />;
   }
 
   return (

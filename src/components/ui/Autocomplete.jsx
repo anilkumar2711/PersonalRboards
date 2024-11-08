@@ -71,14 +71,15 @@ const Autocomplete = React.forwardRef(({
       renderInput={(params) => <TextField {...params} {...props} />}
       renderOption={renderOption || defaultRenderOption}
       value={value}
-      onChange={(event, newValue) => {
-        setValue(newValue);
+      onChange={(event, newValue,...args) => {
+        let selectedValue = typeof newValue === "string" ? newValue : newValue.value;
+        setValue(selectedValue);
         if (props.onChange) {
-          props.onChange(event, newValue);
+          props.onChange(event, selectedValue,newValue);
         }
       }}
       inputValue={inputValue}
-      onInputChange={(event, newInputValue) => {
+      onInputChange={(event, newInputValue,...args) => {
         setInputValue(newInputValue);
         if (props.onInputChange) {
           props.onInputChange(event, newInputValue);
