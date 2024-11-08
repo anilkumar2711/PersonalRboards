@@ -16,16 +16,7 @@ export default function ProjectDetailsPanel(props) {
     const {
         isOpen,
         onClose,
-        project = {
-            name: "Sample Project: Biology Research",
-            owner: "Dr. Divakar Sadan",
-            status: "IN PROGRESS",
-            completion: 50,
-            dates: "",
-            priority: "Medium",
-            label: "Biology",
-            summary: "Project summary and details"
-        }
+        project
     } = props;
     const [relatedProjects] = useState([
         { name: "Sample Project 1", status: "In Progress", owner: "Dr. Divakar Sadan", priority: "Medium",},
@@ -33,7 +24,9 @@ export default function ProjectDetailsPanel(props) {
         { name: "Sample Project 3", status: "Planning", owner: "Dr. Divakar Sadan",priority: "Medium", },
         { name: "Sample Project 4", status: "Planning", owner: "Dr. Divakar Sadan",priority: "Medium", },
         { name: "Sample Project 5", status: "Planning", owner: "Dr. Divakar Sadan",priority: "Medium", },
-    ]) 
+    ]);
+
+    console.log({project});
 
     
     return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TextField } from '@mui/material';
 import { styled } from '@mui/system';
 
@@ -50,6 +50,13 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
 }));
 
 const Input = React.forwardRef(({ className = '', ...props }, ref) => {
+  const [value,setValue] = useState(props.value);
+
+  useEffect(()=>{
+    setValue(props.value);
+  },[props.value]);
+  
+  console.log(props.value,value);
   return (
     <StyledTextField
       variant="outlined"
@@ -61,6 +68,8 @@ const Input = React.forwardRef(({ className = '', ...props }, ref) => {
         },
       }}
       {...props}
+      onChange={(e)=>setValue(e.target.value)}
+      value={value}
     />
   );
 });

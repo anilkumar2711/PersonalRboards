@@ -66,16 +66,6 @@ function ProjectPage() {
         isOpen={isPanelOpen} 
         onClose={() => setIsPanelOpen(false)}
         project={selectedProject}
-        // project={{
-        //   name: "Sample Project: Biology Research",
-        //   owner: "Dr. Divakar Sadan",
-        //   status: "Planning",
-        //   completion: 30,
-        //   goals: "Research Goal",
-        //   priority: "Medium",
-        //   label: "Biology",
-        //   summary: "Detailed project summary goes here..."
-        // }}
       />
       <Table>
         <TableHeader>
