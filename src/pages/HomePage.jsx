@@ -1,79 +1,77 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { CalendarDays, CheckSquare, NotepadText, MoreHorizontal, FlaskConical,Maximize2,Ellipsis } from 'lucide-react';
+import { Box, Typography } from '@mui/material';
+import { CalendarDays, CheckSquare, NotepadText, FlaskConical, Maximize2, Ellipsis } from 'lucide-react';
 
 function HomePage() {
   return (
-    <div className="space-y-6">
-      <h2 className="text-xl font-bold text-txtblack">Good morning Divakar</h2>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <Typography variant="h2" sx={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--txtblack)' }}>
+        Good morning Divakar
+      </Typography>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: '1.5rem' }}>
+        
         {/* Recents */}
         <Card>
-          <div className="flex items-center justify-between space-y-0 pl-6 py-2">
-            <span className="text-base font-medium text-txtblack">Recents</span>
-            <div className='grow'></div>
-            <div className='flex gap-2'>
-              <Maximize2 className="mr-2 h-4 w-4 text-muted-foreground" />
-              <Ellipsis className="mr-2 h-4 w-4 text-muted-foreground" />
-            </div>
-          </div>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.5rem 1.5rem' }}>
+            <Typography sx={{ fontSize: '1rem', fontWeight: 'medium', color: 'var(--txtblack)' }}>Recents</Typography>
+            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ display: 'flex', gap: '0.5rem' }}>
+              <Maximize2 sx={{ height: '1rem', width: '1rem', color: 'var(--txtblack)' }} />
+              <Ellipsis sx={{ height: '1rem', width: '1rem', color: 'var(--txtblack)' }} />
+            </Box>
+          </Box>
           <CardContent>
-            <ul className="space-y-2">
-              <li className="flex items-center">
-                <CheckSquare className="mr-2 h-4 w-4 text-txtblack" />
-                <span className="text-base font-medium mr-2 text-txtblack">Task: </span>
-                <span className="text-base text-txtblack"> Search for soil samples</span>
-              </li>
-              <li className="flex items-center">
-                <FlaskConical className="mr-2 h-4 w-4 text-txtblack" />
-                <span className="text-base font-medium mr-2 text-txtblack">Experiment: </span>
-                <span className="text-base text-txtblack"> DNA Isolation from soil samples</span>
-              </li>
-              <li className="flex items-center">
-                <NotepadText className="mr-2 h-4 w-4 text-txtblack" />
-                <span className="text-base font-medium mr-2 text-txtblack">Survey: </span>
-                <span className="text-base text-txtblack"> DNA Isolation from soil samples</span>
-              </li>
-            </ul>
+            <Box component="ul" sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <Box component="li" sx={{ display: 'flex', alignItems: 'center' }}>
+                <CheckSquare sx={{ marginRight: '0.5rem', height: '1rem', width: '1rem', color: 'var(--txtblack)' }} />
+                <Typography sx={{ fontSize: '1rem', fontWeight: 'medium', color: 'var(--txtblack)' }}>Task:</Typography>
+                <Typography sx={{ fontSize: '1rem', color: 'var(--txtblack)' }}> Search for soil samples</Typography>
+              </Box>
+              <Box component="li" sx={{ display: 'flex', alignItems: 'center' }}>
+                <FlaskConical sx={{ marginRight: '0.5rem', height: '1rem', width: '1rem', color: 'var(--txtblack)' }} />
+                <Typography sx={{ fontSize: '1rem', fontWeight: 'medium', color: 'var(--txtblack)' }}>Experiment:</Typography>
+                <Typography sx={{ fontSize: '1rem', color: 'var(--txtblack)' }}> DNA Isolation from soil samples</Typography>
+              </Box>
+              <Box component="li" sx={{ display: 'flex', alignItems: 'center' }}>
+                <NotepadText sx={{ marginRight: '0.5rem', height: '1rem', width: '1rem', color: 'var(--txtblack)' }} />
+                <Typography sx={{ fontSize: '1rem', fontWeight: 'medium', color: 'var(--txtblack)' }}>Survey:</Typography>
+                <Typography sx={{ fontSize: '1rem', color: 'var(--txtblack)' }}> DNA Isolation from soil samples</Typography>
+              </Box>
+            </Box>
           </CardContent>
         </Card>
 
         {/* Agenda */}
         <Card>
-        <div className="flex items-center justify-between space-y-0 pl-6 py-2">
-            <span className="text-base font-medium text-txtblack">Agenda</span>
-            <div className='grow'></div>
-            <div className='flex gap-2'>
-              <Maximize2 className="mr-2 h-4 w-4 text-muted-foreground" />
-              <Ellipsis className="mr-2 h-4 w-4 text-muted-foreground" />
-            </div>
-          </div>
-          {/* <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Agenda</CardTitle>
-            <MoreHorizontal className="h-4 w-4 text-muted-foreground" />
-          </CardHeader> */}
-          <CardContent className="pt-6">
-            <div className="flex justify-center">
-              <CalendarDays className="h-24 w-24 text-txtblack" />
-            </div>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.5rem 1.5rem' }}>
+            <Typography sx={{ fontSize: '1rem', fontWeight: 'medium', color: 'var(--txtblack)' }}>Agenda</Typography>
+            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ display: 'flex', gap: '0.5rem' }}>
+              <Maximize2 sx={{ height: '1rem', width: '1rem', color: 'var(--txtblack)' }} />
+              <Ellipsis sx={{ height: '1rem', width: '1rem', color: 'var(--txtblack)' }} />
+            </Box>
+          </Box>
+          <CardContent sx={{ paddingTop: '1.5rem' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <CalendarDays sx={{ height: '6rem', width: '6rem', color: 'var(--txtblack)' }} />
+            </Box>
           </CardContent>
         </Card>
-      </div>
+      </Box>
 
       {/* LineUp */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-txtblack">LineUp</CardTitle>
+          <CardTitle sx={{ color: 'var(--txtblack)' }}>LineUp</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-txtblack">No upcoming events</p>
+          <Typography sx={{ color: 'var(--txtblack)' }}>No upcoming events</Typography>
         </CardContent>
       </Card>
-    </div>
+    </Box>
   );
 }
 
 export default HomePage;
-
-
