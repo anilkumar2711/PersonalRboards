@@ -6,11 +6,11 @@ import { Box, Typography } from '@mui/material';
 
 // import { ProgressInput} from "../../components/ui/ProgressInput"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "../../components/ui/table"
-import { User, Flag, Ellipsis, Plus, CalendarDays, Clock, Search, Text, ChevronsRight, MoveDiagonal2, ChevronsUpDown } from "lucide-react"
+import { User, Flag, Ellipsis, Plus, CalendarDays, Clock, Search, CircleFadingArrowUp, Tag, Text, ChevronsRight, MoveDiagonal2, ChevronsUpDown } from "lucide-react"
 import { useState } from "react"
 import { BsLayoutSidebarInsetReverse } from "react-icons/bs";
 import { PiChartPieSliceFill } from "react-icons/pi";
-import { MdOutlineLabel } from "react-icons/md";
+import { MdAdd ,MdOutlineSearch,MdMoreHoriz } from "react-icons/md";
 
 
 export default function ProjectDetailsPanel(props) {
@@ -36,11 +36,11 @@ export default function ProjectDetailsPanel(props) {
     ]
 
     const [relatedProjects] = useState([
-        { name: "Sample Project 1", status: "In Progress", owner: "Dr. Divakar Sadan", priority: "Medium", },
-        { name: "Sample Project 2", status: "Planning", owner: "Dr. Divakar Sadan", priority: "Medium", },
-        { name: "Sample Project 3", status: "Planning", owner: "Dr. Divakar Sadan", priority: "Medium", },
-        { name: "Sample Project 4", status: "Planning", owner: "Dr. Divakar Sadan", priority: "Medium", },
-        { name: "Sample Project 5", status: "Planning", owner: "Dr. Divakar Sadan", priority: "Medium", },
+        { name: "Sample Project 1", status: "In Progress", owner: "Dr. Divakar Sadam", priority: "Medium", },
+        { name: "Sample Project 2", status: "Planning", owner: "Dr. Divakar Sadam", priority: "High", },
+        { name: "Sample Project 3", status: "Planning", owner: "Dr. Divakar Sadam", priority: "High", },
+        { name: "Sample Project 4", status: "Planning", owner: "Dr. Divakar Sadam", priority: "Low", },
+        { name: "Sample Project 5", status: "Planning", owner: "Dr. Divakar Sadam", priority: "Medium", },
     ]);
 
     const handleSubmit = (data, event) => {
@@ -97,6 +97,8 @@ export default function ProjectDetailsPanel(props) {
                         sx={{
                             display: 'flex',
                             flexDirection: 'row',
+                       
+                            alignItems:'center',
                             paddingX: 4,  // equivalent to px-4
                             marginTop: 4, // equivalent to mt-4
                             gap: 1, // equivalent to gap-1
@@ -112,13 +114,13 @@ export default function ProjectDetailsPanel(props) {
                     <Box
                         sx={{
                             padding: 4, // equivalent to p-4
-                            borderBottom: '1px solid', // equivalent to border-b
+                            borderBottom: '0.5px solid', // equivalent to border-b
                             display: 'flex', // equivalent to flex
                             alignItems: 'center', // equivalent to items-center
                             justifyContent: 'space-between', // equivalent to justify-between
                         }}
                     >
-                        <Typography variant="h6" sx={{ fontWeight: '600' }}>
+                        <Typography variant="h6" sx={{ fontSize: '20px', color: '#565656', fontWeight: '700' }}>
                             {project.name}
                         </Typography>
                         {/* Optionally, you can include a Button if needed */}
@@ -139,24 +141,24 @@ export default function ProjectDetailsPanel(props) {
                         <Box sx={{ '& > *': { marginBottom: 2 } }}>
                             {/* Project Details */}
                             <Form onSubmit={handleSubmit}>
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                     <User sx={{ width: 16, height: 16, color: 'text.secondary' }} />
-                                    <span sx={{ fontSize: '0.875rem', width: 6 }}>
+                                    <span sx={{ width: 6 }}>
                                         Owner
                                     </span>
-                                    <Input name="owner" value={project.owner} sx={{ height: '2rem', fontSize: '0.875rem' }} />
+                                    <Input name="owner" value={project.owner} sx={{ height: '2rem', fontSize: '12px', fontWeight: '400' }} />
                                 </Box>
 
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                     <Clock sx={{ height: 16, width: 16, color: 'text.secondary' }} />
-                                    <span sx={{ fontSize: '0.875rem', width: 96 }}>Status</span>
-                                    <Input name="status" type="search" options={statusOptions} renderOption={renderStatusOption} value={project.status} sx={{ height: 32, fontSize: '0.875rem', backgroundColor: 'yourCustomColor' }} />
+                                    <span sx={{ fontSize: '12px', fontWeight: '600', width: 96 }}>Status</span>
+                                    <Input name="status" type="search" options={statusOptions} renderOption={renderStatusOption} value={project.status} sx={{ height: 32, fontSize: '12px', fontWeight: '400', backgroundColor: 'yourCustomColor' }} />
                                 </Box>
 
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                                    <PiChartPieSliceFill sx={{ height: 16, width: 16, color: 'text.secondary' }} />
-                                    <span sx={{ fontSize: '0.875rem', width: 96 }}>Completion</span>
-                                    <Input name="completion" type="range" value={[0, project.completion]} sx={{ height: 32, fontSize: '0.875rem', width: '100%' }} />
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
+                                    <CircleFadingArrowUp sx={{ height: 16, width: 16, color: 'text.secondary' }} />
+                                    <span sx={{ fontSize: '12px', fontWeight: '600', width: 96 }}>Completion</span>
+                                    <Input name="completion" type="range" value={[0, project.completion]} sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} />
                                     {/* <div className="flex-1">
                                         <div className="w-full bg-gray-200 rounded-full h-2">
                                             <div
@@ -168,30 +170,30 @@ export default function ProjectDetailsPanel(props) {
                                     {/* <ProgressInput value={`${project.completion}%`} className="h-8  text-sm w-16" /> */}
                                 </Box>
 
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                     <CalendarDays sx={{ height: 16, width: 16, color: 'text.secondary' }} />
-                                    <span sx={{ fontSize: '0.875rem', width: 96 }}>Dates</span>
-                                    <Input name="dates" type="daterange" value={project.dates} sx={{ height: 32, fontSize: '0.875rem', width: '100%' }} />
+                                    <span sx={{ fontSize: '0.875rem', width: 96, fontSize: '12px', fontWeight: '400' }}>Dates</span>
+                                    <Input name="dates" type="daterange" value={project.dates} sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} />
                                 </Box>
 
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                     <Flag sx={{ height: 16, width: 16, color: 'text.secondary' }} />
                                     <span sx={{ fontSize: '0.875rem', width: 96 }}>Priority</span>
-                                    <Input name="priority" type="search" options={priorityOptions} renderOption={renderStatusOption} value={project.priority} sx={{ height: 32, fontSize: '0.875rem', width: '100%' }} />
+                                    <Input name="priority" type="search" options={priorityOptions} renderOption={renderStatusOption} value={project.priority} sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} />
                                 </Box>
 
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                                    <MdOutlineLabel sx={{ height: 16, width: 16, color: 'text.secondary' }} />
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
+                                    <Tag sx={{ height: 16, width: 16, color: 'text.secondary' }} />
                                     <span sx={{ fontSize: '0.875rem', width: 96 }}>Label</span>
-                                    <Input name="label" value={project.label} sx={{ height: 32, fontSize: '0.875rem', width: '100%' }} />
+                                    <Input name="label" value={project.label} sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} />
                                 </Box>
 
                                 <Box sx={{ '& > * + *': { marginTop: 8 } }}>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                         <Text sx={{ width: 16, height: 16, color: 'text.secondary' }} />
                                         <span sx={{ fontSize: '0.875rem' }}>Summary</span>
                                     </Box>
-                                    <Input name="summary" type="textarea" value={project.summary} sx={{ height: '5rem', fontSize: '0.875rem' }} />
+                                    <Input name="summary" type="textarea" value={project.summary} sx={{ height: '5rem', fontSize: '12px', fontWeight: '400' }} />
                                 </Box>
                                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, justifyContent: 'flex-end' }} >
                                     <Button type="submit" sx={{
@@ -214,12 +216,12 @@ export default function ProjectDetailsPanel(props) {
                                 <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                         <img src="correctTask.png" alt="correct" />
-                                        <h5 sx={{ paddingLeft: 4, color: 'text.primary', fontSize: '1rem', fontWeight: 'bold' }}> Tasks </h5>
+                                        <Box sx={{px:2}}><h5 sx={{ color: '#565656', fontSize: '12px', fontWeight: '600', }}> Tasks </h5></Box>
                                     </Box>
-                                    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: 56, width: 56 }} >
-                                        <Search />
-                                        <Plus />
-                                        <Ellipsis />
+                                    <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent:'end', alignItems: 'center', height: 56, width: "100%" }} >
+                                        <MdOutlineSearch />
+                                       <Box sx={{px:1,}}><MdAdd  /></Box> 
+                                        <MdMoreHoriz />
                                     </Box>
                                 </Box>
                                 <Table>
@@ -235,35 +237,72 @@ export default function ProjectDetailsPanel(props) {
                                     <TableBody>
                                         {relatedProjects.map((project, index) => (
                                             <TableRow key={index}>
-                                                <TableCell><Box sx={{ color: 'text.primary', fontSize: '0.875rem', fontWeight: 500 }}>{project.name}</Box></TableCell>
+                                                <TableCell><Box sx={{ color: '#565656', fontSize: '12px', fontWeight: '600' }}>{project.name}</Box></TableCell>
                                                 <TableCell>
-                                                    <Badge variant="secondary" sx={{ color: 'text.primary', fontSize: '1rem', fontWeight: 500 }}>{project.status}</Badge>
+                                                    <Box variant="secondary" sx={{
+                                                        display: 'flex',
+                                                        flexDirection: 'row',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
+                                                        width: "100%",
+                                                        px: 1, // equivalent to px-2
+                                                        py: 1, // equivalent to py-1
+                                                        borderRadius: '50px', // rounded-full
+                                                        fontSize: '10px',
+                                                        fontWeight: '600',  // font-semibold
+                                                        color: '#565656', // text-#565656
+                                                        backgroundColor:
+                                                            project.status === 'Planning'
+                                                                ? '#FDD13A' // bg-#FDD13A47
+                                                                : project.status === 'In progress'
+                                                                    ? '#BFC5D2' // bg-#BFC5D2
+                                                                    : '#C9DEFF', // bg-#C9DEFF
+                                                    }}>{project.status}</Box>
                                                 </TableCell>
                                                 <TableCell >
-                                                    <Box sx={{ color: 'text.primary', fontSize: '1rem', fontWeight: 500 }}>{project.owner}</Box></TableCell>
+                                                    <Box sx={{ color: '#565656', fontSize: '12px', fontWeight: '600' }}>{project.owner}</Box></TableCell>
                                                 <TableCell>
-                                                    <Box sx={{ color: 'text.primary', fontSize: '0.875rem', fontWeight: 500 }}>{project.priority}</Box></TableCell>
+                                                    <Box sx={{
+                                                        display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', px: 1, width: '100%', // equivalent to px-2
+                                                        py: 1.0, // equivalent to py-1
+                                                        borderRadius: '25px', // rounded-full
+                                                        fontSize: '12px',
+                                                        fontWeight: '600', // font-semibold
+                                                        color: '#565656', backgroundColor:
+                                                            project.priority === 'Low'
+                                                                ? '#BFC5D2' // bg-gray-200
+                                                                : project.priority === 'Medium'
+                                                                    ? '#FDD13A47' // bg-#FDD13A47
+                                                                    : '#6EA6FF', // bg-#6EA6FF  
+                                                    }}>{project.priority}</Box></TableCell>
                                                 <TableCell>
                                                     <Box sx={{
                                                         width: '100%',
                                                         display: 'flex',
                                                         flexDirection: 'row',
                                                         height: '2rem', // h-8 in Tailwind is 2rem (32px)
-                                                        paddingX: 2, // px-2 in Tailwind is 0.5rem (8px)
+                                                        // px-2 in Tailwind is 0.5rem (8px)
                                                         backgroundColor: 'lightgrey', // 'bg-lgtgrey' assuming lightgrey color
                                                         justifyContent: 'center',
                                                         alignItems: 'center',
-                                                        borderRadius: '0.375rem', // rounded-md in Tailwind is 0.375rem
+                                                        borderRadius: '0.375rem',
+                                                        color: '#565656',  // Assuming 'text-txtblack' is the primary text color in your theme
+                                                        fontSize: '10px',      // text-base corresponds to 1rem (16px)
+                                                        fontWeight: '600',// rounded-md in Tailwind is 0.375rem
                                                     }}>
                                                         <BsLayoutSidebarInsetReverse sx={{
-                                                            width: '2rem', // w-8 in Tailwind is 2rem (32px)
-                                                            height: '1.5rem', // h-6 in Tailwind is 1.5rem (24px)
+                                                            width: '36px', // w-8 in Tailwind is 2rem (32px)
+                                                            height: '1.5rem',
+
+                                                            // h-6 in Tailwind is 1.5rem (24px)
                                                         }} />
-                                                        <span sx={{
+                                                        <Box sx={{
                                                             color: '#565656',  // Assuming 'text-txtblack' is the primary text color in your theme
-                                                            fontSize: '1rem',      // text-base corresponds to 1rem (16px)
-                                                            fontWeight: 500,       // font-medium corresponds to font-weight 500
-                                                        }}>OPEN</span>
+                                                            fontSize: '10px',      // text-base corresponds to 1rem (16px)
+                                                            fontWeight: '600',
+                                                            paddingLeft: '5px',
+                                                            // font-medium corresponds to font-weight 500
+                                                        }}>OPEN</Box>
                                                     </Box>
 
                                                     {/* <img src="button_image.png" alt="priority"/> */}

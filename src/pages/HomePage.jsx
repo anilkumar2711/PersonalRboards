@@ -10,12 +10,12 @@ function HomePage() {
         Good morning Divakar
       </Typography>
 
-      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: '8px' }}>
+      <Box sx={{ display: 'grid',paddingTop:'10px', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: '8px', height:"450px" }}>
         
         {/* Recents */}
         <Card>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 24px' }}>
-            <Typography sx={{ fontSize: '16px', fontWeight: '700', color: '#565656' }}>Recents</Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 24px' }}>
+            <Typography sx={{ fontSize: '16px', fontWeight: '700', color: '#565656', }}>Recents</Typography>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: 'flex', gap: '8px' }}>
               <Maximize2 sx={{ height: '14px', width: '14px', color: '#565656' }} />
@@ -45,7 +45,7 @@ function HomePage() {
 
         {/* Agenda */}
         <Card>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 24px' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 24px' }}>
             <Typography sx={{ fontSize: '16px', fontWeight: '700', color: '#565656' }}>Agenda</Typography>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: 'flex', gap: '8px' }}>
@@ -54,8 +54,8 @@ function HomePage() {
             </Box>
           </Box>
           <CardContent sx={{ paddingTop: '24px' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-              <CalendarDays sx={{ height: '96px', width: '96px', color: '#565656' }} />
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems:'center',height:'220px',color:'#5F6368', }}>
+            <CalendarDays style={{height: '150px', width: '150px',}} sx={{  color: '#565656' }} />
             </Box>
           </CardContent>
         </Card>
