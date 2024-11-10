@@ -10,7 +10,7 @@ function HomePage() {
         Good morning Divakar
       </Typography>
 
-      <Box sx={{ display: 'grid',paddingTop:'10px', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: '8px', height:"450px" }}>
+      <Box sx={{ display: 'grid',paddingTop:'10px', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: '8px', height:"350px" }}>
         
         {/* Recents */}
         <Card>
