@@ -184,7 +184,7 @@ export default function ProjectDetailsPanel(props) {
 
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                     <Tag sx={{ height: 16, width: 16, color: 'text.secondary' }} />
-                                    <span sx={{ fontSize: '0.875rem', width: 96 }}>Label</span>
+                                    <Box sx={{ fontSize: '12px', color: '#565656', fontWeight: '600', width: 96 }}>Label</Box>
                                     <Input name="label" value={project.label} sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} />
                                 </Box>
 
@@ -193,17 +193,17 @@ export default function ProjectDetailsPanel(props) {
                                         <Text sx={{ width: 16, height: 16, color: 'text.secondary' }} />
                                         <span sx={{ fontSize: '0.875rem' }}>Summary</span>
                                     </Box>
-                                    <Input name="summary" type="textarea" value={project.summary} sx={{ height: '5rem', fontSize: '12px', fontWeight: '400' }} />
+                                    <Input name="summary" type="textarea" value={project.summary} sx={{ fontSize: '12px', fontWeight: '400' }} />
                                 </Box>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, justifyContent: 'flex-end' }} >
+                                <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, justifyContent: 'flex-end' }} >
                                     <Button type="submit" sx={{
                                         display: 'flex',
                                         flexDirection: 'row',
                                         height: 32, // Assuming 'h-8' translates to 32px (Tailwind uses 8px as its base unit)
                                         paddingX: 2, // Assuming 'px-2' translates to 8px (Tailwind's default spacing scale)
                                         backgroundColor: 'actgrey', // Replace 'actgrey' with the actual color in your theme or define it
-                                        justifyContent: 'center',
-                                        alignItems: 'center'
+                                        justifyContent: 'end',
+                                        alignItems: 'center',    width: '64px'
                                     }}>
                                         <span sx={{ paddingX: 2 }}>SAVE</span>
                                     </Button>
@@ -216,7 +216,7 @@ export default function ProjectDetailsPanel(props) {
                                 <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                         <img src="correctTask.png" alt="correct" />
-                                        <Box sx={{px:2}}><h5 sx={{ color: '#565656', fontSize: '12px', fontWeight: '600', }}> Tasks </h5></Box>
+                                        <Box sx={{ color: '#565656', fontSize: '12px', fontWeight: '600',px:2 }}> Tasks</Box>
                                     </Box>
                                     <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent:'end', alignItems: 'center', height: 56, width: "100%" }} >
                                         <MdOutlineSearch />
