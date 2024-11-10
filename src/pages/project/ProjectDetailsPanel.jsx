@@ -260,7 +260,7 @@ export default function ProjectDetailsPanel(props) {
                                                             height: '1.5rem', // h-6 in Tailwind is 1.5rem (24px)
                                                         }} />
                                                         <span sx={{
-                                                            color: 'textPrimary',  // Assuming 'text-txtblack' is the primary text color in your theme
+                                                            color: '#565656',  // Assuming 'text-txtblack' is the primary text color in your theme
                                                             fontSize: '1rem',      // text-base corresponds to 1rem (16px)
                                                             fontWeight: 500,       // font-medium corresponds to font-weight 500
                                                         }}>OPEN</span>

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/ui/table';
 import { Button } from '../components/ui/button';
-import { Search, ListFilter } from 'lucide-react';
+import { Search, ListFilter, } from 'lucide-react';
 import ProjectDetailsPanel from './project/ProjectDetailsPanel';
 import { Box, Typography } from '@mui/material';
+import { MdDataUsage,MdPermIdentity,MdOutlineEventNote,MdOutlineAssistantPhoto,MdIncompleteCircle } from "react-icons/md";
 
 const projects = [
   {
@@ -46,8 +47,8 @@ function ProjectPage() {
     <Box
       sx={{
         backgroundColor: 'white',
-        borderRadius: 2, // Equivalent to `rounded-lg` in Tailwind
-        boxShadow: 3, // Equivalent to `shadow` in Tailwind
+        borderRadius: 2, 
+        boxShadow: 3, 
       }}
     >
       <Box
@@ -65,14 +66,14 @@ function ProjectPage() {
             fontWeight: 'bold',
             display: 'flex',
             alignItems: 'center',
-            color: 'txtblack',
+            color: '#565656',
           }}
         >
           <Box
             component="img"
             src="rocket_launch.png"
             alt="rocket-launch"
-            sx={{ mr: 1, height: 20, width: 20 }}
+            sx={{ mr: 1, height: 20, width: 20, fontSize:"20px", fontWeight:"700"}}
           />
           Projects
         </Typography>
@@ -86,7 +87,7 @@ function ProjectPage() {
               alt="star"
               sx={{ mr: 1, height: 16, width: 20 }}
             />
-            <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'actgrey' }}>
+            <Typography variant="h6" sx={{ fontSize:"14px",fontWeight: '700', color: '#B3ABAB' }}>
               Active
             </Typography>
           </Box>
@@ -98,20 +99,23 @@ function ProjectPage() {
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'center',
-              pr: 2,
+               pr: 2,
             }}
           >
-            <Search sx={{ mr: 1, height: 16, width: 16, color: 'txtblack' }} />
-            <ListFilter sx={{ mr: 1, height: 16, width: 16, color: 'txtblack' }} />
+            <Search sx={{ mr: 1, height: 16, width: 16, color: '#565656',}} />
+            <Box sx={{pr:1,pl:1}}><ListFilter sx={{ mr: 1, height: 16, width: 16, color: '#565656', paddingLeft:'8px' }} /></Box>
             <Button
               variant="contained"
               size="small"
-              sx={{
-                backgroundColor: 'newblue',
+              sx={{ 
+                fontSize:'12px',
+                fontWeight:'700',
+                backgroundColor: '#6EA6FF',
+                paddingLeft:'8px',
                 color: 'white',
                 borderRadius: 1,
                 '&:hover': {
-                  backgroundColor: 'newblue.dark',
+                  backgroundColor: '#6EA6FF',
                 },
               }}
             >
@@ -131,8 +135,9 @@ function ProjectPage() {
           <TableRow>
             <TableHead
               sx={{
-                color: 'txtblack', // Assuming txtblack is defined in your theme; otherwise, replace with an actual color code
-                fontSize: '1rem',   // Equivalent to Tailwind's `text-base`
+                color: '#565656', // Assuming #565656 is defined in your theme; otherwise, replace with an actual color code
+                fontSize: '14px', 
+                fontWeight:'400',  // Equivalent to Tailwind's `text-base`
                 paddingLeft: '1rem', // Equivalent to `pl-4`
               }}
             >
@@ -140,24 +145,71 @@ function ProjectPage() {
             </TableHead>
 
             <TableHead>
-              {/* <div className='flex flex-row text-txtblack text-sm'> <CircleDashed className="mr-2 h-5 w-5 text-txtblack" />
+              {/* <div className='flex flex-row text-#565656 text-sm'> <CircleDashed className="mr-2 h-5 w-5 text-#565656" />
              Status
              </div> */}
-              <img src="status_icon.png" alt="status"></img>
+             <Box sx={{ display: 'flex',
+              flexDirection: 'row',alignItems:'center'}}> 
+                
+                <MdDataUsage />
+             <Box sx={{ color: '#565656', // Assuming #565656 is defined in your theme; otherwise, replace with an actual color code
+                fontSize: '14px', 
+                fontWeight:'400', 
+                pl:1,
+                
+                }}>Status</Box></Box>
+             
+              {/* <img src="status_icon.png" alt="status"></img> */}
             </TableHead>
 
             <TableHead>
-              <img src="owner_icon.png" alt="owner"></img>
+            <Box sx={{ display: 'flex',
+              flexDirection: 'row',alignItems:'center'}}> 
+                
+                <MdPermIdentity  />
+             <Box sx={{ color: '#565656', // Assuming #565656 is defined in your theme; otherwise, replace with an actual color code
+                fontSize: '14px', 
+                fontWeight:'400', 
+                pl:1,
+                
+                }}>Owner</Box></Box>
             </TableHead>
             <TableHead>
-              <img src="dates_icon.png" alt="dates"></img>
+            <Box sx={{ display: 'flex',
+              flexDirection: 'row',alignItems:'center'}}> 
+                
+                <MdOutlineEventNote/>
+             <Box sx={{ color: '#565656', // Assuming #565656 is defined in your theme; otherwise, replace with an actual color code
+                fontSize: '14px', 
+                fontWeight:'400', 
+                pl:1,
+                
+                }}>Dates</Box></Box>
             </TableHead>
             <TableHead>
-              <img src="priority_icon.png" alt="priority"></img>
+            <Box sx={{ display: 'flex',
+              flexDirection: 'row',alignItems:'center'}}> 
+                
+                <MdOutlineAssistantPhoto />
+             <Box sx={{ color: '#565656', // Assuming #565656 is defined in your theme; otherwise, replace with an actual color code
+                fontSize: '14px', 
+                fontWeight:'400', 
+                pl:1,
+                
+                }}>Priority</Box></Box>
             </TableHead>
 
             <TableHead>
-              <img src="completion_icon.png" alt="completion"></img>
+            <Box sx={{ display: 'flex',
+              flexDirection: 'row',alignItems:'center'}}> 
+                
+                <MdIncompleteCircle />
+             <Box sx={{ color: '#565656', // Assuming #565656 is defined in your theme; otherwise, replace with an actual color code
+                fontSize: '14px', 
+                fontWeight:'400', 
+                pl:1,
+                
+                }}>Completion</Box></Box>
             </TableHead>
           </TableRow>
         </TableHeader>
@@ -170,9 +222,10 @@ function ProjectPage() {
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'center',
-                    fontSize: '1rem', // text-base equivalent
-                    fontWeight: 'fontWeightMedium', // equivalent to font-semibold
-                    color: 'txtblack.main', // assuming txtblack is defined in your theme palette
+                    fontSize: '12px', 
+                     fontWeight:'700',  // text-base equivalent
+                     // equivalent to font-semibold
+                    color: '#565656', // assuming #565656 is defined in your theme palette
                   }}
                 >
                   <Box
@@ -208,7 +261,7 @@ function ProjectPage() {
 
               </TableCell>
               {/* <TableCell>
-                <div className='flex flex-row items-center text-base font-semibold text-txtblack '><img src="biological.png" className="h-4 w-4 mr-2"/>{project.name}</div></TableCell> */}
+                <div className='flex flex-row items-center text-base font-semibold text-#565656 '><img src="biological.png" className="h-4 w-4 mr-2"/>{project.name}</div></TableCell> */}
               <TableCell>
 
 
@@ -220,15 +273,15 @@ function ProjectPage() {
                     px: 1, // equivalent to px-2
                     py: 0.5, // equivalent to py-1
                     borderRadius: '50px', // rounded-full
-                    fontSize: '0.75rem', // text-xs equivalent
-                    fontWeight: 'fontWeightMedium', // font-semibold
-                    color: 'txtblack.main', // text-txtblack
+                    fontSize: '12px', 
+                    fontWeight:'600',  // font-semibold
+                    color: '#565656', // text-#565656
                     backgroundColor:
                       project.status === 'Planning'
-                        ? 'plnng.main' // bg-plnng
+                        ? '#FDD13A47' // bg-#FDD13A47
                         : project.status === 'In progress'
-                          ? 'inprog.main' // bg-inprog
-                          : 'doneblu.main', // bg-doneblu
+                          ? '#BFC5D2' // bg-#BFC5D2
+                          : '#C9DEFF', // bg-#C9DEFF
                   }}
                 >
                   <Box
@@ -247,8 +300,12 @@ function ProjectPage() {
                 </Box>
 
               </TableCell>
-              <TableCell>{project.owner}</TableCell>
-              <TableCell>{project.dates}</TableCell>
+              <TableCell><Box sx={{fontSize: '12px', 
+                    fontWeight:'600', // font-semibold
+                    color: '#565656',}}>{project.owner}</Box></TableCell>
+              <TableCell><Box sx={{fontSize: '12px', 
+                    fontWeight:'600', // font-semibold
+                    color: '#565656',}}>{project.dates}</Box></TableCell>
               <TableCell>
                 <Box
                   component="span"
@@ -256,15 +313,15 @@ function ProjectPage() {
                     px: 1, // equivalent to px-2
                     py: 0.5, // equivalent to py-1
                     borderRadius: '50px', // rounded-full
-                    fontSize: '0.75rem', // text-xs
-                    fontWeight: 'fontWeightMedium', // font-semibold
-                    color: 'txtblack.main', // default text color
+                    fontSize: '12px', 
+                    fontWeight:'600', // font-semibold
+                    color: '#565656', // default text color
                     backgroundColor:
                       project.priority === 'Low'
-                        ? 'gray.200' // bg-gray-200
+                        ? '#BFC5D2' // bg-gray-200
                         : project.priority === 'Medium'
-                          ? 'plnng.main' // bg-plnng
-                          : 'pjctblue.main', // bg-pjctblue
+                          ? '#FDD13A47' // bg-#FDD13A47
+                          : '#6EA6FF', // bg-#6EA6FF
                   }}
                 >
                   {project.priority}
@@ -281,7 +338,7 @@ function ProjectPage() {
                 >
                   <Box
                     sx={{
-                      backgroundColor: 'blue', // equivalent to bg-blue-600
+                      backgroundColor: '#24A249', // equivalent to bg-blue-600
                       height: '10px', // same height as outer box
                       borderRadius: '50px', // fully rounded
                       width: `${project.completion}%`, // dynamically set width

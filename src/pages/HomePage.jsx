@@ -5,39 +5,39 @@ import { CalendarDays, CheckSquare, NotepadText, FlaskConical, Maximize2, Ellips
 
 function HomePage() {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      <Typography variant="h2" sx={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--txtblack)' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      <Typography variant="h2" sx={{ fontSize: '20px', fontWeight: '700', color: '#565656' }}>
         Good morning Divakar
       </Typography>
 
-      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: '1.5rem' }}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: '8px' }}>
         
         {/* Recents */}
         <Card>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.5rem 1.5rem' }}>
-            <Typography sx={{ fontSize: '1rem', fontWeight: 'medium', color: 'var(--txtblack)' }}>Recents</Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 24px' }}>
+            <Typography sx={{ fontSize: '16px', fontWeight: '700', color: '#565656' }}>Recents</Typography>
             <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ display: 'flex', gap: '0.5rem' }}>
-              <Maximize2 sx={{ height: '1rem', width: '1rem', color: 'var(--txtblack)' }} />
-              <Ellipsis sx={{ height: '1rem', width: '1rem', color: 'var(--txtblack)' }} />
+            <Box sx={{ display: 'flex', gap: '8px' }}>
+              <Maximize2 sx={{ height: '14px', width: '14px', color: '#565656' }} />
+              <Ellipsis sx={{ height: '14px', width: '14px', color: '#565656' }} />
             </Box>
           </Box>
           <CardContent>
-            <Box component="ul" sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <Box component="ul" sx={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <Box component="li" sx={{ display: 'flex', alignItems: 'center' }}>
-                <CheckSquare sx={{ marginRight: '0.5rem', height: '1rem', width: '1rem', color: 'var(--txtblack)' }} />
-                <Typography sx={{ fontSize: '1rem', fontWeight: 'medium', color: 'var(--txtblack)' }}>Task:</Typography>
-                <Typography sx={{ fontSize: '1rem', color: 'var(--txtblack)' }}> Search for soil samples</Typography>
+                <CheckSquare sx={{ marginRight: '8px', marginRight:'5px', height: '12px', width: '12px', color: '#565656', }} />
+                <Typography sx={{ fontSize: '12px', fontWeight: '700', color: '#565656', paddingRight:"8px",paddingLeft:'12px' }}>Task:</Typography>
+                <Typography sx={{ fontSize: '12px',fontWeight: '400', color: '#565656' }}> Search for soil samples</Typography>
               </Box>
               <Box component="li" sx={{ display: 'flex', alignItems: 'center' }}>
-                <FlaskConical sx={{ marginRight: '0.5rem', height: '1rem', width: '1rem', color: 'var(--txtblack)' }} />
-                <Typography sx={{ fontSize: '1rem', fontWeight: 'medium', color: 'var(--txtblack)' }}>Experiment:</Typography>
-                <Typography sx={{ fontSize: '1rem', color: 'var(--txtblack)' }}> DNA Isolation from soil samples</Typography>
+                <FlaskConical sx={{ marginRight: '8px', height: '16px', width: '16px', color: '#565656' }} />
+                <Typography sx={{ fontSize: '12px', fontWeight: '700', color: '#565656',paddingRight:"8px",paddingLeft:'12px' }}>Experiment:</Typography>
+                <Typography sx={{ fontSize: '12px',fontWeight: '400', color: '#565656' }}> DNA Isolation from soil samples</Typography>
               </Box>
               <Box component="li" sx={{ display: 'flex', alignItems: 'center' }}>
-                <NotepadText sx={{ marginRight: '0.5rem', height: '1rem', width: '1rem', color: 'var(--txtblack)' }} />
-                <Typography sx={{ fontSize: '1rem', fontWeight: 'medium', color: 'var(--txtblack)' }}>Survey:</Typography>
-                <Typography sx={{ fontSize: '1rem', color: 'var(--txtblack)' }}> DNA Isolation from soil samples</Typography>
+                <NotepadText sx={{ marginRight: '8px', height: '16px', width: '16px', color: '#565656' }} />
+                <Typography sx={{ fontSize: '12px', fontWeight: '700', color: '#565656',paddingRight:"8px",paddingLeft:'12px' }}>Survey:</Typography>
+                <Typography sx={{ fontSize: '12px',fontWeight: '400', color: '#565656' }}> DNA Isolation from soil samples</Typography>
               </Box>
             </Box>
           </CardContent>
@@ -45,17 +45,17 @@ function HomePage() {
 
         {/* Agenda */}
         <Card>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.5rem 1.5rem' }}>
-            <Typography sx={{ fontSize: '1rem', fontWeight: 'medium', color: 'var(--txtblack)' }}>Agenda</Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 24px' }}>
+            <Typography sx={{ fontSize: '16px', fontWeight: '700', color: '#565656' }}>Agenda</Typography>
             <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ display: 'flex', gap: '0.5rem' }}>
-              <Maximize2 sx={{ height: '1rem', width: '1rem', color: 'var(--txtblack)' }} />
-              <Ellipsis sx={{ height: '1rem', width: '1rem', color: 'var(--txtblack)' }} />
+            <Box sx={{ display: 'flex', gap: '8px' }}>
+              <Maximize2 sx={{ height: '16px', width: '16px', color: '#565656' }} />
+              <Ellipsis sx={{ height: '16px', width: '16px', color: '#565656' }} />
             </Box>
           </Box>
-          <CardContent sx={{ paddingTop: '1.5rem' }}>
+          <CardContent sx={{ paddingTop: '24px' }}>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-              <CalendarDays sx={{ height: '6rem', width: '6rem', color: 'var(--txtblack)' }} />
+              <CalendarDays sx={{ height: '96px', width: '96px', color: '#565656' }} />
             </Box>
           </CardContent>
         </Card>
@@ -63,11 +63,11 @@ function HomePage() {
 
       {/* LineUp */}
       <Card>
-        <CardHeader>
-          <CardTitle sx={{ color: 'var(--txtblack)' }}>LineUp</CardTitle>
-        </CardHeader>
+        {/* <CardHeader>
+          <CardTitle sx={{ color: '#565656' }}>LineUp</CardTitle>
+        </CardHeader> */}
         <CardContent>
-          <Typography sx={{ color: 'var(--txtblack)' }}>No upcoming events</Typography>
+          <Typography sx={{ fontSize: '16px', fontWeight: '700', color: '#565656' }}>LineUp</Typography>
         </CardContent>
       </Card>
     </Box>
