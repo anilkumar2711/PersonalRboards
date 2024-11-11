@@ -1,29 +1,96 @@
 import React from 'react';
 import { Button } from './button';
-import { Home, PanelsLeftBottom, BriefcaseBusiness} from 'lucide-react';
+import { Home, PanelsLeftBottom, BriefcaseBusiness } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { Box, Typography } from '@mui/material';
 
-function Sidebar () {
+function Sidebar() {
     const location = useLocation();
-    return (<div className="w-64 bg-white p-4 flex flex-col border">
-        <nav className="flex-grow">
-            <Link to="/" className={`flex items-center text-txtblack py-2 px-4 rounded ${location.pathname === '/' ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:bg-gray-200'}`}>
-                <Home className="mr-2 h-5 w-5 text-txtblack" />
-                Home
-            </Link>
-            <Link to="/projects" className={`flex items-center py-2 px-4 rounded ${location.pathname === '/projects' ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:bg-gray-200'}`}>
-                <BriefcaseBusiness className="mr-2 h-5 w-5 text-txtblack" />
-                Projects
-            </Link>
-            <a href="javascript:void(0)" className="flex items-center py-2 px-4 text-gray-700 hover:bg-gray-200 rounded">
-                <PanelsLeftBottom className="mr-2 h-5 w-5 text-txtblack" />
-                Boards
-            </a>
-        </nav>
-        <Button className="mt-auto bg-golerly hover:bg-purple-600 text-white">
+    return (<Box sx={{
+        // width: '16rem', // 64 in Tailwind
+        backgroundColor: 'white',
+        padding: 4,
+        display: 'flex',
+        flexDirection: 'column',
+        border: '1px solid',
+        borderColor: 'divider',
+    }}>
+        <Box sx={{ flexGrow: 1 }}>
+            <Box
+                component={Link}
+                to="/"
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    color: location.pathname === '/' ? 'text.primary' : 'text.secondary',
+                    backgroundColor: location.pathname === '/' ? 'grey.200' : 'transparent',
+                    paddingY: 1,
+                    paddingX: 2,
+                    borderRadius: 1,
+                    '&:hover': {
+                        backgroundColor: 'grey.200',
+                    },
+                    textDecoration: 'none',
+                }}
+            >
+                <Home sx={{ marginRight: 1, height: 20, width: 20, color: 'text.primary' }} />
+                <Typography>Home</Typography>
+            </Box>
+
+            <Box
+                component={Link}
+                to="/projects"
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    color: location.pathname === '/projects' ? 'text.primary' : 'text.secondary',
+                    backgroundColor: location.pathname === '/projects' ? 'grey.200' : 'transparent',
+                    paddingY: 1,
+                    paddingX: 2,
+                    borderRadius: 1,
+                    '&:hover': {
+                        backgroundColor: 'grey.200',
+                    },
+                    textDecoration: 'none',
+                }}
+            >
+                <BriefcaseBusiness sx={{ marginRight: 1, height: 20, width: 20, color: 'text.primary' }} />
+                <Typography>Projects</Typography>
+            </Box>
+
+            <Box
+                component="a"
+                href="javascript:void(0)"
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    color: 'text.secondary',
+                    paddingY: 1,
+                    paddingX: 2,
+                    borderRadius: 1,
+                    '&:hover': {
+                        backgroundColor: 'grey.200',
+                    },
+                    textDecoration: 'none',
+                }}
+            >
+                <PanelsLeftBottom sx={{ marginRight: 1, height: 20, width: 20, color: 'text.primary' }} />
+                <Typography>Boards</Typography>
+            </Box>
+        </Box>
+        <Button
+            sx={{
+                marginTop: 'auto',
+                backgroundColor: 'primary.main',  // Adjust this if "golerly" is a custom color
+                color: 'white',
+                '&:hover': {
+                    backgroundColor: 'purple.600', // Replace with MUI color or custom theme color
+                },
+            }}
+        >
             Get goals early
         </Button>
-    </div>)
+    </Box>)
 }
 
 export default Sidebar;

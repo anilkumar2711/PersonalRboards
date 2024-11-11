@@ -4,7 +4,7 @@ import { Badge } from "../../components/ui/badge"
 import { Form } from "../../components/ui/Form";
 import { Box, Typography } from '@mui/material';
 
-// import { ProgressInput} from "../../components/ui/ProgressInput"
+// import { ProgressInput} from "../project/ProgressInput";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "../../components/ui/table"
 import { User, Flag, Ellipsis, Plus, CalendarDays, Clock, Search, CircleFadingArrowUp, Tag, Text, ChevronsRight, MoveDiagonal2, ChevronsUpDown } from "lucide-react"
 import { useState } from "react"
@@ -158,22 +158,23 @@ export default function ProjectDetailsPanel(props) {
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                     <CircleFadingArrowUp sx={{ height: 16, width: 16, color: 'text.secondary' }} />
                                     <span sx={{ fontSize: '12px', fontWeight: '600', width: 96 }}>Completion</span>
-                                    <Input name="completion" type="range" value={[0, project.completion]} sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} />
-                                    {/* <div className="flex-1">
-                                        <div className="w-full bg-gray-200 rounded-full h-2">
-                                            <div
-                                                className="bg-blue-600 h-2 rounded-full"
+                                    {/* <Input name="completion" type="range" value={[0, project.completion]} sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} /> */}
+                                    <Box sx={{flex: 1,}}>
+                                        <Box   sx={{ width: '100%', display:'flex', flexDirection:'row',alignItems:'center'}}
+>                                              <Box sx={{pr:1, fontSize:'12px',color:'#565656',fontWeight:'400'}}>{project.completion}%</Box>
+                                            <Box
+                                                 sx={{backgroundColor: '#24A249',height: '6px',borderRadius: '50px', }}
                                                 style={{ width: `${project.completion}%` }}
                                             />
-                                        </div>
-                                    </div> */}
-                                    {/* <ProgressInput value={`${project.completion}%`} className="h-8  text-sm w-16" /> */}
+                                        </Box>
+                                    </Box> 
+                                     {/* <ProgressInput value={`${project.completion}%`} className="h-8  text-sm w-16" /> */}
                                 </Box>
 
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                     <CalendarDays sx={{ height: 16, width: 16, color: 'text.secondary' }} />
                                     <span sx={{ fontSize: '0.875rem', width: 96, fontSize: '12px', fontWeight: '400' }}>Dates</span>
-                                    <Input name="dates" type="daterange" value={project.dates} sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} />
+                                    <Input name="dates" type="date" value={project.dates} sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} />
                                 </Box>
 
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
@@ -184,7 +185,7 @@ export default function ProjectDetailsPanel(props) {
 
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                     <Tag sx={{ height: 16, width: 16, color: 'text.secondary' }} />
-                                    <Box sx={{ fontSize: '12px', color: '#565656', fontWeight: '600', width: 96 }}>Label</Box>
+                                    <span sx={{ fontSize: '12px', color: '#565656', fontWeight: '600', width: 96 }}>Label</span>
                                     <Input name="label" value={project.label} sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} />
                                 </Box>
 

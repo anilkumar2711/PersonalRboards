@@ -5,6 +5,7 @@ import Autocomplete from './Autocomplete';
 import DateRangePicker from './DateRangePicker';
 import Textarea from './Textarea';
 import RangeSlider from './RangeSlider';
+import DatePicker from "./DatePicker";
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
   '& .MuiInputBase-root': {
@@ -71,6 +72,9 @@ const Input = React.forwardRef(({ className = '', type = 'text', ...props }, ref
 
   if (type === 'daterange') {
     return <DateRangePicker {...props} ref={ref} />;
+  }
+  if (type === 'date'){
+    return <DatePicker {...props} ref={ref} />;
   }
 
   if (type === 'textarea') {
