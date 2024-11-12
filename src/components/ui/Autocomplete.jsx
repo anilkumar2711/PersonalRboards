@@ -51,18 +51,19 @@ const getOption = (options,value)=>(options.find(v => typeof v=='string'? v==val
 const Autocomplete = React.forwardRef(({ 
   className = '', 
   options = [], 
+  renderInput,
   renderOption,
   value: propValue,
   onChange: propOnChange,
   inputValue: propInputValue,
   onInputChange: propOnInputChange,
+  hasPlacehoderColor = false,
   ...props 
 }, ref) => {
   const [localValue, setLocalValue] = useState(propValue ?? null);
   const [localInputValue, setLocalInputValue] = useState(propInputValue ?? '');
   const [selectedOption, setSelectedOption] = useState(getOption(options,propValue)||{});
   const placeholderColor = getOptionValue(selectedOption,'color');
-  console.log({placeholderColor});
   useEffect(() => {
     if (propValue !== undefined) {
       setLocalValue(propValue);
@@ -94,10 +95,14 @@ const Autocomplete = React.forwardRef(({
     </li>
   );
 
+  const defaultRenderInput = (params) => <TextField {...params} {...props} sx={{
+    ...(hasPlacehoderColor?{backgroundColor:placeholderColor}:{})
+  }} />;
+
   return (
     <StyledAutocomplete
       options={options}
-      renderInput={(params) => <TextField {...params} {...props} sx={{backgroundColor:placeholderColor}} />}
+      renderInput={renderInput || defaultRenderInput}
       renderOption={renderOption || defaultRenderOption}
       value={localValue}
       onChange={handleChange}

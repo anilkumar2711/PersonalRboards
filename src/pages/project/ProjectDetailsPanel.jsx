@@ -43,8 +43,8 @@ export default function ProjectDetailsPanel(props) {
 
     const renderIconOption = (props, option) => (
         <li {...props} key={option.value} >
-            <span style={{backgroundColor:option.color,padding:'4px',display:'flex',gap:1,whiteSpace:'nowrap',borderRadius:'4px'}} >
-                <Flag sx={{ height: 16, width: 16, color: 'text.secondary', marginLeft:'10px' }} />
+            <span style={{backgroundColor:option.color,padding:'4px',display:'flex',gap:2,whiteSpace:'nowrap',borderRadius:'4px'}} >
+                <Tag sx={{ height: 16, width: 16, color: 'text.secondary'}} />
                 {option.label}
             </span>
         </li>
@@ -166,7 +166,7 @@ export default function ProjectDetailsPanel(props) {
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                     <Clock sx={{ height: 16, width: 16, color: 'text.secondary' }} />
                                     <span style={{ fontSize: '12px', fontWeight: '600', width: 96 }}>Status</span>
-                                    <Input name="status" type="search" options={statusOptions} renderOption={renderColorOption} value={project.status} sx={{ height: 32, fontSize: '12px', fontWeight: '400', backgroundColor: 'yourCustomColor' }} />
+                                    <Input name="status" type="search" options={statusOptions} hasPlacehoderColor={true} renderOption={renderColorOption} value={project.status} sx={{ height: 32, fontSize: '12px', fontWeight: '400', backgroundColor: 'yourCustomColor' }} />
                                 </Box>
 
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
@@ -184,7 +184,7 @@ export default function ProjectDetailsPanel(props) {
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                     <Flag sx={{ height: 16, width: 16, color: 'text.secondary' }} />
                                     <span style={{ fontSize: '0.875rem', width: 96 }}>Priority</span>
-                                    <Input name="priority" type="search" options={priorityOptions} renderOption={renderColorOption} value={project.priority} sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} />
+                                    <Input name="priority" type="search" options={priorityOptions} hasPlacehoderColor={true} renderOption={renderColorOption} value={project.priority} sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} />
                                 </Box>
 
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
