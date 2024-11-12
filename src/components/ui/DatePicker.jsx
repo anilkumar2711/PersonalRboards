@@ -11,7 +11,7 @@ export default function DatePickerValue(props) {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DatePicker']}>
         <DatePicker
-          label="End date"
+          label="Date"
           {...props}
           value={value}
           onChange={(newValue) => setValue(newValue)}

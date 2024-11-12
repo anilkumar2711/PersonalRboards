@@ -184,13 +184,20 @@ export default function ProjectDetailsPanel(props) {
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                     <Flag sx={{ height: 16, width: 16, color: 'text.secondary' }} />
                                     <span style={{ fontSize: '0.875rem', width: 96 }}>Priority</span>
-                                    <Input name="priority" type="search" options={priorityOptions} hasPlacehoderColor={true} renderOption={renderColorOption} value={project.priority} sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} />
+                                    <Input 
+                                        name="priority" 
+                                        type="search" 
+                                        options={priorityOptions}
+                                        renderOption={renderColorOption}
+                                        value={project.priority} 
+                                        sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} 
+                                    />
                                 </Box>
 
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                     <Tag sx={{ height: 16, width: 16, color: 'text.secondary' }} />
                                     <span style={{ fontSize: '12px', color: '#565656', fontWeight: '600', width: 96 }}>Label</span>
-                                    <Input name="label" value={project.label} type="search" options={labelOptions} renderOption={renderIconOption} sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} />
+                                    <Input name="label" value={project.label} type="tags" options={labelOptions} renderOption={renderIconOption} sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} />
                                 </Box>
 
                                 <Box sx={{ '& > * + *': { marginTop: 8 } }}>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { TextField } from '@mui/material';
 import { styled } from '@mui/system';
 import Autocomplete from './Autocomplete';
+import InputTags from "./InputTags";
 import DateRangePicker from './DateRangePicker';
 import Textarea from './Textarea';
 import RangeSlider from './RangeSlider';
@@ -70,6 +71,10 @@ const Input = React.forwardRef(({ className = '', type = 'text', ...props }, ref
 
   if (type === 'search') {
     return <Autocomplete {...props} ref={ref} />;
+  }
+
+  if (type === 'tags') {
+    return <InputTags {...props} ref={ref} />;
   }
 
   if (type === 'daterange') {

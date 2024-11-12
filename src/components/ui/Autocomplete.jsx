@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Autocomplete as MuiAutocomplete, TextField } from '@mui/material';
+import { Autocomplete as MuiAutocomplete, TextField, InputAdornment } from '@mui/material';
 import { styled } from '@mui/system';
 
 const StyledAutocomplete = styled(MuiAutocomplete)(({ theme }) => ({
@@ -95,14 +95,23 @@ const Autocomplete = React.forwardRef(({
     </li>
   );
 
-  const defaultRenderInput = (params) => <TextField {...params} {...props} sx={{
-    ...(hasPlacehoderColor?{backgroundColor:placeholderColor}:{})
-  }} />;
+  const defaultRenderInput = (params) => <TextField 
+      {...params} 
+      {...props} 
+      sx={{
+        ...(hasPlacehoderColor?{backgroundColor:placeholderColor}:{})
+      }} 
+  />;
+
+
+  const wrapperRederInput = (...args)=>{
+    return (renderInput ? renderInput(...args,selectedOption) : defaultRenderInput(...args));
+  }
 
   return (
     <StyledAutocomplete
       options={options}
-      renderInput={renderInput || defaultRenderInput}
+      renderInput={wrapperRederInput || defaultRenderInput}
       renderOption={renderOption || defaultRenderOption}
       value={localValue}
       onChange={handleChange}
