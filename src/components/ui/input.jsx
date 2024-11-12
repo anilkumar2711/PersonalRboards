@@ -6,6 +6,8 @@ import DateRangePicker from './DateRangePicker';
 import Textarea from './Textarea';
 import RangeSlider from './RangeSlider';
 import DatePicker from "./DatePicker";
+import DateStartEndPicker from "./DateStartEndPicker";
+import ProgressInput from "./ProgressInput";
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
   '& .MuiInputBase-root': {
@@ -73,6 +75,9 @@ const Input = React.forwardRef(({ className = '', type = 'text', ...props }, ref
   if (type === 'daterange') {
     return <DateRangePicker {...props} ref={ref} />;
   }
+  if (type === 'datestartend') {
+    return <DateStartEndPicker {...props} ref={ref} />;
+  }
   if (type === 'date'){
     return <DatePicker {...props} ref={ref} />;
   }
@@ -83,6 +88,10 @@ const Input = React.forwardRef(({ className = '', type = 'text', ...props }, ref
 
   if (type === 'range') {
     return <RangeSlider {...props} ref={ref} />;
+  }
+
+  if(type === 'progress') {
+    return <ProgressInput {...props} ref={ref} />;
   }
 
   return (

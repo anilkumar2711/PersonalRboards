@@ -7,9 +7,9 @@ import { Box, Typography } from '@mui/material';
 function Sidebar() {
     const location = useLocation();
     return (<Box sx={{
-        // width: '16rem', // 64 in Tailwind
+        width: '16rem',
         backgroundColor: 'white',
-        padding: 4,
+        paddingY:2,
         display: 'flex',
         flexDirection: 'column',
         border: '1px solid',
@@ -83,6 +83,7 @@ function Sidebar() {
                 marginTop: 'auto',
                 backgroundColor: 'primary.main',  // Adjust this if "golerly" is a custom color
                 color: 'white',
+                marginX: 2,
                 '&:hover': {
                     backgroundColor: 'purple.600', // Replace with MUI color or custom theme color
                 },
