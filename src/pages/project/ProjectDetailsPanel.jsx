@@ -168,7 +168,7 @@ export default function ProjectDetailsPanel(props) {
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                     <Clock sx={{ height: 16, width: 16, color: 'text.secondary' }} />
                                     <span style={{ fontSize: '12px', fontWeight: '600', width: 96 }}>Status</span>
-                                    <Input name="status" type="search" options={statusOptions} hasPlacehoderColor={true} renderOption={renderColorOption} value={project.status} icon={ColorTag} />
+                                    <Input name="status" type="search" options={statusOptions} renderOption={renderColorOption} value={project.status} icon={ColorTag} />
                                 </Box>
 
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
