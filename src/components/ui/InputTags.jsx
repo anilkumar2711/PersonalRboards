@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Autocomplete as MuiAutocomplete, TextField, Chip } from '@mui/material';
 import { height, styled } from '@mui/system';
+import { Tag } from 'lucide-react';
 
 const StyledAutocomplete = styled(MuiAutocomplete)(({ theme }) => ({
   '&': {
@@ -82,6 +83,7 @@ const InputTags = React.forwardRef(({
         value.map((option, index) => (
           <Chip
             variant="outlined"
+            icon={props.icon?<props.icon fill={typeof option === 'string' ? "" : option?.color} />:<Tag/>}
             label={typeof option === 'string' ? option : option?.label}
             {...getTagProps({ index })}
           />
@@ -89,11 +91,13 @@ const InputTags = React.forwardRef(({
       }
       renderOption={renderOption || defaultRenderOption}
       renderInput={(params) => (
-        <TextField
-          {...params}
-          {...props}
-          placeholder="Select Options"
-        />
+        <span style={{position:'relative'}} >
+          <TextField
+            {...params}
+            {...props}
+            placeholder="Select Options"
+          />
+        </span>
       )}
       ref={ref}
     />

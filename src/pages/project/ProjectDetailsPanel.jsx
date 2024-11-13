@@ -41,6 +41,8 @@ export default function ProjectDetailsPanel(props) {
         </li>
     );
 
+    const ColorTag = (props) =><span style={{backgroundColor:props.option.color, display:'block', borderRadius:'4px', width:'16px',height:'16px', marginRight:'10px'}} ></span>;
+
     const renderIconOption = (props, option) => (
         <li {...props} key={option.value} >
             <span style={{backgroundColor:option.color,padding:'4px',display:'flex',gap:2,whiteSpace:'nowrap',borderRadius:'4px'}} >
@@ -166,7 +168,7 @@ export default function ProjectDetailsPanel(props) {
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                     <Clock sx={{ height: 16, width: 16, color: 'text.secondary' }} />
                                     <span style={{ fontSize: '12px', fontWeight: '600', width: 96 }}>Status</span>
-                                    <Input name="status" type="search" options={statusOptions} hasPlacehoderColor={true} renderOption={renderColorOption} value={project.status} sx={{ height: 32, fontSize: '12px', fontWeight: '400', backgroundColor: 'yourCustomColor' }} />
+                                    <Input name="status" type="search" options={statusOptions} hasPlacehoderColor={true} renderOption={renderColorOption} value={project.status} icon={ColorTag} />
                                 </Box>
 
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
@@ -190,6 +192,7 @@ export default function ProjectDetailsPanel(props) {
                                         options={priorityOptions}
                                         renderOption={renderColorOption}
                                         value={project.priority} 
+                                        icon={ColorTag}
                                         sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} 
                                     />
                                 </Box>
@@ -197,7 +200,7 @@ export default function ProjectDetailsPanel(props) {
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                     <Tag sx={{ height: 16, width: 16, color: 'text.secondary' }} />
                                     <span style={{ fontSize: '12px', color: '#565656', fontWeight: '600', width: 96 }}>Label</span>
-                                    <Input name="label" value={project.label} type="tags" options={labelOptions} renderOption={renderIconOption} sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} />
+                                    <Input name="label" value={project.label} type="tags" options={labelOptions} renderOption={renderIconOption} sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} icon={Tag} />
                                 </Box>
 
                                 <Box sx={{ '& > * + *': { marginTop: 8 } }}>

@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Autocomplete as MuiAutocomplete, TextField, InputAdornment } from '@mui/material';
 import { styled } from '@mui/system';
 
-const StyledAutocomplete = styled(MuiAutocomplete)(({ theme }) => ({
+const StyledAutocomplete = styled(MuiAutocomplete)(({ theme,icon }) => ({
   '&': {
     width:'100%'
   },
   '& .MuiInputBase-root': {
+    ...(icon?{paddingLeft:'40px'}:{}),
     height: '40px',
     borderRadius: theme.shape?.borderRadius ?? 4,
     // backgroundColor: theme.palette?.background?.paper ?? '#fff',
@@ -95,13 +96,23 @@ const Autocomplete = React.forwardRef(({
     </li>
   );
 
-  const defaultRenderInput = (params) => <TextField 
-      {...params} 
-      {...props} 
-      sx={{
-        ...(hasPlacehoderColor?{backgroundColor:placeholderColor}:{})
-      }} 
-  />;
+  const defaultRenderInput = (params) => <span style={{position:'relative'}}>
+      <TextField 
+        {...params} 
+        {...props} 
+        sx={{
+          ...(hasPlacehoderColor?{backgroundColor:placeholderColor}:{})
+        }} 
+    />
+    {props.icon?<span style={{
+        position: 'absolute',
+        left:'0px',
+        top: '50%',
+        transform: 'translate(50%, 0%)'
+      }}>
+      <props.icon option={selectedOption} />
+    </span>:""}
+  </span>;
 
 
   const wrapperRederInput = (...args)=>{
