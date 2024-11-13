@@ -101,8 +101,8 @@ const RangeSlider = React.forwardRef(({
         {...props}
       />
       <Box display="flex" justifyContent="space-between">
-          {min !=value[0] &&  <ValueTag>{calculatePercentage(value[0])}%</ValueTag> }
-          {max !=value[1] &&  <ValueTag>{calculatePercentage(value[1])}%</ValueTag> }
+          {min !==value[0] &&  <ValueTag>{calculatePercentage(value[0])}%</ValueTag> }
+          {max !==value[1] &&  <ValueTag>{calculatePercentage(value[1])}%</ValueTag> }
       </Box>
     </Box>
   );
