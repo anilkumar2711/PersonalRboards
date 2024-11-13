@@ -20,7 +20,7 @@ const ProgressInput = (props) => {
 
     return (
         <Box sx={{ flex: 1, display:'contents' }}>
-            <Box sx={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center',backgroundColor:'#bebebe38', borderRadius:'40px', paddingLeft:'15px' }}>
+            <Box sx={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center',backgroundColor:'#bebebe38', borderRadius:'40px', padding:'0px 15px' }}>
                 <Box sx={{ pr: 1, fontSize: '12px', color: '#565656', fontWeight: '400' }}>{progress}%</Box>
                 <Box
                     sx={{ backgroundColor: '#24A249', height: '6px', borderRadius: '50px', }}
