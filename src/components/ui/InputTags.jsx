@@ -72,7 +72,7 @@ const InputTags = React.forwardRef(({
     </li>
   );
 
-  return (
+  return (<>
     <StyledAutocomplete
       multiple
       options={options}
@@ -101,6 +101,8 @@ const InputTags = React.forwardRef(({
       )}
       ref={ref}
     />
+    <input name={props.name} type='hidden' value={localValue.map(v=>v?.value||v)}/>
+    </>
   );
 });
 
