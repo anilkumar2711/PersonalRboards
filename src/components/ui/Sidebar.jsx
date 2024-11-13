@@ -21,6 +21,7 @@ function Sidebar() {
                 to="/"
                 sx={{
                     display: 'flex',
+                    gap:2,
                     alignItems: 'center',
                     color: location.pathname === '/' ? 'text.primary' : 'text.secondary',
                     backgroundColor: location.pathname === '/' ? 'grey.200' : 'transparent',
@@ -42,6 +43,7 @@ function Sidebar() {
                 to="/projects"
                 sx={{
                     display: 'flex',
+                    gap:2,
                     alignItems: 'center',
                     color: location.pathname === '/projects' ? 'text.primary' : 'text.secondary',
                     backgroundColor: location.pathname === '/projects' ? 'grey.200' : 'transparent',
@@ -63,6 +65,7 @@ function Sidebar() {
                 href="javascript:void(0)"
                 sx={{
                     display: 'flex',
+                    gap:2,
                     alignItems: 'center',
                     color: 'text.secondary',
                     paddingY: 1,
