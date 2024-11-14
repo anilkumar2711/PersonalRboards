@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useRef, useEffect } from 'react';
 import { 
   Button, 
@@ -8,23 +9,26 @@ import {
   ClickAwayListener
 } from '@mui/material';
 import { styled } from '@mui/system';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { ChevronDown } from 'lucide-react';
 
-const StyledButton = styled(Button)(({ theme, transparent }) => ({
-  justifyContent: 'space-between',
-  width: '100%',
-  padding: theme?.spacing?.(1, 2) ?? '8px 16px',
-  color: theme?.palette?.text?.primary ?? '#000',
-  backgroundColor: transparent ? 'transparent' : (theme?.palette?.background?.paper ?? '#fff'),
-  border: transparent ? 'none' : `1px solid ${theme?.palette?.divider ?? '#e0e0e0'}`,
-  '&:hover': {
-    backgroundColor: transparent ? 'rgba(0, 0, 0, 0.04)' : (theme?.palette?.action?.hover ?? '#f5f5f5'),
-  },
-  '&:focus': {
-    outline: 'none',
-    boxShadow: `0 0 0 2px ${theme?.palette?.primary?.main ?? '#1976d2'}`,
-  },
-}));
+const StyledButton = styled(Button)(({ theme, transparent:transparentString }) => {
+  const transparent = transparentString==="true";
+  return ({
+    justifyContent: 'space-between',
+    width: '100%',
+    padding: theme?.spacing?.(1, 2) ?? '8px 16px',
+    color: theme?.palette?.text?.primary ?? '#000',
+    backgroundColor: transparent ? 'transparent' : (theme?.palette?.background?.paper ?? '#fff'),
+    border: transparent ? 'none' : `1px solid ${theme?.palette?.divider ?? '#e0e0e0'}`,
+    '&:hover': {
+      backgroundColor: transparent ? 'rgba(0, 0, 0, 0.04)' : (theme?.palette?.action?.hover ?? '#f5f5f5'),
+    },
+    '&:focus': {
+      outline: 'none',
+      boxShadow: `0 0 0 2px ${theme?.palette?.primary?.main ?? '#1976d2'}`,
+    },
+  })
+});
 
 const Dropdown = ({ 
   options = [], 
@@ -80,8 +84,8 @@ const Dropdown = ({
         <StyledButton
           ref={buttonRef}
           onClick={handleClick}
-          endIcon={hasDropIcon ? <KeyboardArrowDownIcon /> : null}
-          transparent={transparent}
+          endIcon={hasDropIcon ? <ChevronDown /> : null}
+          transparent={transparent.toString()}
         >
           <Typography variant="body2">
             {selectedOption ? renderOptionContent(selectedOption) : placeholder}

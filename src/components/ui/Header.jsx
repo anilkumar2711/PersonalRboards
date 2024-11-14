@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+"use client";
+import Link from 'next/link';
+import { Box, Typography } from '@mui/material';
+import Image from 'next/image';
 import { Button } from './button';
-import { Input } from './input';
+import { Input } from './Input';
 import Dropdown from './Dropdown';
 import { Settings } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { Box, Typography } from '@mui/material';
 
 function Header() {
   const options = [
@@ -13,12 +13,6 @@ function Header() {
     { value: 'option2', label: 'Option 2' },
     { value: 'option3', label: 'Option 3' },
   ];
-
-  const navigate = useNavigate();
-
-  const handleButtonClick = () => {
-    navigate('/newproject');
-  };
 
   return (
     <Box
@@ -31,10 +25,12 @@ function Header() {
         flexDirection: { xs: 'column', sm: 'row' },
       }}
     >
+      {/* Logo */}
       <Box sx={{ pl: 6 }}>
-        <img src="Group 152.png" alt="rboard" />
+        <Image src="/Group152.png" alt="rboard" width={150} height={50} /> {/* Next.js Image Optimization */}
       </Box>
 
+      {/* Search Bar */}
       <Box
         sx={{
           flexGrow: 1,
@@ -54,9 +50,6 @@ function Header() {
             placeholder="Search..." 
             sx={{
                paddingLeft: '10px',
-              // paddingRight: '16px',
-              // paddingTop: '8px',
-              // paddingBottom: '8px',
               borderRadius: '9999px', // full rounding
               width: '100%',
               boxSizing: 'border-box',
@@ -83,6 +76,7 @@ function Header() {
         </Box>
       </Box>
 
+      {/* Buttons and Dropdown */}
       <Box
         sx={{
           display: 'flex',
@@ -90,17 +84,18 @@ function Header() {
           gap: 2, // spacing between child elements
         }}
       >
-        <Button
-          onClick={handleButtonClick}
-          sx={{
-            backgroundColor: '#6EA6FF',
-            fontSize: '12px',
-            fontWeight: '700',
-            color: 'white',
-          }}
-        >
-          Create Project
-        </Button>
+        <Link href="/newproject">
+          <Button
+            sx={{
+              fontSize: '12px',
+              fontWeight: '700',
+              color: 'white',
+            }}
+          >
+            Create Project
+          </Button>
+        </Link>
+        
         <Dropdown
           options={options}
           optionTag="a"

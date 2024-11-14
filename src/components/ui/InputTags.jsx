@@ -3,7 +3,9 @@ import { Autocomplete as MuiAutocomplete, TextField, Chip } from '@mui/material'
 import { height, styled } from '@mui/system';
 import { Tag } from 'lucide-react';
 
-const StyledAutocomplete = styled(MuiAutocomplete)(({ theme }) => ({
+const StyledAutocomplete = styled(MuiAutocomplete,{
+  shouldForwardProp: (prop) => !["icon"].includes(prop) // Prevent `icon` from being forwarded to the DOM
+})(({ theme }) => ({
   '&': {
     width: '100%',
     height: 'auto'

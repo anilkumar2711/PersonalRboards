@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import Sidebar from './ui/Sidebar';
 import Header from './ui/Header';
@@ -40,3 +41,4 @@ function Layout({ children }) {
 }
 
 export default Layout;
+

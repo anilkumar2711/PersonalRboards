@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Autocomplete as MuiAutocomplete, TextField, InputAdornment } from '@mui/material';
 import { styled } from '@mui/system';
 
-const StyledAutocomplete = styled(MuiAutocomplete)(({ theme,icon }) => ({
+const StyledAutocomplete = styled(MuiAutocomplete,{
+  shouldForwardProp: (prop) => !["icon"].includes(prop) // Prevent `icon` from being forwarded to the DOM
+})(({ theme,icon }) => ({
   '&': {
     width:'100%'
   },

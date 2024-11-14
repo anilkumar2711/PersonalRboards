@@ -1,100 +1,112 @@
-import React from 'react';
-import { Button } from './button';
-import { Home, PanelsLeftBottom, BriefcaseBusiness } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+"use client";
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { Box, Typography } from '@mui/material';
+import { Home, PanelsLeftBottom, BriefcaseBusiness } from 'lucide-react';
+import { Button } from './button';
 
 function Sidebar() {
-    const location = useLocation();
-    return (<Box sx={{
+//   const router = useRouter();
+//   const { pathname } = router; // Get the current path
+  const pathname = "";
+
+  return (
+    <Box
+      sx={{
         width: '16rem',
         backgroundColor: 'white',
-        paddingY:2,
+        paddingY: 2,
         display: 'flex',
         flexDirection: 'column',
         border: '1px solid',
         borderColor: 'divider',
-    }}>
-        <Box sx={{ flexGrow: 1 }}>
-            <Box
-                component={Link}
-                to="/"
-                sx={{
-                    display: 'flex',
-                    gap:2,
-                    alignItems: 'center',
-                    color: location.pathname === '/' ? 'text.primary' : 'text.secondary',
-                    backgroundColor: location.pathname === '/' ? 'grey.200' : 'transparent',
-                    paddingY: 1,
-                    paddingX: 2,
-                    borderRadius: 1,
-                    '&:hover': {
-                        backgroundColor: 'grey.200',
-                    },
-                    textDecoration: 'none',
-                }}
-            >
-                <Home sx={{ marginRight: 1, height: 20, width: 20, color: 'text.primary' }} />
-                <Typography>Home</Typography>
-            </Box>
-
-            <Box
-                component={Link}
-                to="/projects"
-                sx={{
-                    display: 'flex',
-                    gap:2,
-                    alignItems: 'center',
-                    color: location.pathname === '/projects' ? 'text.primary' : 'text.secondary',
-                    backgroundColor: location.pathname === '/projects' ? 'grey.200' : 'transparent',
-                    paddingY: 1,
-                    paddingX: 2,
-                    borderRadius: 1,
-                    '&:hover': {
-                        backgroundColor: 'grey.200',
-                    },
-                    textDecoration: 'none',
-                }}
-            >
-                <BriefcaseBusiness sx={{ marginRight: 1, height: 20, width: 20, color: 'text.primary' }} />
-                <Typography>Projects</Typography>
-            </Box>
-
-            <Box
-                component="a"
-                href="javascript:void(0)"
-                sx={{
-                    display: 'flex',
-                    gap:2,
-                    alignItems: 'center',
-                    color: 'text.secondary',
-                    paddingY: 1,
-                    paddingX: 2,
-                    borderRadius: 1,
-                    '&:hover': {
-                        backgroundColor: 'grey.200',
-                    },
-                    textDecoration: 'none',
-                }}
-            >
-                <PanelsLeftBottom sx={{ marginRight: 1, height: 20, width: 20, color: 'text.primary' }} />
-                <Typography>Boards</Typography>
-            </Box>
-        </Box>
-        <Button
-            sx={{
-                marginTop: 'auto',
-                backgroundColor: 'primary.main',  // Adjust this if "golerly" is a custom color
-                color: 'white',
-                marginX: 2,
-                '&:hover': {
-                    backgroundColor: 'purple.600', // Replace with MUI color or custom theme color
-                },
-            }}
+      }}
+    >
+      <Box sx={{ flexGrow: 1 }}>
+        {/* Home Link */}
+        <Box
+          component={Link}
+          href="/"
+          passHref
+          sx={{
+            display: 'flex',
+            gap: 2,
+            alignItems: 'center',
+            color: pathname === '/' ? 'text.primary' : 'text.secondary',
+            backgroundColor: pathname === '/' ? 'grey.200' : 'transparent',
+            paddingY: 1,
+            paddingX: 2,
+            borderRadius: 1,
+            '&:hover': {
+              backgroundColor: 'grey.200',
+            },
+            textDecoration: 'none',
+          }}
         >
-            Get goals early
-        </Button>
-    </Box>)
+          <Home sx={{ marginRight: 1, height: 20, width: 20, color: 'text.primary' }} />
+          <Typography>Home</Typography>
+        </Box>
+
+        {/* Projects Link */}
+        <Box
+          component={Link}
+          href="/projects"
+          passHref
+          sx={{
+            display: 'flex',
+            gap: 2,
+            alignItems: 'center',
+            color: pathname === '/projects' ? 'text.primary' : 'text.secondary',
+            backgroundColor: pathname === '/projects' ? 'grey.200' : 'transparent',
+            paddingY: 1,
+            paddingX: 2,
+            borderRadius: 1,
+            '&:hover': {
+              backgroundColor: 'grey.200',
+            },
+            textDecoration: 'none',
+          }}
+        >
+          <BriefcaseBusiness sx={{ marginRight: 1, height: 20, width: 20, color: 'text.primary' }} />
+          <Typography>Projects</Typography>
+        </Box>
+
+        {/* Boards Link */}
+        <Box
+          component="a"
+          href="javascript:void(0)"
+          sx={{
+            display: 'flex',
+            gap: 2,
+            alignItems: 'center',
+            color: 'text.secondary',
+            paddingY: 1,
+            paddingX: 2,
+            borderRadius: 1,
+            '&:hover': {
+              backgroundColor: 'grey.200',
+            },
+            textDecoration: 'none',
+          }}
+        >
+          <PanelsLeftBottom sx={{ marginRight: 1, height: 20, width: 20, color: 'text.primary' }} />
+          <Typography>Boards</Typography>
+        </Box>
+      </Box>
+
+      {/* Button */}
+      <Button
+        sx={{
+          fontSize: '12px',
+          fontWeight: '700',
+          color: 'white',
+          margin:2
+        }}
+      >
+        Get goals early
+      </Button>
+    </Box>
+  );
 }
 
 export default Sidebar;
