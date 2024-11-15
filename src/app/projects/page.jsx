@@ -1,11 +1,12 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Search, ListFilter, } from 'lucide-react';
 import ProjectDetailsPanel from './ProjectDetailsPanel';
 import { Box, Typography } from '@mui/material';
 import { MdDataUsage,MdPermIdentity,MdOutlineEventNote,MdOutlineAssistantPhoto,MdIncompleteCircle } from "react-icons/md";
+import { api } from '@/libs/axios';
 
 const projects = [
   {
@@ -44,6 +45,9 @@ function ProjectPage() {
     setSelectedProject(project);
     setIsPanelOpen(true);
   }
+  useEffect(()=>{
+    window.api = api;
+  },[]);
   return (
     <Box
       sx={{
@@ -105,7 +109,7 @@ function ProjectPage() {
           >
             <Search sx={{ mr: 1, height: 16, width: 16, color: '#565656',}} />
             <Box sx={{pr:1,pl:1}}><ListFilter sx={{ mr: 1, height: 16, width: 16, color: '#565656', paddingLeft:'8px' }} /></Box>
-            <Button
+            {/* <Button
               variant="contained"
               size="small"
               sx={{ 
@@ -121,7 +125,7 @@ function ProjectPage() {
               }}
             >
               New
-            </Button>
+            </Button> */}
           </Box>
         </Box>
       </Box>
