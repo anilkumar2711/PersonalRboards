@@ -124,6 +124,10 @@ export default function ProjectDetailsPanel(props) {
                         <button>
                             <ChevronsRight sx={{ width: 32, height: 32 }} onClick={onClose} />
                         </button>
+                        <MoveDiagonal2 sx={{ width: 24, height: 32, display: 'flex', alignItems: 'center' }} />
+                        <BsLayoutSidebarInsetReverse sx={{ width: 24, height: 32, marginLeft: 2, display: 'flex', alignItems: 'center' }} />
+                        <ChevronsUpDown sx={{ width: 24, height: 32, marginLeft: 2, display: 'flex', alignItems: 'center' }} />
+                    
                     </Box>
                     <Box
                         sx={{
