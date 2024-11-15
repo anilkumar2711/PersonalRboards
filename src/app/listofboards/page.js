@@ -28,7 +28,7 @@ const assignees = [
   { name: 'Bhaskar P', tasks: 1, initials: 'BP', backgroundColor:'#F81111'},
 ];
 
-function BoardsPage() {
+function ListOfBoards() {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', p: 0.5, backgroundColor: 'white', minHeight: '100vh' }}>
       
@@ -238,4 +238,4 @@ function BoardsPage() {
   );
 }
 
-export default BoardsPage;
+export default ListOfBoards;
