@@ -8,7 +8,7 @@ import { Box, Typography } from '@mui/material';
 import { MdDataUsage,MdPermIdentity,MdOutlineEventNote,MdOutlineAssistantPhoto,MdIncompleteCircle } from "react-icons/md";
 import { api } from '@/libs/axios';
 
-const projects = [
+const ogprojects =  [
   {
     image: "biological.png",
     name: "Sample Project: Biology Research",
@@ -41,12 +41,16 @@ const projects = [
 function ProjectPage() {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState({});
+  const [projects, setProjects] = useState(ogprojects);
   const handleProjectSelect = (project) => {
     setSelectedProject(project);
     setIsPanelOpen(true);
   }
   useEffect(()=>{
     window.api = api;
+    api.get("/projects").then((response)=>{
+      // setProjects();
+    });
   },[]);
   return (
     <Box
