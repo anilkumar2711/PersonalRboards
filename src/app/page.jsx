@@ -6,7 +6,7 @@ import { CalendarDays, CheckSquare, NotepadText, FlaskConical, Maximize2, Ellips
 
 function HomePage() {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px', p:6 }}>
       <Typography variant="h2" sx={{ fontSize: '20px', fontWeight: '700', color: '#565656' }}>
         Good morning Divakar
       </Typography>

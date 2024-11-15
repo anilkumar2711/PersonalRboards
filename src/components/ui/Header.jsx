@@ -27,7 +27,7 @@ function Header() {
     >
       {/* Logo */}
       <Box sx={{ pl: 6 }}>
-        <Image src="/Group152.png" alt="rboard" width={150} height={50} /> {/* Next.js Image Optimization */}
+        <img src="/Group 152.png" alt="rboard" /> {/* Update path for Next.js */}
       </Box>
 
       {/* Search Bar */}
