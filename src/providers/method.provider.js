@@ -6,7 +6,7 @@ export default {
       }) {
         api.post("https://api.scholarbench.com/api/v1/auth/login",data).then((response)=>{
             localStorage.setItem('authToken',response.token);
-            globalThis.reload();
+            globalThis.location.reload();
         })
     }
 }
