@@ -56,12 +56,25 @@ function ProjectPage(props) {
     });
   }, []);
 
-  const projectColumns = ["name", "status", "owner_id", "startDate", "priority", "completion"];
+  const projectColumns = ["name", "status", "owner", "startDate", "priority", "completion"];
 
   const projectColumnFields = {
     "name": {
       headerIcon: "",
-      label: "Project Name"
+      label: "Project Name",
+      render : ({ value,row }) => (
+        <Box sx={{
+            fontWeight:'700',
+            paddingLeft:'10px',
+            display:'flex'
+        }}>
+            <span style={{flexGrow:1}}>{value}</span>
+            <span onClick={()=>handleProjectSelect(row)} style={{cursor:'pointer',marginRight:'10px'}}>
+              <Input value={value} type="switch" readonly={true} trueLabel={"OPEN"} falseLabel={"CLOSE"} />
+            </span>
+        </Box>
+      
+      )
     },
     "status": {
       headerIcon: <MdDataUsage/>,
@@ -84,10 +97,19 @@ function ProjectPage(props) {
         </Box>
     )
     },
-    "owner_id": {
+    "owner": {
       headerIcon: <MdPermIdentity/>,
-      label: "Owner"
-    },
+      label: "Owner",
+      render: ({value}) =>{
+        if (value) {
+          return (
+              <div>
+                {value.full_name || ""}
+              </div>
+            )
+      }
+    }
+  },
     "startDate": {
       headerIcon: <MdOutlineEventNote/>,
       label: "Dates",

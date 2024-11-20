@@ -10,8 +10,6 @@ const axiosInstance = axios.create({
 // Add Request Interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
-    // Add Authorization Header Dynamically
-    console.log("config",config.url);
     if(!config.url.startsWith("http")) {
       config.baseURL = 'https://api_rboards.scholarbench.com/api/v1';
     }
@@ -29,8 +27,8 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (response) => {
-    let { data:domianResponse } = response;
-    let { data:apiresponse } = domianResponse;
+    let { data: domianResponse } = response;
+    let { data: apiresponse } = domianResponse;
     return apiresponse;
   },
   (error) => {

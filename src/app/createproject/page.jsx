@@ -8,7 +8,7 @@ import { api } from '@/libs/axios';
 import { User, Clock, Flag, CircleFadingArrowUp, CalendarDays, Tag, Text } from "lucide-react";
 
 
-const NewBoardForm = (props) => {
+const NewProjectForm = (props) => {
     const [project, setProject] = useState({
         completion:0
     });
@@ -50,11 +50,11 @@ const NewBoardForm = (props) => {
 
     const handleSubmit = (data, event) => {
         console.log({data});
-        api.post("/boards",{
+        api.post("/projects",{
             "name": data.owner,
             "description": data.summary,
             "status": data.status,
-            "completion": !!data.completion,
+            "completion": data.completion,
             "startDate": data.dates.split(",")[0],
             "endDate":  data.dates.split(",")[1],
             "priority": data.priority
@@ -174,4 +174,4 @@ const NewBoardForm = (props) => {
     );
 };
 
-export default NewBoardForm;
+export default NewProjectForm;
