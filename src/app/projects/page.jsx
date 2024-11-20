@@ -57,12 +57,22 @@ function ProjectPage(props) {
     });
   }, []);
 
-  const projectColumns = ["name", "status", "owner_id", "startDate", "priority", "completion"];
+  const projectColumns = ["name", "status", "owner", "startDate", "priority", "completion"];
 
   const projectColumnFields = {
     "name": {
       headerIcon: "",
-      label: "Project Name"
+      label: "Project Name",
+      render : ({ value }) => (
+        <Box sx={{
+            fontSize:'12px',
+            fontWeight:'700',
+            paddingLeft:'10px'
+        }}>
+            <span>{value}</span>
+        </Box>
+      
+      )
     },
     "status": {
       headerIcon: <MdDataUsage/>,
@@ -85,10 +95,19 @@ function ProjectPage(props) {
         </Box>
     )
     },
-    "owner_id": {
+    "owner": {
       headerIcon: <MdPermIdentity/>,
-      label: "Owner"
-    },
+      label: "Owner",
+      render: ({value}) =>{
+        if (value) {
+          return (
+              <div>
+                {value.full_name || ""}
+              </div>
+            )
+      }
+    }
+  },
     "startDate": {
       headerIcon: <MdOutlineEventNote/>,
       label: "Dates",

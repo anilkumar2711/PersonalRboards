@@ -12,7 +12,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     // Add Authorization Header Dynamically
-    const token = localStorage.getItem('authToken') || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZDk5ZjU3MjAtZjA3ZC00ZDM2LTk5OTAtZGMxOTlkNGMwOWI3IiwicHVibGlzaGluZ19uYW1lIjpudWxsLCJlbWFpbCI6ImFuaWxrdW1hcmtyaXNobmEwMjdAZ21haWwuY29tIiwiZnVsbF9uYW1lIjoiQW5pbGt1bWFyICIsInJvbGVfbmFtZSI6bnVsbCwicm9sZV9pZCI6bnVsbCwiaWF0IjoxNzMyMTA0NjU5LCJleHAiOjE3MzIxMDgyNTl9.mAMtOLeEpGHlirsMUlkwqpcyLTQrzquY6JD4xyJGoAg"; // Replace with your token management logic
+    const token = localStorage.getItem('authToken') || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZDk5ZjU3MjAtZjA3ZC00ZDM2LTk5OTAtZGMxOTlkNGMwOWI3IiwicHVibGlzaGluZ19uYW1lIjpudWxsLCJlbWFpbCI6ImFuaWxrdW1hcmtyaXNobmEwMjdAZ21haWwuY29tIiwiZnVsbF9uYW1lIjoiQW5pbGt1bWFyICIsInJvbGVfbmFtZSI6bnVsbCwicm9sZV9pZCI6bnVsbCwiaWF0IjoxNzMyMTA5Njg0LCJleHAiOjE3MzIxMTMyODR9.JNwdzzVu1PNCNfwG3CLb-85rFFjQnNPV6RuLPcE96A4"; // Replace with your token management logic
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }
@@ -25,8 +25,8 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (response) => {
-    let { data:domianResponse } = response;
-    let { data:apiresponse } = domianResponse;
+    let { data: domianResponse } = response;
+    let { data: apiresponse } = domianResponse;
     return apiresponse;
   },
   (error) => {

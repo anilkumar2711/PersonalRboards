@@ -108,7 +108,7 @@ function Header() {
             gap: 2, // spacing between child elements
           }}
         >
-          <Link href="/createboard">
+          <Link href="/createproject">
             <Button
               sx={{
                 fontSize: "12px",
@@ -116,7 +116,7 @@ function Header() {
                 color: "white",
               }}
             >
-              Create Board
+              Create Project
             </Button>
           </Link>
 
