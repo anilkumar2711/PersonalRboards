@@ -1,5 +1,5 @@
 "use client"
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setStore } from '@/redux/store';
 import { api } from '@/libs/axios';
@@ -36,6 +36,10 @@ export function MixinProvider({ children }) {
         ...readables,
         setComponent
     };
+    useEffect(()=>{
+        globalThis.api = api;
+        globalThis.service = serviceProvider;
+    },[]);
     return (
         <MixinContext.Provider value={payload}>
             {children}

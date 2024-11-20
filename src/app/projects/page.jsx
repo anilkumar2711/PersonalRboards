@@ -51,7 +51,6 @@ function ProjectPage(props) {
     setIsPanelOpen(true);
   }
   useEffect(() => {
-    window.api = api;
     api.get("/projects").then(({ data }) => {
       setProjects(data);
     });

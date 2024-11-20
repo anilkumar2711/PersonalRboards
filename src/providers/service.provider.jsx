@@ -1,7 +1,9 @@
 import iconProvider from "./icon.provider";
 import moment from 'moment';
+import methodProvider from "./method.provider";
 export default {
     icons: iconProvider,
+    methods:methodProvider,
     date:(value)=>{
         class ExtededDate extends Date {
             toDbTimestamp() {
