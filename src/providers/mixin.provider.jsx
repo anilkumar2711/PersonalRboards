@@ -39,6 +39,7 @@ export function MixinProvider({ children }) {
     useEffect(()=>{
         globalThis.api = api;
         globalThis.service = serviceProvider;
+        globalThis.setStore = setStore;
     },[]);
     return (
         <MixinContext.Provider value={payload}>

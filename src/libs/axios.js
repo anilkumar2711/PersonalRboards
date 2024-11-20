@@ -14,7 +14,7 @@ axiosInstance.interceptors.request.use(
       config.baseURL = 'https://api_rboards.scholarbench.com/api/v1';
     }
     const tokenExeptionUrls = ["/auth/login"];
-    const token = localStorage.getItem('authToken') || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZDk5ZjU3MjAtZjA3ZC00ZDM2LTk5OTAtZGMxOTlkNGMwOWI3IiwicHVibGlzaGluZ19uYW1lIjpudWxsLCJlbWFpbCI6ImFuaWxrdW1hcmtyaXNobmEwMjdAZ21haWwuY29tIiwiZnVsbF9uYW1lIjoiQW5pbGt1bWFyICIsInJvbGVfbmFtZSI6bnVsbCwicm9sZV9pZCI6bnVsbCwiaWF0IjoxNzMyMTA0NjU5LCJleHAiOjE3MzIxMDgyNTl9.mAMtOLeEpGHlirsMUlkwqpcyLTQrzquY6JD4xyJGoAg"; // Replace with your token management logic
+    const token = localStorage.getItem('authToken') // Replace with your token management logic
     if (token && !tokenExeptionUrls.includes(config.url)) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }
