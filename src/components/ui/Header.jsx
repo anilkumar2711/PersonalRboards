@@ -34,7 +34,7 @@ function Header() {
       }}
     >
       {/* Logo */}
-      <Box sx={{ pl: 2, display: "flex", alignItems: "center", flexGrow: 1 }}>
+      <Box sx={{ pl: 2, display: "flex", alignItems: "center" }}>
         <img src="/Group 152.png" alt="rboard" />
         {isMobile && (
           <IconButton
@@ -56,22 +56,18 @@ function Header() {
             alignItems: "center",
           }}
         >
-          <Box
-            sx={{
-              position: "relative",
-              width: "50%",
-            }}
-          >
+          <div style={{ width: '30%'}}>
             <Input
-              type="text"
-              placeholder="Search..."
-              sx={{
-                paddingLeft: "10px",
-                borderRadius: "9999px", // full rounding
-                width: "100%",
-                boxSizing: "border-box",
-              }}
-            />
+                type="text"
+                placeholder="Search..."
+                sx={{
+                  paddingLeft: "10px",
+                  borderRadius: "9999px", // full rounding
+                  width: "100%",
+                  boxSizing: "border-box",
+                }}
+              />
+          </div>
             <Box
               component="svg"
               xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +91,6 @@ function Header() {
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
             </Box>
-          </Box>
         </Box>
       )}
 
