@@ -1,6 +1,6 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/Input"
+import { Input } from "@/components/ui/InputWrapper"
 import { Form } from "@/components/ui/Form";
 import { Box, Typography } from '@mui/material';
 import { User, Flag, Ellipsis, Plus, CalendarDays, Clock, Search, CircleFadingArrowUp, Tag, Text, ChevronsRight, MoveDiagonal2, ChevronsUpDown } from "lucide-react"
@@ -250,9 +250,7 @@ export default function ProjectDetailsPanel(props) {
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                     <User sx={{ width: 16, height: 16, color: 'text.secondary' }} />
                                     <span style={{ fontSize: '12px', fontWeight: '600', width: 96 }}>Owner</span>
-                                    <Input name="owner" value={project.owner} sx={{ height: '2rem', fontSize: '12px', fontWeight: '400',border: 'none', // Remove border
-                             outline: 'none', // Remove outline when focused
-                             boxShadow: 'none' }} />
+                                    <Input name="owner" value={project.owner?.full_name} sx={{ height: '2rem', fontSize: '12px', fontWeight: '400' }} />
                                 </Box>
 
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
@@ -296,9 +294,10 @@ export default function ProjectDetailsPanel(props) {
                                 <Box sx={{ '& > * + *': { marginTop: 8 } }}>
                                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                         <Text sx={{ width: 16, height: 16, color: 'text.secondary' }} />
-                                        <span style={{ fontSize: '0.875rem' }}>Summary</span>
+                                        <span style={{ fontSize: '12px', color: '#565656', fontWeight: '600', width: 96 }} >Summary</span>
+                                        <Input name="summary" type="textarea" value={project.summary} sx={{ fontSize: '12px', fontWeight: '400' }} />
                                     </Box>
-                                    <Input name="summary" type="textarea" value={project.summary} sx={{ fontSize: '12px', fontWeight: '400' }} />
+                                    
                                 </Box>
                                 <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, justifyContent: 'flex-end' }} >
                                     <Button type="submit" sx={{

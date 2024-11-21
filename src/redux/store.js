@@ -33,7 +33,21 @@ function setNested(state, name, value) {
 }
 
 
+const createNoopStorage = () => ({
+    getItem(_key) {
+        return Promise.resolve(null);
+    },
+    setItem(_key, _value) {
+        return Promise.resolve();
+    },
+    removeItem(_key) {
+        return Promise.resolve();
+    },
+});
 
+// Conditionally choose storage based on the environment
+// const storageProxy = typeof window !== 'undefined' ? globalThis.localStorage  : createNoopStorage();
+const storageProxy = storage;
 
 const persistConfig = {
     key: 'root', // Key for storage

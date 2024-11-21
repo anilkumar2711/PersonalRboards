@@ -154,6 +154,7 @@ function ProjectPage(props) {
         backgroundColor: 'white',
         borderRadius: 2,
         boxShadow: 3,
+        margin:2
       }}
     >
 

@@ -19,7 +19,6 @@ const StyledTextField = styled(TextField,{
   '& .MuiInputBase-root': {
     height: '35px',
     borderRadius: theme.shape?.borderRadius ?? 4,
-    backgroundColor: theme.palette?.background?.paper ?? '#fff',
     transition: theme.transitions?.create?.([
       'border-color',
       'background-color',
@@ -42,9 +41,6 @@ const StyledTextField = styled(TextField,{
       color: theme.palette?.text?.secondary ?? 'rgba(0, 0, 0, 0.6)',
       opacity: '1',
     },
-  },
-  '& .MuiOutlinedInput-notchedOutline': {
-    borderColor: theme.palette?.divider ?? 'rgba(0, 0, 0, 0.23)',
   },
   '&:hover .MuiOutlinedInput-notchedOutline': {
     borderColor: theme.palette?.text?.primary ?? 'rgba(0, 0, 0, 0.87)',

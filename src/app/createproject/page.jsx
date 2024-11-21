@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import { Box, TextField, Typography, IconButton, Tooltip } from '@mui/material';
-import { Input } from "@/components/ui/Input";
+import { Input } from "@/components/ui/InputWrapper";
 import { Form } from "@/components/ui/Form";
 import { Button } from "@/components/ui/button";
 import { api } from '@/libs/axios';
@@ -69,16 +69,7 @@ const NewProjectForm = (props) => {
         <Box sx={{ width: '100%',padding:'0px', }}>
             {/* Top Gap */}
             
-            <Box sx={{ height: '175px',position:'relative' }}>
-            <Box sx={{
-                position: 'absolute',
-                left: '-15px',
-                top: '-15px',
-                transform: 'scale(1.06)'
-            }}>
-            <img src="addcover.png" alt='addcover' />
-            </Box>
-            </Box>
+            <img src="addcover.png" alt='addcover' style={{width:'100%',height:'20%'}} />
            
             
             {/* Icon and Title */}
@@ -151,9 +142,10 @@ const NewProjectForm = (props) => {
                             <Box sx={{ '& > * + *': { marginTop: 8 } }}>
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                     <Text sx={{ width: 16, height: 16, color: 'text.secondary' }} />
-                                    <span style={{ fontSize: '0.875rem' }}>Summary</span>
+                                    <span style={{ fontSize: '12px', color: '#565656', fontWeight: '600', width: 96 }} >Summary</span>
+                                    <Input name="summary" type="textarea" value={project.summary} sx={{ fontSize: '12px', fontWeight: '400' }} />
                                 </Box>
-                                <Input name="summary" type="textarea" value={project.summary} sx={{ fontSize: '12px', fontWeight: '400' }} />
+                                
                             </Box>
                             <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, justifyContent: 'flex-end' }} >
                                 <Button type="submit" sx={{
