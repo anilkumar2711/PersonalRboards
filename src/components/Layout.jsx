@@ -27,7 +27,6 @@ function Layout({ children }) {
           <Box
             sx={{
               flex: 1,
-              p: 2,
               overflow: 'auto',
               backgroundColor: 'white',
             }}

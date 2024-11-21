@@ -7,7 +7,6 @@ import { styled } from '@mui/system';
 
 const StyledDateRangePicker = styled(MuiDateRangePicker)(({ theme }) => {
   const borderRadius = theme?.shape?.borderRadius || 4;
-  const backgroundColor = theme?.palette?.background?.paper || '#fff';
   const transitionDuration = theme?.transitions?.duration?.short || 250;
   const hoverColor = theme?.palette?.action?.hover || 'rgba(0, 0, 0, 0.04)';
   const primaryColor = theme?.palette?.primary?.main || '#1976d2';
@@ -22,7 +21,6 @@ const StyledDateRangePicker = styled(MuiDateRangePicker)(({ theme }) => {
     '& .MuiInputBase-root': {
       height: '35px',
       borderRadius: borderRadius,
-      backgroundColor: backgroundColor,
       transition: theme?.transitions?.create(
         ['border-color', 'background-color', 'box-shadow'],
         {

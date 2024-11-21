@@ -35,7 +35,7 @@ function BoardsPage() {
   };
 
   return (
-    <Box sx={{}}>
+    <Box sx={{margin:2}}>
       {/* Sponsored Projects Section */}
       <Box sx={{}}>
         <Box sx={{ backgroundColor: '#EDF4FF47', border: '1px solid #D9D9D9', borderRadius: '10px', paddingBottom: '10px', paddingRight: '10px', paddingLeft: '10px' }}>

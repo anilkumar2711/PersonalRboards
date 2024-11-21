@@ -8,7 +8,6 @@ const StyledTextarea = styled(TextField)(({ theme }) => ({
     },
     '& .MuiInputBase-root': {
         borderRadius: theme.shape?.borderRadius ?? 4,
-        backgroundColor: theme.palette?.background?.paper ?? '#fff',
         transition: theme.transitions?.create?.([
             'border-color',
             'background-color',
