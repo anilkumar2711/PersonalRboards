@@ -30,7 +30,7 @@ const DynamicTable = ({ data: dataProp = [], columns: columnsProp = [], extras=[
                     hasHeader && <TableHead>
                         <TableRow>
                             {tableColumns.map((col, index) => (
-                                <TableCell key={index} sx={{ fontWeight: "bold" }}>
+                                <TableCell key={index} sx={{ fontWeight: "bold",padding:'8px',width: getField(col).width,borderRight: '1px solid #efefef' }}>
                                     <div style={{display:'flex',gap:'2px',alignItems:'center'}}>
                                         {getField(col).headerIcon?<span>{getField(col).headerIcon}</span>:""}
                                         <span>{getField(col).label? getField(col).label :col}</span>
@@ -47,7 +47,7 @@ const DynamicTable = ({ data: dataProp = [], columns: columnsProp = [], extras=[
                     {data.map((row, rowIndex) => (
                         <TableRow key={rowIndex}>
                             {tableColumns.map((col, colIndex) => (
-                                <TableCell key={colIndex} sx={{ padding:'8px',width: getField(col).width }}>
+                                <TableCell key={colIndex} sx={{ padding:'8px',width: getField(col).width,borderRight: '1px solid #efefef' }}>
                                     <Box sx={{ fontSize: "0.875rem", color: "#565656" }}>
                                         {hasField(col,"render")?getField(col).render({col,colIndex,rowIndex,row,value:row[col]}):row[col]}
                                     </Box>

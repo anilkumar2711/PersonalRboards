@@ -32,18 +32,19 @@ const StyledCustomSwitch = styled(Switch)(({ theme }) => ({
     },
   },
   "& .MuiSwitch-thumb": {
+    borderRadius: 5,
     width: 22, // Thumb size
     height: 22,
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)", // Shadow for the thumb
   },
   "& .MuiSwitch-track": {
-    borderRadius: 13, // Makes the track rounded
+    borderRadius: 5, // Makes the track rounded
     backgroundColor: "#E0E0E0", // Light gray for the track when off
     opacity: 1,
     transition: theme.transitions.create(["background-color"], {
       duration: 500,
     }),
-  },
+  }
 }));
 
 const SwitchWrapper = (props) => {
