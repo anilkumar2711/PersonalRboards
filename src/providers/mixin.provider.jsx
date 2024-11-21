@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setStore } from '@/redux/store';
 import { api } from '@/libs/axios';
 import serviceProvider from './service.provider';
+import sidemenuProvider from './sidemenu.provider';
 
 const MixinContext = createContext();
 
@@ -20,6 +21,7 @@ export function MixinProvider({ children }) {
         dispatchPayload && dispatch(dispatchPayload);
     };
     const readables = {
+        sidemnu:sidemenuProvider,
         api,
         service:serviceProvider,
         $store,
