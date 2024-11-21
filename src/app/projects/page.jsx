@@ -122,7 +122,7 @@ function ProjectPage(props) {
       </div>)
     },
     "priority": {
-      headerIcon: <MdOutlineAssistantPhoto/>,
+      headerIcon: <icons.ProjectPriority/>,
       label: "Priority",
       render: ({ value }) => (
         <Box
