@@ -29,5 +29,6 @@ export default {
     RocketLaun,
     ProjectStatus,
     ProjectOwner,
-    ProjectCalendar,ProjectPriority
+    ProjectCalendar,
+    ProjectPriority
 }
