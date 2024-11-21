@@ -100,7 +100,7 @@ const InputTags = React.forwardRef(({
           <TextField
             {...params}
             {...props}
-            placeholder="Select Options"
+            placeholder={localValue.length==0?props.placeholder:"Select Option"}
           />
         </span>
       )}
