@@ -1,14 +1,13 @@
 "use client"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/InputWrapper"
-import { Form } from "@/components/ui/Form";
+import { Input } from "@/components/ui/Input";
 import { Box, Typography } from '@mui/material';
-import { User, Flag, Ellipsis, Plus, CalendarDays, Clock, Search, CircleFadingArrowUp, Tag, Text, ChevronsRight, MoveDiagonal2, ChevronsUpDown } from "lucide-react"
+import { ChevronsRight, MoveDiagonal2, ChevronsUpDown } from "lucide-react"
 import { useState } from "react"
 import { MdAdd, MdOutlineSearch, MdMoreHoriz } from "react-icons/md";
 import { BsLayoutSidebarInsetReverse } from "react-icons/bs";
 import DynamicTable from "@/components/ui/DynamicTable";
 import { useMixin } from "@/providers/mixin.provider";
+import ProjectForm from "./ProjectForm";
 
 
 export default function ProjectDetailsPanel(props) {
@@ -19,11 +18,6 @@ export default function ProjectDetailsPanel(props) {
         onClose,
         project
     } = props;
-    const statusOptions = [
-        { value: "TO DO", label: "TO DO", color: "#BFC5D2" },
-        { value: "IN PROGRESS", label: "IN PROGRESS", color: "#C9DEFF" },
-        { value: "COMPLETED", label: "COMPLETED", color: "#FDD13A47" }
-    ];
 
     const taskStatusOptions = [
         { value: "TO DO", label: "TO DO", color: "#BFC5D2" },
@@ -31,12 +25,6 @@ export default function ProjectDetailsPanel(props) {
         { value: "COMPLETED", label: "COMPLETED", color: "#FDD13A47" }
     ];
 
-    const priorityOptions = [
-        //{ value: "Urgent", label: "Urgent", color: "#F81111" },
-        { value: "HIGH", label: "HIGH", color: "#24A249" },
-        { value: "MEDIUM", label: "MEDIUM", color: "#9266F5" },
-        { value: "LOW", label: "LOW", color: "#B3ABAB" }
-    ];
 
     const taskPriorityOptions = [
         //{ value: "Urgent", label: "Urgent", color: "#F81111" },
@@ -44,33 +32,6 @@ export default function ProjectDetailsPanel(props) {
         { value: "MEDIUM", label: "MEDIUM", color: "#FDD13A47" },
         { value: "LOW", label: "LOW", color: "#B3ABAB" }
     ];
-
-    const labelOptions = [
-        { value: "1 Hr", label: "1 Hr", color: "#D9D9D9" },
-        { value: "3-4 Hrs", label: "3-4 Hrs", color: "#FDD13A" },
-        { value: "Biotech", label: "Biotech", color: "#6EA6FF" },
-        { value: "DBT", label: "DBT", color: "#FBF3D6" },
-        { value: "BUGs", label: "BUGs", color: "#FBF3D6" },
-        { value: "IT", label: "IT", color: "#F811116E" }
-    ];
-
-    const renderColorOption = (props, option) => (
-        <li {...props} key={option.value} >
-            <span style={{ backgroundColor: option.color, borderRadius: '4px', width: '16px', height: '16px', marginRight: '10px' }} ></span>
-            {option.label}
-        </li>
-    );
-
-    const ColorTag = (props) => <span style={{ backgroundColor: props.option?.color, display: 'block', borderRadius: '4px', width: '16px', height: '16px', marginRight: '10px' }} ></span>;
-
-    const renderIconOption = (props, option) => (
-        <li {...props} key={option.value} >
-            <span style={{ backgroundColor: option.color, padding: '4px', display: 'flex', gap: 2, whiteSpace: 'nowrap', borderRadius: '4px' }} >
-                <Tag sx={{ height: 16, width: 16, color: 'text.secondary' }} />
-                {option.label}
-            </span>
-        </li>
-    );
 
 
     const [relatedProjects] = useState([
@@ -245,75 +206,7 @@ export default function ProjectDetailsPanel(props) {
                         }}
                     >
                         <Box sx={{ '& > *': { marginBottom: 2 } }}>
-                            {/* Project Details */}
-                            <Form onSubmit={handleSubmit}>
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
-                                    <User sx={{ width: 16, height: 16, color: 'text.secondary' }} />
-                                    <span style={{ fontSize: '12px', fontWeight: '600', width: 96 }}>Owner</span>
-                                    <Input name="owner" value={project.owner?.full_name} sx={{ height: '2rem', fontSize: '12px', fontWeight: '400' }} />
-                                </Box>
-
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
-                                    <Clock sx={{ height: 16, width: 16, color: 'text.secondary' }} />
-                                    <span style={{ fontSize: '12px', fontWeight: '600', width: 96 }}>Status</span>
-                                    <Input name="status" type="search" options={statusOptions} renderOption={renderColorOption} value={project.status} icon={ColorTag} />
-                                </Box>
-
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
-                                    <CircleFadingArrowUp sx={{ height: 16, width: 16, color: 'text.secondary' }} />
-                                    <span style={{ fontSize: '12px', fontWeight: '600', width: 96 }}>Completion</span>
-                                    <Input name="completion" type="progress" value={project.completion} />
-                                </Box>
-
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
-                                    <CalendarDays sx={{ height: 16, width: 16, color: 'text.secondary' }} />
-                                    <span style={{ fontSize: '0.875rem', width: 96, fontSize: '12px', fontWeight: '400' }}>Dates</span>
-                                    <Input name="dates" type="datestartend" value={project.dates} sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} />
-                                </Box>
-
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
-                                    <Flag sx={{ height: 16, width: 16, color: 'text.secondary' }} />
-                                    <span style={{ fontSize: '0.875rem', width: 96 }}>Priority</span>
-                                    <Input
-                                        name="priority"
-                                        type="search"
-                                        options={priorityOptions}
-                                        renderOption={renderColorOption}
-                                        value={project.priority}
-                                        icon={ColorTag}
-                                        sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }}
-                                    />
-                                </Box>
-
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
-                                    <Tag sx={{ height: 16, width: 16, color: 'text.secondary' }} />
-                                    <span style={{ fontSize: '12px', color: '#565656', fontWeight: '600', width: 96 }}>Label</span>
-                                    <Input name="label" value={project.label} type="tags" options={labelOptions} renderOption={renderIconOption} sx={{ height: 32, fontSize: '12px', fontWeight: '400', width: '100%' }} icon={Tag} />
-                                </Box>
-
-                                <Box sx={{ '& > * + *': { marginTop: 8 } }}>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
-                                        <Text sx={{ width: 16, height: 16, color: 'text.secondary' }} />
-                                        <span style={{ fontSize: '12px', color: '#565656', fontWeight: '600', width: 96 }} >Summary</span>
-                                        <Input name="summary" type="textarea" value={project.summary} sx={{ fontSize: '12px', fontWeight: '400' }} />
-                                    </Box>
-                                    
-                                </Box>
-                                <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, justifyContent: 'flex-end' }} >
-                                    <Button type="submit" sx={{
-                                        display: 'flex',
-                                        flexDirection: 'row',
-                                        height: 32, // Assuming 'h-8' translates to 32px (Tailwind uses 8px as its base unit)
-                                        paddingX: 2, // Assuming 'px-2' translates to 8px (Tailwind's default spacing scale)
-                                        backgroundColor: 'actgrey', // Replace 'actgrey' with the actual color in your theme or define it
-                                        justifyContent: 'end',
-                                        alignItems: 'center', width: '64px'
-                                    }}>
-                                        <Box style={{ paddingX: 2, color: '#FFF' }}>SAVE</Box>
-                                    </Button>
-                                </Box>
-
-                            </Form>
+                            <ProjectForm onSubmit={handleSubmit} project={project}></ProjectForm>
 
                             {/* Related Projects */}
                             <Box sx={{ '& > *': { marginBottom: 3 } }}>

@@ -46,6 +46,9 @@ const StyledAutocomplete = styled(MuiAutocomplete,{
   '& .MuiChip-root': {
     margin: theme.spacing(0.5), // Space between chips
   },
+  '& .MuiAutocomplete-inputRoot .MuiAutocomplete-input': {
+    minWidth:'100px'
+  }
 }));
 
 const InputTags = React.forwardRef(({

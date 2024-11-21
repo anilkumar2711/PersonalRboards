@@ -1,9 +1,8 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { Button } from './button';
-import { Home, PanelsLeftBottom, BriefcaseBusiness } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { Box, Typography } from '@mui/material';
 import { useMixin } from "@/providers/mixin.provider";
 
@@ -11,11 +10,13 @@ function Sidebar() {
     const { service } = useMixin();
     const { icons } = service;
     const router = useRouter();
+    const pathname = usePathname();
     const [isMounted, setIsMounted] = useState(false);
 
     // UseEffect to prevent useRouter from being used before the component is mounted
     useEffect(() => {
         setIsMounted(true);
+        console.log({router,pathname});
     }, []);
 
     if (!isMounted) {
@@ -38,8 +39,8 @@ function Sidebar() {
                         sx={{
                             display: 'flex',
                             alignItems: 'center',
-                            color: router.pathname === '/' ? 'text.primary' : 'text.secondary',
-                            backgroundColor: router.pathname === '/' ? 'grey.200' : 'transparent',
+                            color: pathname === '/' ? 'text.primary' : 'text.secondary',
+                            backgroundColor: pathname === '/' ? 'grey.200' : 'transparent',
                             paddingY: 1,
                             paddingX: 2,
                             borderRadius: 1,
@@ -60,8 +61,8 @@ function Sidebar() {
                         sx={{
                             display: 'flex',
                             alignItems: 'center',
-                            color: router.pathname === '/projects' ? 'text.primary' : 'text.secondary',
-                            backgroundColor: router.pathname === '/projects' ? 'grey.200' : 'transparent',
+                            color: pathname === '/projects' ? 'text.primary' : 'text.secondary',
+                            backgroundColor: pathname === '/projects' ? 'grey.200' : 'transparent',
                             paddingY: 1,
                             paddingX: 2,
                             borderRadius: 1,
@@ -82,8 +83,8 @@ function Sidebar() {
                         sx={{
                             display: 'flex',
                             alignItems: 'center',
-                            color: router.pathname === '/boards' ? 'text.primary' : 'text.secondary',
-                            backgroundColor: router.pathname === '/boards' ? 'grey.200' : 'transparent',
+                            color: pathname === '/boards' ? 'text.primary' : 'text.secondary',
+                            backgroundColor: pathname === '/boards' ? 'grey.200' : 'transparent',
                             paddingY: 1,
                             paddingX: 2,
                             borderRadius: 1,
@@ -102,8 +103,8 @@ function Sidebar() {
                         sx={{
                             display: 'flex',
                             alignItems: 'center',
-                            color: router.pathname === '/boards' ? 'text.primary' : 'text.secondary',
-                            backgroundColor: router.pathname === '/boards' ? 'grey.200' : 'transparent',
+                            color: pathname === '/boards' ? 'text.primary' : 'text.secondary',
+                            backgroundColor: pathname === '/boards' ? 'grey.200' : 'transparent',
                             paddingY: 1,
                             paddingX: 2,
                             borderRadius: 1,

@@ -66,7 +66,7 @@ const Input = React.forwardRef(({ classNameProp = '', type = 'text', ...props },
 
   const handleChange = (e) => {
     setValue(e.target.value);
-    props.onChange && props.onChange(e);
+    props.onChange && props.onChange(e.target.value,e);
   };
 
   useEffect(() => {

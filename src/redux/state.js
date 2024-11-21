@@ -20,5 +20,14 @@ export default {
         { value: "HIGH", label: "HIGH", color: "#6EA6FF" },
         { value: "MEDIUM", label: "MEDIUM", color: "#FDD13A47" },
         { value: "LOW", label: "LOW", color: "#B3ABAB" }
+    ],
+
+    labelOptions: [
+        { value: "1 Hr", label: "1 Hr", color: "#D9D9D9" },
+        { value: "3-4 Hrs", label: "3-4 Hrs", color: "#FDD13A" },
+        { value: "Biotech", label: "Biotech", color: "#6EA6FF" },
+        { value: "DBT", label: "DBT", color: "#FBF3D6" },
+        { value: "BUGs", label: "BUGs", color: "#FBF3D6" },
+        { value: "IT", label: "IT", color: "#F811116E" }
     ]
 }

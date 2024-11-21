@@ -24,7 +24,7 @@ const StyledTextarea = styled(TextField)(({ theme }) => ({
         },
     },
     '& .MuiInputBase-input': {
-        padding: '10px 12px',
+        // padding: '10px 12px',
         fontSize: theme.typography?.fontSize ?? '0.875rem',
         '&::placeholder': {
             color: theme.palette?.text?.secondary ?? 'rgba(0, 0, 0, 0.6)',
