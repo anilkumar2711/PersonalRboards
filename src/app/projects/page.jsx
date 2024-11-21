@@ -79,7 +79,7 @@ function ProjectPage(props) {
       )
     },
     "status": {
-      headerIcon: <MdDataUsage/>,
+      headerIcon: <icons.ProjectStatus/>,
       label: "Status",
       render: ({ value }) => (
         <Box
@@ -94,13 +94,13 @@ function ProjectPage(props) {
                 maxWidth: 'fit-content'
             }}
         >
-            <span style={{ width: '15px', height: '15px', borderRadius: '15px', backgroundColor: '#8c8c8c', display: 'inline-block' }}></span>
-            <span>{value}</span>
+            {/* <span style={{ width: '15px', height: '15px', borderRadius: '15px', backgroundColor: '#8c8c8c', display: 'inline-block' }}></span> */}
+            <Box sx={{paddingLeft: '10px'}}>{value}</Box>
         </Box>
     )
     },
     "owner": {
-      headerIcon: <MdPermIdentity/>,
+      headerIcon: <icons.ProjectOwner/>,
       label: "Owner",
       render: ({value}) =>{
         if (value) {
@@ -113,7 +113,7 @@ function ProjectPage(props) {
     }
   },
     "startDate": {
-      headerIcon: <MdOutlineEventNote/>,
+      headerIcon: <icons.ProjectCalendar/>,
       label: "Dates",
       render: ({value,row})=>(<div className='vmiddle' style={{gap:'5px'}} >
         <span>{service.date(value).toHumanString()}</span>
@@ -163,24 +163,23 @@ function ProjectPage(props) {
         project={selectedProject}
       />
       <Box sx={{ padding: 1, paddingTop: '50px' }} >
-        <Typography
+        <Box sx={{display:'flex',flexDirection:'row',paddingLeft:'5px' }}>
+          <icons.RocketLaun
+            sx={{ height: 25, width: 25, fontSize: "20px", fontWeight: "700" }}
+          /><Typography
           variant="h6"
           sx={{
             fontWeight: 'bold',
             display: 'flex',
             alignItems: 'center',
             color: '#565656',
-            ml:1
+            ml:2
           }}
         >
-          <Box
-            component="img"
-            src="rocket_launch.png"
-            alt="rocket-launch"
-            sx={{ mr: 3, height: 20, width: 20, fontSize: "20px", fontWeight: "700" }}
-          />
+          
           Projects
         </Typography>
+        </Box>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '5px 10px', ml:1 }}>
         <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>

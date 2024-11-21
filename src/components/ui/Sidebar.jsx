@@ -5,8 +5,11 @@ import { Home, PanelsLeftBottom, BriefcaseBusiness } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Box, Typography } from '@mui/material';
+import { useMixin } from "@/providers/mixin.provider";
 
 function Sidebar() {
+    const { service } = useMixin();
+    const { icons } = service;
     const router = useRouter();
     const [isMounted, setIsMounted] = useState(false);
 
@@ -46,7 +49,7 @@ function Sidebar() {
                             textDecoration: 'none',
                         }}
                     >
-                        <Home sx={{ marginRight: 1, height: 20, width: 20, color: 'text.primary',  }} />
+                        <icons.HomeSidebar sx={{ marginRight: 1 }} />
                         <Typography sx={{ paddingLeft: '10px'}}>Home</Typography>
                     </Box>
                 </Link>
@@ -68,7 +71,7 @@ function Sidebar() {
                             textDecoration: 'none',
                         }}
                     >
-                        <BriefcaseBusiness sx={{ marginRight: 1, height: 20, width: 20, color: 'text.primary' }} />
+                        <icons.ProjectSidebar  sx={{ marginRight: 1}} />
                         <Typography sx={{ paddingLeft: '10px'}}>Projects</Typography>
                     </Box>
                 </Link>
@@ -90,7 +93,7 @@ function Sidebar() {
                             textDecoration: 'none',
                         }}
                     >
-                        <PanelsLeftBottom sx={{ marginRight: 1, height: 20, width: 20, color: 'text.primary' }} />
+                        <icons.BoardSidebar sx={{ marginRight: 1 }} />
                         <Typography sx={{ paddingLeft: '10px'}}>Boards</Typography>
                     </Box>
                 </Link>
@@ -110,7 +113,7 @@ function Sidebar() {
                             textDecoration: 'none',
                         }}
                     >
-                        <PanelsLeftBottom sx={{ marginRight: 1, height: 20, width: 20, color: 'text.primary' }} />
+                        <icons.SchemaSidebar sx={{ marginRight: 1 }} />
                         <Typography sx={{ paddingLeft: '10px'}}>Schema</Typography>
                     </Box>
                 </Link>
