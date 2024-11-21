@@ -4,12 +4,12 @@ import { styled } from '@mui/system';
 
 const StyledAutocomplete = styled(MuiAutocomplete,{
   shouldForwardProp: (prop) => !["icon"].includes(prop) // Prevent `icon` from being forwarded to the DOM
-})(({ theme,icon }) => ({
+})(({ theme,icon,value }) => ({
   '&': {
     width:'100%'
   },
   '& .MuiInputBase-root': {
-    ...(icon?{paddingLeft:'40px'}:{}),
+    ...(icon&&value?{paddingLeft:'40px'}:{}),
     height: '35px',
     borderRadius: theme.shape?.borderRadius ?? 4,
     // backgroundColor: theme.palette?.background?.paper ?? '#fff',
