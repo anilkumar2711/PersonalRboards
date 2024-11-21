@@ -15,7 +15,7 @@ const StyledCustomSwitch = styled(Switch)(({ theme }) => ({
   },
   "& .MuiSwitch-switchBase": {
     padding: 2,
-    color: "#4A4A4A", // Color for the off state
+    color: "#565656", // Color for the off state
     "&:hover": {
       backgroundColor: "white", // Hover effect for the off state
     },
@@ -23,10 +23,10 @@ const StyledCustomSwitch = styled(Switch)(({ theme }) => ({
       transform: "translateX(24px)", // Moves the thumb to the right when toggled
       color: "#fff", // Thumb color when toggled on
       "&:hover": {
-        backgroundColor: "#4A4A4A", // Hover effect for the on state
+        backgroundColor: "#565656", // Hover effect for the on state
       },
       "& + .MuiSwitch-track": {
-        backgroundColor: "#4A4A4A", // Dark gray for the track when toggled on
+        backgroundColor: "#565656", // Dark gray for the track when toggled on
         opacity: 1,
       },
     },
@@ -39,7 +39,7 @@ const StyledCustomSwitch = styled(Switch)(({ theme }) => ({
   },
   "& .MuiSwitch-track": {
     borderRadius: 5, // Makes the track rounded
-    backgroundColor: "#E0E0E0", // Light gray for the track when off
+    backgroundColor: "#F5F5F5", // Light gray for the track when off
     opacity: 1,
     transition: theme.transitions.create(["background-color"], {
       duration: 500,

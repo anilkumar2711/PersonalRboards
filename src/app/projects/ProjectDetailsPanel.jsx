@@ -224,10 +224,13 @@ export default function ProjectDetailsPanel(props) {
                             borderBottom: '0.5px solid', // equivalent to border-b
                             display: 'flex', // equivalent to flex
                             alignItems: 'center', // equivalent to items-center
-                            justifyContent: 'space-between', // equivalent to justify-between
+                            justifyContent: 'space-between', 
+                            // equivalent to justify-between
                         }}
                     >
-                        <Typography variant="h6" sx={{ fontSize: '20px', color: '#565656', fontWeight: '700' }}>
+                        <Typography variant="h6" sx={{ fontSize: '20px', color: '#565656', fontWeight: '700',
+                             
+                         }}>
                             {project.name}
                         </Typography>
                     </Box>
