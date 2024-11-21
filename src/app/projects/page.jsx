@@ -7,6 +7,7 @@ import { Box, Typography } from '@mui/material';
 import { MdDataUsage, MdPermIdentity, MdOutlineEventNote, MdOutlineAssistantPhoto, MdIncompleteCircle } from "react-icons/md";
 import { useMixin } from '@/providers/mixin.provider';
 import DynamicTable from '@/components/ui/DynamicTable';
+import Link from "next/link";
 import { Input } from '@/components/ui/Input';
 
 const ogprojects = [
@@ -41,6 +42,7 @@ const ogprojects = [
 
 function ProjectPage(props) {
   const { $store, setStore, setComponent, api, service } = useMixin();
+  const { icons } = service;
   const node = setComponent("ProjectPage", { props });
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState({});
@@ -140,7 +142,7 @@ function ProjectPage(props) {
     )
     },
     "completion":{
-      headerIcon: <MdIncompleteCircle/>,
+      headerIcon: <icons.CompletionPie/>,
       label: "Completion",
       render: ({value})=>(<Input name="completion" type="progress" value={value} />)
     }
@@ -168,18 +170,19 @@ function ProjectPage(props) {
             display: 'flex',
             alignItems: 'center',
             color: '#565656',
+            ml:1
           }}
         >
           <Box
             component="img"
             src="rocket_launch.png"
             alt="rocket-launch"
-            sx={{ mr: 1, height: 20, width: 20, fontSize: "20px", fontWeight: "700" }}
+            sx={{ mr: 3, height: 20, width: 20, fontSize: "20px", fontWeight: "700" }}
           />
           Projects
         </Typography>
       </Box>
-      <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '5px 10px' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '5px 10px', ml:1 }}>
         <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
           <Box
             component="img"
@@ -201,7 +204,18 @@ function ProjectPage(props) {
           }}
         >
           <Search sx={{ mr: 1, height: 16, width: 16, color: '#565656', }} />
-          <Box sx={{ pr: 1, pl: 1 }}><ListFilter sx={{ mr: 1, height: 16, width: 16, color: '#565656', paddingLeft: '8px' }} /></Box>
+          <Box sx={{ pr: 2, pl: 2 }}><ListFilter sx={{ mr: 1, height: 16, width: 16, color: '#565656', paddingLeft: '8px' }} /></Box>
+          <Link href="/createproject">
+            <Button
+              sx={{
+                fontSize: "12px",
+                fontWeight: "700",
+                color: "white",
+              }}
+            >
+              New
+            </Button>
+          </Link>
         </Box>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', mt: 1, width: '100%' }} >

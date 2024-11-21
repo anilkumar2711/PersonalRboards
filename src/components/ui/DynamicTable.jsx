@@ -27,7 +27,7 @@ const DynamicTable = ({ data: dataProp = [], columns: columnsProp = [], extras=[
             <Table>
                 {/* Table Header */}
                 {
-                    hasHeader && <TableHead>
+                    hasHeader && <TableHead >
                         <TableRow>
                             {tableColumns.map((col, index) => (
                                 <TableCell key={index} sx={{ fontWeight: "bold",padding:'8px',width: getField(col).width,borderRight: '1px solid #efefef' }}>

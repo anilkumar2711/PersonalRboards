@@ -224,10 +224,13 @@ export default function ProjectDetailsPanel(props) {
                             borderBottom: '0.5px solid', // equivalent to border-b
                             display: 'flex', // equivalent to flex
                             alignItems: 'center', // equivalent to items-center
-                            justifyContent: 'space-between', // equivalent to justify-between
+                            justifyContent: 'space-between', 
+                            // equivalent to justify-between
                         }}
                     >
-                        <Typography variant="h6" sx={{ fontSize: '20px', color: '#565656', fontWeight: '700' }}>
+                        <Typography variant="h6" sx={{ fontSize: '20px', color: '#565656', fontWeight: '700',
+                             
+                         }}>
                             {project.name}
                         </Typography>
                     </Box>
@@ -247,7 +250,9 @@ export default function ProjectDetailsPanel(props) {
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
                                     <User sx={{ width: 16, height: 16, color: 'text.secondary' }} />
                                     <span style={{ fontSize: '12px', fontWeight: '600', width: 96 }}>Owner</span>
-                                    <Input name="owner" value={project.owner} sx={{ height: '2rem', fontSize: '12px', fontWeight: '400' }} />
+                                    <Input name="owner" value={project.owner} sx={{ height: '2rem', fontSize: '12px', fontWeight: '400',border: 'none', // Remove border
+                             outline: 'none', // Remove outline when focused
+                             boxShadow: 'none' }} />
                                 </Box>
 
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', color: '#565656', fontWeight: '600' }}>
