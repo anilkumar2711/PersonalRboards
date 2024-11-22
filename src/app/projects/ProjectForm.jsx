@@ -90,7 +90,7 @@ export default function ProjectForm(props) {
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', fontWeight: '600' }}>
                         <span style={{ alignSelf:'start' }}><Text /></span>
                         <span style={{ fontSize: '14px', fontWeight: '600', width: 96, alignSelf:'start' }} >Summary</span>
-                        <Input name="summary" type="textarea" value={project.summary} />
+                        <Input name="description" type="textarea" value={project.description} />
                     </Box>
                 </Box>
                 <input type="hidden" name="name" value={project.name} ></input>

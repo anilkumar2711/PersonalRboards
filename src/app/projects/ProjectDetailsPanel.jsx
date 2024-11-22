@@ -115,12 +115,14 @@ export default function ProjectDetailsPanel(props) {
         console.log({ data });
         api.put(`/projects/${project.id}`, {
             name: data.name,
-            description: data.summary,
+            type: data.type,
+            description: data.description,
             status: data.status,
             completion: data.completion,
             startDate: data.dates.split(",")[0],
             endDate: data.dates.split(",")[1],
             priority: data.priority,
+            label: data.label
         }).then((response) => {
             console.log({ createProject: response });
         })
