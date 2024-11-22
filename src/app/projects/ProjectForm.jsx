@@ -11,7 +11,7 @@ export default function ProjectForm(props) {
     const { project,submitLabel="SAVE" } = props;
     const { service, $store } = useMixin();
     const { icons } = service;
-    const { statusOptions, priorityOptions, labelOptions  } = $store;
+    const { statusOptions, priorityOptions, labelOptions, projectTypeOptions  } = $store;
 
     const ColorTag = (props) => <span style={{ backgroundColor: props.option?.color, display: 'block', borderRadius: '4px', width: '16px', height: '16px', marginRight: '10px' }} ></span>;
 
@@ -37,6 +37,12 @@ export default function ProjectForm(props) {
     return (
         <Box sx={{}}>
             <Form onSubmit={handleSubmit}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', fontWeight: '600' }}>
+                    <User sx={{ width: 16, height: 16, color: 'text.secondary' }} />
+                    <span style={{ fontSize: '14px', fontWeight: '600', width: 96 }}>Type</span>
+                    <Input name="type" type="search" options={projectTypeOptions} value={project.type} />
+                </Box>
+
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', fontWeight: '600' }}>
                     <User sx={{ width: 16, height: 16, color: 'text.secondary' }} />
                     <span style={{ fontSize: '14px', fontWeight: '600', width: 96 }}>Owner</span>

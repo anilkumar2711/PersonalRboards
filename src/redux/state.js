@@ -29,5 +29,13 @@ export default {
         { value: "DBT", label: "DBT", color: "#FBF3D6" },
         { value: "BUGs", label: "BUGs", color: "#FBF3D6" },
         { value: "IT", label: "IT", color: "#F811116E" }
+    ],
+
+    projectTypeOptions: [
+        { value: "Ph.D Project", label: "Ph.D Project" },
+        { value: "Grant", label: "Grant" },
+        { value: "Collaborative project", label: "Collaborative project" },
+        { value: "Self funded", label: "Self funded" },
+        { value: "Others", label: "Others" },
     ]
 }

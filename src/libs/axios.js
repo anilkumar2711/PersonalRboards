@@ -42,7 +42,7 @@ axiosInstance.interceptors.response.use(
       apiContext.hitcount.unauthenticated++;
       if (error.response.status === 401) {
         console.log('Unauthorized, redirecting to login...');
-        if(error.config.url.endsWith("/auth/login")) {
+        if(!error.config.url.endsWith("/auth/login")) {
           apiContext.service.methods.login().then(()=>{
             globalThis.location.reload();
           });

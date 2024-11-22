@@ -11,8 +11,9 @@ import ProjectForm from "./ProjectForm";
 
 
 export default function ProjectDetailsPanel(props) {
-    const { service } = useMixin();
+    const { service,api } = useMixin();
     const { icons } = service;
+    
     const {
         isOpen,
         onClose,
@@ -111,7 +112,21 @@ export default function ProjectDetailsPanel(props) {
     };
 
     const handleSubmit = (data, event) => {
-        console.log({ data, event });
+        console.log({ data });
+        api.put(`/projects/${project.id}`, {
+            name: data.name,
+            description: data.summary,
+            status: data.status,
+            completion: data.completion,
+            startDate: data.dates.split(",")[0],
+            endDate: data.dates.split(",")[1],
+            priority: data.priority,
+        }).then((response) => {
+            console.log({ createProject: response });
+        })
+        .catch((err) => {
+            console.error(err);
+        });
     };
 
     console.log({ project });
