@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Search, ListFilter, } from 'lucide-react';
 import ProjectDetailsPanel from './ProjectDetailsPanel';
 import { Box, Typography } from '@mui/material';
-import { MdDataUsage, MdPermIdentity, MdOutlineEventNote, MdOutlineAssistantPhoto, MdIncompleteCircle } from "react-icons/md";
 import { useMixin } from '@/providers/mixin.provider';
 import DynamicTable from '@/components/ui/DynamicTable';
 import Link from "next/link";
@@ -55,7 +54,10 @@ function ProjectPage(props) {
     },
   });
   node.state = state;
+  node.selectedProject = selectedProject;
   const handleProjectSelect = (project) => {
+    ;
+    project.dates = `${service.date(project.startDate).toDbDate()},${service.date(project.endDate).toDbDate()}`;
     setSelectedProject(project);
     setIsPanelOpen(true);
   }

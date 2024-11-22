@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 
 const ProgressInput = (props) => {
@@ -16,7 +16,6 @@ const ProgressInput = (props) => {
 
     // Calculate the progress percentage
     const progress = (inputValue / maxLength) * 100;
-    console.log({props,progress,inputValue,maxLength});
 
     return (
         <Box sx={{ flex: 1, display:'contents' }} className={props.className} >

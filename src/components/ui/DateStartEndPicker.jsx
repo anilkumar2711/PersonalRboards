@@ -10,6 +10,9 @@ const StyledDatePickerWrapper = styled('div')(({ theme }) => ({
   width:'100%',
   display:'flex',
   gap:'10px',
+  '& .MuiInputBase-root': {
+      width: '150px'
+  },
   '& .MuiInputBase-input': {
     padding: '6px 10px', // Inner padding of the input field
     fontSize: '12px', // Adjusted font size
@@ -25,15 +28,26 @@ const StyledDatePickerWrapper = styled('div')(({ theme }) => ({
 }));
 
 export default function DateStartEndPicker(props) {
-  const [propStartDate = null, propEndDate = null] = (props.defaultValue || props.value || '').split(',');
+  const dateValue = (props.defaultValue || props.value || '').split(',').filter(v=>v);
+  const [propStartDate , propEndDate ] = dateValue;
   const [startDate, setStartDate] = React.useState(propStartDate || null);
   const [endDate, setEndDate] = React.useState(propEndDate || null);
+
+  React.useEffect(()=>{
+    if(!dateValue || dateValue.length == 0) return;
+    console.log({dateValue});
+    setStartDate(dayjs(propStartDate));
+    setEndDate(dayjs(propEndDate));
+  },[props.defaultValue,props.value]);
+
+
+  console.log({startDate,endDate,dateValue});
 
   const getDateValue = (dateObj) => (dateObj && dateObj?.$d?.toISOString().split("T")[0]) || dateObj;
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <StyledDatePickerWrapper>
+      <StyledDatePickerWrapper className='DateStartEndPicker' >
         {/* Start Date */}
         <DatePicker
           label="Start Date"
