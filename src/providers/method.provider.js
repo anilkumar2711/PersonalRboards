@@ -16,7 +16,7 @@ export default {
     refreshToken() {
         return new Promise((resolve,reject)=>{
             this.api.post("https://api.scholarbench.com/api/v1/auth/refresh",{
-                refreshToken:localStorage.setItem('refreshToken')
+                refreshToken:localStorage.getItem('refreshToken')
             }).then((response)=>{
                 localStorage.setItem('authToken',response.newAccessToken);
                 this.getLoggedUser(true).then(()=>{
@@ -30,7 +30,7 @@ export default {
         return new Promise((resolve,reject)=>{
             if(!this.$store.loggedUser||force) {
                 this.api.get("https://api.scholarbench.com/api/v1/profile").then((response)=>{
-                    this.setStorre("loggedUser",response.model);
+                    this.setStore("loggedUser",response.model);
                     resolve(response);
                 }).catch(reject);
             }

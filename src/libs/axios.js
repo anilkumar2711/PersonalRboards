@@ -1,6 +1,11 @@
 import axios from 'axios';
 
-export const apiContext = {};
+export const apiContext = {
+  hitcount: {
+    unauthorized: 0,
+    unauthenticated: 0
+  }
+};
 // Base URL Configuration
 const axiosInstance = axios.create({
   headers: {
@@ -34,21 +39,34 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     if (error.response) {
-      console.error('API Error:', error.response.status, error.response.data,error);
+      apiContext.hitcount.unauthenticated++;
       if (error.response.status === 401) {
         console.log('Unauthorized, redirecting to login...');
-        if(error.config.url != "/auth/login") {
+        if(error.config.url.endsWith("/auth/login")) {
           apiContext.service.methods.login().then(()=>{
             globalThis.location.reload();
           });
         }
+        if(apiContext.hitcount.unauthenticated > 2) {
+          alert("UnAuthenticated Exeception Reached Maximum");
+        }
       } else if(error.response.status === 403) {
-        if(error.config.url != "/auth/refresh") {
+        apiContext.hitcount.unauthorized ++;
+        if(!error.config.url.endsWith("/auth/refresh")) {
           apiContext.service.methods.refreshToken().then(()=>{
+            apiContext.hitcount.unauthorized = 0;
             globalThis.location.reload();
           });
         }
+        if(apiContext.hitcount.unauthorized > 2) {
+          apiContext.service.methods.login().then(()=>{
+            globalThis.location.reload();
+          }).catch(()=>{
+            alert("UnAuthorized Exeception Reached Maximum");
+          });
+        }
       }
+      console.error('API Error:', error.response.status, error.response.data,error,error.config.url);
     } else {
       console.error('Network Error:', error.message);
     }
