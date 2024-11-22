@@ -35,10 +35,18 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error.response) {
       console.error('API Error:', error.response.status, error.response.data,error);
-      if (error.response.status === 403) {
+      if (error.response.status === 401) {
         console.log('Unauthorized, redirecting to login...');
         if(error.config.url != "/auth/login") {
-          apiContext.service.methods.login();
+          apiContext.service.methods.login().then(()=>{
+            globalThis.location.reload();
+          });
+        }
+      } else if(error.response.status === 403) {
+        if(error.config.url != "/auth/refresh") {
+          apiContext.service.methods.refreshToken().then(()=>{
+            globalThis.location.reload();
+          });
         }
       }
     } else {

@@ -189,7 +189,7 @@ export default function ProjectDetailsPanel(props) {
                             // equivalent to justify-between
                         }}
                     >
-                        <Typography variant="h6" sx={{ fontSize: '20px', color: '#565656', fontWeight: '700',
+                        <Typography variant="h6" sx={{ fontSize: '20px', fontWeight: '700',
                              
                          }}>
                             {project.name}
@@ -213,7 +213,7 @@ export default function ProjectDetailsPanel(props) {
                                 <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                         <img src="correctTask.png" alt="correct" />
-                                        <Box sx={{ color: '#565656', fontSize: '12px', fontWeight: '600', px: 2 }}> Tasks</Box>
+                                        <Box sx={{ fontSize: '12px', fontWeight: '600', px: 2 }}> Tasks</Box>
                                     </Box>
                                     <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'end', alignItems: 'center', height: 56, width: "100%" }} >
                                         <MdOutlineSearch />

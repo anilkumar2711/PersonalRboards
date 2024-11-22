@@ -3,8 +3,10 @@ import { Switch, styled } from "@mui/material";
 
 // Custom Styled Switch using MUI's styled API
 const StyledCustomSwitch = styled(Switch)(({ theme }) => ({
-  width: 50, // Adjust the width of the switch
-  height: 26, // Adjust the height of the switch
+  border:'2px solid #565656',
+  borderRadius:'5px',
+  width: '40px', // Adjust the width of the switch
+  height: '25px', // Adjust the height of the switch
   padding: 0,
   display: "flex",
   "& .MuiButtonBase-root": {
@@ -15,31 +17,34 @@ const StyledCustomSwitch = styled(Switch)(({ theme }) => ({
   },
   "& .MuiSwitch-switchBase": {
     padding: 2,
-    color: "#565656", // Color for the off state
     "&:hover": {
       backgroundColor: "white", // Hover effect for the off state
     },
     "&.Mui-checked": {
-      transform: "translateX(24px)", // Moves the thumb to the right when toggled
+      transform: "translateX(16px)", // Moves the thumb to the right when toggled
       color: "#fff", // Thumb color when toggled on
       "&:hover": {
-        backgroundColor: "#565656", // Hover effect for the on state
+        backgroundColor: "#F5F5F5", // Hover effect for the on state
       },
       "& + .MuiSwitch-track": {
-        backgroundColor: "#565656", // Dark gray for the track when toggled on
+        backgroundColor: "#F5F5F5", // Dark gray for the track when toggled on
         opacity: 1,
       },
+      "& .MuiSwitch-thumb": {
+        backgroundColor: "#565656", 
+      }
     },
   },
   "& .MuiSwitch-thumb": {
-    borderRadius: 5,
-    width: 22, // Thumb size
-    height: 22,
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)", // Shadow for the thumb
+      borderRadius: 5,
+      width: 15, // Thumb size
+      height: 18,
+      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)", // Shadow for the thumb
+      background:"#F5F5F5"
   },
   "& .MuiSwitch-track": {
-    borderRadius: 5, // Makes the track rounded
-    backgroundColor: "#F5F5F5", // Light gray for the track when off
+    borderRadius: 0, // Makes the track rounded
+    backgroundColor: "#565656", // Light gray for the track when off
     opacity: 1,
     transition: theme.transitions.create(["background-color"], {
       duration: 500,

@@ -156,7 +156,7 @@ function ProjectPage(props) {
     "completion":{
       headerIcon: <icons.CompletionPie/>,
       label: "Completion",
-      render: ({value})=>(<Input name="completion" type="progress" value={value} />)
+      render: ({value})=>(<Input name="completion" type="progress" disabled={true} value={value} />)
     }
   };
 
@@ -185,7 +185,6 @@ function ProjectPage(props) {
             fontWeight: 'bold',
             display: 'flex',
             alignItems: 'center',
-            color: '#565656',
             ml:2
           }}
         >
@@ -215,8 +214,8 @@ function ProjectPage(props) {
             pr: 2,
           }}
         >
-          <Search sx={{ mr: 1, height: 16, width: 16, color: '#565656', }} />
-          <Box sx={{ pr: 2, pl: 2 }}><ListFilter sx={{ mr: 1, height: 16, width: 16, color: '#565656', paddingLeft: '8px' }} /></Box>
+          <Search sx={{ mr: 1, height: 16, width: 16, }} />
+          <Box sx={{ pr: 2, pl: 2 }}><ListFilter sx={{ mr: 1, height: 16, width: 16, paddingLeft: '8px' }} /></Box>
           <Link href="/createproject">
             <Button
               sx={{
