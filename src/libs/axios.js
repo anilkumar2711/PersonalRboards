@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+export const apiContext = {};
 // Base URL Configuration
 const axiosInstance = axios.create({
   headers: {
@@ -37,10 +38,8 @@ axiosInstance.interceptors.response.use(
       if (error.response.status === 403) {
         console.log('Unauthorized, redirecting to login...');
         if(error.config.url != "/auth/login") {
-          globalThis.service.methods.login();
+          apiContext.service.methods.login();
         }
-        // window.location.href = '/login';
-        // globalThis.service.methods.login();
       }
     } else {
       console.error('Network Error:', error.message);

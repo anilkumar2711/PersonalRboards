@@ -2,13 +2,14 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setStore } from '@/redux/store';
-import { api } from '@/libs/axios';
+import { api,apiContext } from '@/libs/axios';
 import serviceProvider from './service.provider';
 import sidemenuProvider from './sidemenu.provider';
 
 const MixinContext = createContext();
 
 export function MixinProvider({ children }) {
+    const methods = serviceProvider.methods;
     const $store = useSelector((state) => state.root);
     const dispatch = useDispatch();
     const setStoreMethod = (name,value)=>{
@@ -20,6 +21,8 @@ export function MixinProvider({ children }) {
         }
         dispatchPayload && dispatch(dispatchPayload);
     };
+    apiContext.service = serviceProvider;
+    serviceProvider.methods = Object.assign({api,$store,setStore},methods);
     const readables = {
         sidemnu:sidemenuProvider,
         api,
