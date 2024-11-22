@@ -86,8 +86,8 @@ export default function ProjectForm(props) {
                         <span style={{ fontSize: '14px', fontWeight: '600', width: 96, alignSelf:'start' }} >Summary</span>
                         <Input name="summary" type="textarea" value={project.summary} />
                     </Box>
-
                 </Box>
+                <input type="hidden" name="name" value={project.name} ></input>
                 <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, justifyContent: 'flex-end' }} >
                     <Button type="submit" sx={{ paddingX: 2, color: '#FFF' }} >{submitLabel}</Button>
                 </Box>

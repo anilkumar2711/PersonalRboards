@@ -16,7 +16,7 @@ const NewProjectForm = (props) => {
     const handleSubmit = (data, event) => {
         console.log({ data });
         api.post("/projects", {
-            name: data.owner,
+            name: data.name,
             description: data.summary,
             status: data.status,
             completion: data.completion,

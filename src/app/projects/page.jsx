@@ -46,15 +46,25 @@ function ProjectPage(props) {
   const node = setComponent("ProjectPage", { props });
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState({});
-  const [projects, setProjects] = useState([]);
-  node.projects = projects;
+  const [state, setState] = useState({
+    projects:{
+      data:[],
+      current_page: 1,
+      total_page: 1,
+      total_records: 1
+    },
+  });
+  node.state = state;
   const handleProjectSelect = (project) => {
     setSelectedProject(project);
     setIsPanelOpen(true);
   }
   useEffect(() => {
-    api.get("/projects").then(({ data }) => {
-      setProjects(data);
+    api.get("/projects",{
+      limit: 10,
+      page: 1
+    }).then((projects) => {
+      setState((v)=>({...v,projects}));
     });
   }, []);
 
@@ -220,7 +230,10 @@ function ProjectPage(props) {
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', mt: 1, width: '100%' }} >
         <DynamicTable
-          data={projects}
+          data={state.projects.data}
+          total={state.projects.total}
+          page={state.projects.page}
+          currentPage={state.projects.current_page}
           columns={projectColumns}
           fields={projectColumnFields}
         >
