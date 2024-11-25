@@ -31,8 +31,13 @@ const NewProjectForm = (props) => {
                 'Content-Type': 'multipart/form-data',
             }
         })
-        .then((response) => {
-            console.log({ createProject: response });
+        .then((projectResponse) => {
+            api.post("/boards", {
+                "projectId": projectResponse.id,
+                "name": "DEFAULT BOARD"
+            }).then(()=>{
+                alert("Project Created");
+            })
         })
         .catch((err) => {
             console.error(err);

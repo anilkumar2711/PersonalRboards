@@ -53,8 +53,17 @@ function BoardsPage() {
   }, []);
   
   const handleCardClick = (project) => {
-    // Navigate to the desired route, e.g., `/projects/[id]`
-    router.push(`/listofboards?id=${project.id}`); // You can replace 'project.id' with any dynamic value
+   //  /boards/{project_id}?name=DEFAULT BOARD
+    api.get("/boards").then((boardsList)=>{
+      let selectedBoard = boardsList.find(row=>row.project_id==project.id);
+      if(selectedBoard) {
+        router.push(`/listofboards?id=${selectedBoard.id}`);
+      } else {
+        alert("There is no board this current project");
+      }
+      
+    });
+    // You can replace 'project.id' with any dynamic value
   };
 
   return (
