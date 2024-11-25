@@ -16,9 +16,9 @@ const NewProjectForm = (props) => {
     const [coverImage, setCoverImage] = useState("addcover.png");
 
     useEffect(()=>{
-        service.methods.getAllUsers().then((data)=>{
-            console.log({data});
-        })
+        // service.methods.getAllUsers().then((data)=>{
+        //     console.log({data});
+        // })
     },[]);
 
     const handleSubmit = (data, event) => {

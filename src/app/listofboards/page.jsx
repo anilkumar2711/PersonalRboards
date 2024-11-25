@@ -160,7 +160,7 @@ function ListOfBoards() {
         </Box>
         
         <Box sx={{flex:1,alignItems:'center'}}>
-            Add Group
+            + Add Column
         </Box>
         {/* Assignees Sidebar */}
        
