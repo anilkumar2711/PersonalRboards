@@ -1,11 +1,12 @@
 'use client'
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Typography, Card, CardContent, Avatar, Grid, Button, Tabs, Tab, Divider } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PeopleIcon from '@mui/icons-material/People';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { MdClear } from "react-icons/md";
 import { useRouter } from 'next/navigation';
+import { useMixin } from '@/providers/mixin.provider';
 
 // Sample data for sponsored projects, Ph.D projects, and dashboards
 const sponsoredProjects = [
@@ -27,11 +28,33 @@ const dashboards = [
 ];
 
 function BoardsPage() {
+  const { $store, setStore, setComponent, api, service } = useMixin();
   const router = useRouter();
+  const [state, setState] = useState({
+    projects:{
+      data:[],
+      current_page: 1,
+      total_page: 1,
+      total_records: 1
+    },
+  });
+
+  useEffect(() => {
+    api.get("/projects",{
+      limit: 3,
+      page: 1
+    }).then((projects) => {
+      projects.data = projects.data.map(row=>({
+        ...row,
+        duration: service.date(row.startDate).duration(row.endDate)
+      }))
+      setState((v)=>({...v,projects}));
+    });
+  }, []);
   
-  const handleCardClick = () => {
+  const handleCardClick = (project) => {
     // Navigate to the desired route, e.g., `/projects/[id]`
-    router.push(`/listofboards`); // You can replace 'project.id' with any dynamic value
+    router.push(`/listofboards?id=${project.id}`); // You can replace 'project.id' with any dynamic value
   };
 
   return (
@@ -89,10 +112,10 @@ function BoardsPage() {
       <Box sx={{ mb: 4, pt: 4 }}>
         <Typography fontWeight="600" fontSize='14px' color='#B3ABAB'>Ph.D Projects</Typography>
         <Grid container spacing={2} sx={{ mt: 2 }}>
-          {phdProjects.map((project, index) => (
+          {state.projects.data.map((project, index) => (
             <Grid item xs={12} sm={4} key={index}>
-              <Card sx={{ border: '1px solid #D9D9D9', borderRadius: '15px', boxShadow: 'none', padding: '10px' }}
-               onClick={handleCardClick}>
+              <Card sx={{ border: '1px solid #D9D9D9', borderRadius: '15px', boxShadow: 'none', padding: '10px', cursor:'pointer' }}
+               onClick={()=>handleCardClick(project)}>
                 <Box
                   component="img"
                   src="project_01.png" // Replace with actual image URL
@@ -101,14 +124,14 @@ function BoardsPage() {
                 />
                 <CardContent>
                   <Typography fontWeight="600" fontSize='12px' color='#B3ABAB' sx={{ mb: 1 }}>
-                    {project.title}
+                    {project.description}
                   </Typography>
                   <Box>
                     <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'start', alignItems: 'center', }}>
                       <img src="profile_image.png" alt='profileimage' sx={{ width: 35, height: 35,}} />
                       <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'start', alignItems: 'initial',paddingLeft:'10px' }}>
                         <Box>
-                          <Typography fontWeight="500" fontSize='12px' color='#B3ABAB'>{project.owner}</Typography>
+                          <Typography fontWeight="500" fontSize='12px' color='#B3ABAB'>{project.owner.full_name}</Typography>
                         </Box>
                         <Box>
                           <Typography fontWeight="400" fontSize='12px' color='#24A249'>{project.duration}</Typography>

@@ -1,27 +1,10 @@
 import iconProvider from "./icon.provider";
-import moment from 'moment';
 import methodProvider from "./method.provider";
+import dateProvider from "./date.provider";
 export default {
     icons: iconProvider,
     methods:methodProvider,
-    date:(value)=>{
-        class ExtededDate extends Date {
-            toDbTimestamp() {
-                return this.toISOString();
-            }
-            toDbDate() {
-                return this.toDbTimestamp().split("T")[0];
-            }
-            moment(format="DD/MM/YYYY") {
-                return moment(this, format);
-            }
-            toHumanString(format="DD/MM/YYYY") {
-                const parsedDate = this.moment(format);
-                return parsedDate.format("MMM D YYYY");
-            }
-        }
-        return new ExtededDate(value);
-    },
+    date:dateProvider,
     string:(value)=>{
         class ExtendedString extends String {
             toProfile(num=2) {
