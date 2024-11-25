@@ -1,17 +1,25 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { Input } from "@/components/ui/InputWrapper";
 import { api } from '@/libs/axios';
 import ProjectForm from '../projects/ProjectForm';
+import { useMixin } from '@/providers/mixin.provider';
 
 const NewProjectForm = (props) => {
+    const { $store, service } = useMixin();
     const [project, setProject] = useState({
         name: "New Project",
         completion: 0,
     });
 
     const [coverImage, setCoverImage] = useState("addcover.png");
+
+    useEffect(()=>{
+        service.methods.getAllUsers().then((data)=>{
+            console.log({data});
+        })
+    },[]);
 
     const handleSubmit = (data, event) => {
         console.log({ data });
