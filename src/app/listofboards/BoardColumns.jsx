@@ -8,45 +8,86 @@ import { BiCalendar } from "react-icons/bi";
 import { FaFlag } from "react-icons/fa";
 
 export default function BoardColumns() {
-	const { api, $store, urlparams, setComponent } = useMixin();
-	const { statusOptions } = $store;
+    const { api, $store, urlparams, setComponent } = useMixin();
+    const { statusOptions } = $store;
 
-	const board_id = urlparams().id;
-	const project_id = urlparams().project_id;
+    const board_id = urlparams().id;
+    const project_id = urlparams().project_id;
 
-	const [columns, setColumns] = useState([]);
-	const [tasks, setTasks] = useState([]);
+    const [columns, setColumns] = useState([]);
+    const [tasks, setTasks] = useState([]);
+    const [draggedTask, setDraggedTask] = useState(null); // Track the task being dragged
 
-	const columnsColors = statusOptions.reduce(
-		(colors, option) => ({ ...colors, [option.value]: option.color }),
-		{}
-	);
+    const columnsColors = statusOptions.reduce(
+        (colors, option) => ({ ...colors, [option.value]: option.color }),
+        {}
+    );
 
-	// Set the component metadata
-	setComponent("BoardColumns", { columnsColors, columns, tasks });
+    // Set the component metadata
+    setComponent("BoardColumns", { columnsColors, columns, tasks });
 
-	useEffect(() => {
-		// Fetch columns and tasks for the current board and project
-		api.get("/columns").then((response) => {
-			setColumns(response.filter((col) => col.board_id === board_id));
-		});
+    useEffect(() => {
+        // Fetch columns and tasks for the current board and project
+        api.get("/columns").then((response) => {
+            setColumns(response.filter((col) => col.board_id === board_id));
+        });
 
-		api.get("/tasks").then((response) => {
-			setTasks(response.filter((task) => task.project_id === project_id));
-		});
-	}, [api, board_id, project_id]);
+        api.get("/tasks").then((response) => {
+            setTasks(response.filter((task) => task.project_id === project_id));
+        });
+    }, [api, board_id, project_id]);
 
-	return (
-		<Box sx={{ display: "flex", flexDirection:'column',gap:'5px'}}>
-            <Box sx={{display:'flex',px:2,py:1}}>
-                <div style={{flexGrow:1}}></div>
-                <button style={{ backgroundColor:'none',outline:'none',fontWeight:'600'}} >+ Add Column</button>
+    // Handle drag start
+    const handleDragStart = (task) => {
+        setDraggedTask(task); // Store the task being dragged
+    };
+
+    // Handle drag over
+    const handleDragOver = (e) => {
+        e.preventDefault(); // Allow drop
+    };
+
+    // Handle drop
+    const handleDrop = (columnId) => {
+        if (!draggedTask) return;
+
+        // Update the task's column_id
+        const updatedTasks = tasks.map((task) =>
+            task.id === draggedTask.id ? { ...task, column_id: columnId } : task
+        );
+        setTasks(updatedTasks);
+        setDraggedTask(null); // Clear dragged task
+
+        // Optionally, update the task in the backend
+        // api.patch(`/tasks/move-task/${draggedTask.id}`, {
+        //     newColumnId: columnId,
+        //     status: columns.find(v => v.id == columnId)?.name
+        // }).then(() => {
+
+        // });
+    };
+
+    return (
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+            <Box sx={{ display: "flex", px: 2, py: 1 }}>
+                <div style={{ flexGrow: 1 }}></div>
+                <button
+                    style={{
+                        backgroundColor: "none",
+                        outline: "none",
+                        fontWeight: "600",
+                    }}
+                >
+                    + Add Column
+                </button>
             </Box>
-			<Box sx={{ display: "flex", justifyContent:'space-between',alignItems:'center'}} >
+            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <Box sx={{ display: "flex", gap: 2 }}>
                     {columns.map((column) => (
                         <Box
                             key={column.id}
+                            onDragOver={handleDragOver}
+                            onDrop={() => handleDrop(column.id)} // Handle drop event
                             sx={{
                                 flex: 1,
                                 backgroundColor: "#D9D9D940",
@@ -56,7 +97,8 @@ export default function BoardColumns() {
                                 minWidth: "300px",
                                 minHeight: "50vh",
                                 flexShrink: 1,
-                            }}>
+                            }}
+                        >
                             {/* Column Header */}
                             <Box sx={{ display: "flex", alignItems: "center" }}>
                                 <Box
@@ -68,7 +110,8 @@ export default function BoardColumns() {
                                         px: 1,
                                         py: 0.5,
                                         border: "1px solid #ddd",
-                                    }}>
+                                    }}
+                                >
                                     <Typography sx={{ fontSize: "14px", fontWeight: "600", color: "#B3ABAB" }}>
                                         {column.name}
                                     </Typography>
@@ -81,14 +124,17 @@ export default function BoardColumns() {
                                 .map((task, index) => (
                                     <Card
                                         key={index}
+                                        draggable
+                                        onDragStart={() => handleDragStart(task)} // Start dragging
                                         sx={{
                                             my: 1,
                                             boxShadow: "none",
                                             border: "1px solid #ddd",
                                             borderRadius: "8px",
                                             backgroundColor: "#ffffff",
-                                            cursor:'pointer'
-                                        }}>
+                                            cursor: "grab",
+                                        }}
+                                    >
                                         <CardContent>
                                             <Box sx={{ display: "flex", color: "#5F6368", gap: "5px" }}>
                                                 <img src="work_schedule.png" alt="clock" />
@@ -130,6 +176,6 @@ export default function BoardColumns() {
                     ))}
                 </Box>
             </Box>
-		</Box>
-	);
+        </Box>
+    );
 }
