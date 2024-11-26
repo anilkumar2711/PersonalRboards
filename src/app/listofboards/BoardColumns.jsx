@@ -2,10 +2,12 @@
 
 import { useMixin } from "@/providers/mixin.provider";
 import { useEffect, useState } from "react";
+import { Button } from '@mui/material';
 import { Box, Typography, Card, CardContent } from "@mui/material";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { BiCalendar } from "react-icons/bi";
 import { FaFlag } from "react-icons/fa";
+import { List,LayoutPanelLeft,UserRound,AlignJustify,Flag,ArrowDownWideNarrow,ChartNoAxesCombined,CircleChevronDown } from "lucide-react";
 
 export default function BoardColumns() {
     const { api, $store, urlparams, setComponent } = useMixin();
@@ -69,7 +71,21 @@ export default function BoardColumns() {
 
     return (
         <Box sx={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-            <Box sx={{ display: "flex", px: 2, py: 1 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2,px:1 }}>
+                <Box sx={{ display: 'flex', gap: 1 }}>
+                    <Box  sx={{display:'flex', flexDirection:'row', alignItems:'center',border: '1px solid #ddd',borderRadius: '20px',paddingRight:'4px',paddingLeft:'4px'}}>
+                        <UserRound/>
+                    <Button sx={{ color: '#9266F5' }}>Assignee</Button>
+                    </Box>
+                    <Box  sx={{display:'flex', flexDirection:'row', alignItems:'center',border: '1px solid #ddd',borderRadius: '20px',paddingRight:'4px',paddingLeft:'4px'}}>
+                        <Flag/>
+                    <Button sx={{ color: '#9266F5' }}>Priority</Button>
+                    </Box>
+                    <Box  sx={{display:'flex', flexDirection:'row', alignItems:'center',border: '1px solid #ddd',borderRadius: '20px',paddingRight:'4px',paddingLeft:'4px'}}>
+                        <ArrowDownWideNarrow/>
+                    <Button sx={{ color: '#9266F5' }}>Sort</Button>
+                    </Box>
+                </Box>
                 <div style={{ flexGrow: 1 }}></div>
                 <button
                     style={{

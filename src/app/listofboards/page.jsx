@@ -74,22 +74,7 @@ function ListOfBoards() {
       </Box>
 
       {/* Filter/Search Buttons Under Top Row */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-        <Box sx={{ display: 'flex', gap: 1 }}>
-            <Box  sx={{display:'flex', flexDirection:'row', alignItems:'center',border: '1px solid #ddd',borderRadius: '20px',paddingRight:'4px',paddingLeft:'4px'}}>
-                <UserRound/>
-             <Button sx={{ color: '#9266F5' }}>Assignee</Button>
-            </Box>
-            <Box  sx={{display:'flex', flexDirection:'row', alignItems:'center',border: '1px solid #ddd',borderRadius: '20px',paddingRight:'4px',paddingLeft:'4px'}}>
-                <Flag/>
-             <Button sx={{ color: '#9266F5' }}>Priority</Button>
-            </Box>
-            <Box  sx={{display:'flex', flexDirection:'row', alignItems:'center',border: '1px solid #ddd',borderRadius: '20px',paddingRight:'4px',paddingLeft:'4px'}}>
-                <ArrowDownWideNarrow/>
-             <Button sx={{ color: '#9266F5' }}>Sort</Button>
-            </Box>
-        </Box>
-      </Box>
+      
       <BoardColumns></BoardColumns>
       {/* Dashboard List with Tabs */}
       {/* <Box sx={{ mt: 4 }}>
