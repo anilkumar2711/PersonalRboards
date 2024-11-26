@@ -1,6 +1,6 @@
 export default {
     statusOptions: [
-        { value: "TO DO", label: "TO DO", color: "#BFC5D2" },
+        { value: "TO DO", label: "TO DO", color: "#D9D9D9" },
         { value: "IN PROGRESS", label: "IN PROGRESS", color: "#C9DEFF" },
         { value: "COMPLETED", label: "COMPLETED", color: "#FDD13A47" }
     ],

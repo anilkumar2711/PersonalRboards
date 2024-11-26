@@ -17,6 +17,9 @@ const StyledInputField = styled('div',{
         boxShadow: 'none !important',
         backgroundColor: '#f6f6f6'
     },
+    '& .MuiFormLabel-root:not(.Mui-focused,.MuiFormLabel-filled)': {
+        transform: "translate(14px, 6px) scale(1)"
+    },
     ...(isTitle?{
         '& .MuiInputBase-root': {
             backgroundColor: '#fff'

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Typography, Card, CardContent, Avatar, Grid, Button, Tabs, Tab, Divider, IconButton } from '@mui/material';
 import { AccessTime, People, Add, Search } from '@mui/icons-material';
 import { List,LayoutPanelLeft,UserRound,AlignJustify,Flag,ArrowDownWideNarrow,ChartNoAxesCombined,CircleChevronDown } from "lucide-react";
@@ -9,6 +9,9 @@ import { BiCalendar } from "react-icons/bi";
 import { FaFlag } from "react-icons/fa";
 import { IoIosCloseCircleOutline} from "react-icons/io";
 import { FaCheckCircle } from "react-icons/fa";
+import PopupModel from '@/components/ui/PopupModel';
+import NewTask from './NewTask';
+import BoardColumns from './BoardColumns';
 const sponsoredProjects = [
   { title: 'Task', description:'Collection of soil Samples from forest', dueDate: 'Tomorrow', priority: 'Urgent' },
   { title: 'Experiment', description:'Collection of soil Samples from forest', dueDate: 'Aug 9', priority: 'Normal' },
@@ -29,6 +32,7 @@ const assignees = [
 ];
 
 function ListOfBoards() {
+  const [openTask,setOpenTask] = useState(false);
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', p: 0.5, backgroundColor: 'white', minHeight: '100vh' }}>
       
@@ -62,7 +66,7 @@ function ListOfBoards() {
             <Search />
             <input type="text" placeholder="Search tasks..." style={{ border: 'none', outline: 'none' }} />
           </Box>
-          <Button  color="#FFFFFF" startIcon={<Add />} sx={{fontSize:'12px',fontWeight:'700', backgroundColor: '#6EA6FF', color: '#FFFFFF' }}>
+          <Button onClick={()=>setOpenTask(true)}  color="#FFFFFF" startIcon={<Add />} sx={{fontSize:'12px',fontWeight:'700', backgroundColor: '#6EA6FF', color: '#FFFFFF' }}>
             Add Task
           </Button>
           <Box sx={{ display:'flex',color:'#D9D9D9',alignItems:'center'}}><CircleChevronDown /></Box>
@@ -86,111 +90,9 @@ function ListOfBoards() {
             </Box>
         </Box>
       </Box>
-      
-      {/* Columns for Task Status */}
-      <Box sx={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'initial',}}>
-      <Box sx={{ display: 'flex', gap: 2, }}>
-        {/* To Do Column */}
-        <Box sx={{ flex: 1, backgroundColor: '#D9D9D940', borderRadius: '8px', p: 1, border: '1px solid #ddd' }}>
-         <Box sx={{display:'flex',flexDirection:'row',alignItems:'center'}}>
-          <Box sx={{display:'flex', flexDirection:'row',alignItems:'center',borderRadius: '8px',backgroundColor: '#D9D9D9',paddingX:'5px',paddingY:'5px', border: '1px solid #ddd'}}>
-            <img src="Ellipse02.png" alt="ecllipse"/>
-          <Box sx={{paddingLeft:'8px'  }}> <Typography sx={{ fontSize:'14px',fontWeight:'600',color:"#B3ABAB",}}>
-          TO DO </Typography></Box> 
-          </Box>
-         <Box sx={{fontSize:'14px',fontWeight:'600',color:"#B3ABAB",paddingLeft:'10px'}}>12</Box>
-         </Box>
-         
-          {sponsoredProjects.map((project, index) => (
-            <Card key={index} sx={{ my: 1, boxShadow: 'none', border: '1px solid #ddd', backgroundColor: '#ffffff' }}>
-              <CardContent>
-                <Box sx={{display:'flex',flexDirection:'row',color:'#5F6368'}}>
-                  <img src="work_schedule.png" alt='clock'/>
-                <Typography fontWeight="400" fontSize="12px" paddingLeft="10px" >
-                {project.title}</Typography>
-                </Box>
-               
-                  <Typography fontWeight="600" fontSize="14px" color='#5F6368' paddingTop='10px' >
-                  {project.description}</Typography>
-
-                  <Box sx={{paddingTop:'8px'}}><HiMenuAlt2  /></Box>
-                  <Box sx={{paddingTop:'8px'}}><img src='Frame1.png' alt='profile'/></Box>
-                <Box sx={{display:'flex', flexDirection:'row', paddingTop:'8px'}}>
-                <Box><BiCalendar/></Box>
-                <Typography  sx={{ color: '#9ca3af' }}> 
-                  {project.dueDate}</Typography>
-                  </Box>
-                  <Box sx={{display:'flex', flexDirection:'row', paddingTop:'5px'}}> 
-                    <FaFlag sx={{color:'#E70C0C'}}/>
-                  <Typography  sx={{ fontWeight:"400", fontSize:"12px",color:'#5F6368', paddingLeft:'10px' }}>
-                   {project.priority}
-                   </Typography>
-                  </Box>
-                
-
-              </CardContent>
-            </Card>
-          ))}
-        </Box>
-        
-        {/* In Progress Column */}
-        <Box sx={{ flex: 1, backgroundColor: '#C9DEFF24', borderRadius: '10px', p: 1, border: '1px solid #ddd' }}>
-        <Box sx={{display:'flex',flexDirection:'row',alignItems:'center'}}>
-          <Box sx={{display:'flex', flexDirection:'row',alignItems:'center',borderRadius: '10px',backgroundColor: '#6EA6FFB0',paddingX:'5px',paddingY:'5px', border: '1px solid #ddd'}}>
-            <img src="Ellipse02.png" alt="ecllipse"/>
-          <Box sx={{paddingLeft:'8px'  }}> <Typography sx={{ fontSize:'14px',fontWeight:'600',color:"#56565687",}}>
-          IN PROGRESS </Typography></Box> 
-          </Box>
-         <Box sx={{fontSize:'14px',fontWeight:'600',color:"#B3ABAB",paddingLeft:'10px'}}>21</Box>
-         </Box>
-          <Card sx={{ my: 1, height: '80px', boxShadow: 'none', border: '1px dashed #ddd', backgroundColor: '#ffffff' }} />
-        </Box>
-        
-        {/* Completed Column */}
-        <Box sx={{ flex: 1, backgroundColor: '#FFFFFF', borderRadius: '8px', p: 1, border: '1px solid #ddd' }}>
-        <Box sx={{display:'flex',flexDirection:'row',alignItems:'center'}}>
-          <Box sx={{display:'flex', flexDirection:'row',alignItems:'center',borderRadius: '8px',backgroundColor: '#24A24985',paddingX:'5px',paddingY:'5px', border: '1px solid #ddd'}}>
-            <img src="Ellipse02.png" alt="ecllipse"/>
-          <Box sx={{paddingLeft:'8px'  }}> <Typography sx={{ fontSize:'14px',fontWeight:'600',color:"#56565687",}}>
-          COMPLETED</Typography></Box> 
-          </Box>
-         <Box sx={{fontSize:'14px',fontWeight:'600',color:"#B3ABAB",paddingLeft:'10px'}}>7</Box>
-         </Box>
-          <Card sx={{ my: 1, height: '80px', boxShadow: 'none', border: '1px dashed #ddd', backgroundColor: '#ffffff' }} />
-        </Box>
-        
-        <Box sx={{flex:1,alignItems:'center'}}>
-            + Add Column
-        </Box>
-        {/* Assignees Sidebar */}
-       
-      </Box>
-      <Box sx={{ width: '220px', backgroundColor: '#FFFFFF', borderRadius: '8px', p: 2, border: '1px solid #ddd' }}>
-        <Box sx={{display:'flex',justifyContent:'end',alignItems:'center',color:'#D9D9D9'}}><IoIosCloseCircleOutline/></Box>
-          <Box sx={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
-          <Typography sx={{ fontSize:'16px',fontWeight:'700',color: '#B3ABAB' }}>Assignee</Typography>
-          <Typography sx={{ fontSize:'12px',fontWeight:'400', color: '#9266F5' }}>Select all</Typography>
-          </Box>
-          
-          <input type="text" placeholder="Search" style={{ width: '100%', padding: '8px', marginTop: '8px', backgroundColor:'#D9D9D945',marginBottom: '16px', borderRadius: '4px', border: '1px solid #ddd' }} />
-          {assignees.map((assignee, index) => (
-            <Box sx={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
-            <Box key={index} sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-              <Avatar sx={{ backgroundColor: '#3b82f6', borderRadius: '50px',border: '1px solid #ddd',fontSize:'12px',fontWeight:'700', }}>{assignee.initials}</Avatar> 
-              <Box sx={{ ml: 1 }}>
-                <Typography variant="body2" sx={{ color: '#5F6368',fontSize:'14px',fontWeight:'400', }}>{assignee.name}</Typography>
-                <Typography variant="caption" sx={{ color: '#5F636847',fontSize:'12px',fontWeight:'400', }}>{assignee.tasks} tasks</Typography>
-              </Box>
-            </Box>
-            <Box sx={{paddingTop:"5px",color:'#6EA6FF'}}>
-            <FaCheckCircle  />
-            </Box>
-          </Box>
-          ))}
-        </Box>
-      </Box>
+      <BoardColumns></BoardColumns>
       {/* Dashboard List with Tabs */}
-      <Box sx={{ mt: 4 }}>
+      {/* <Box sx={{ mt: 4 }}>
         <Tabs value={0} variant="scrollable" scrollButtons="auto">
           <Tab label="All" />
           <Tab label="My dashboards" />
@@ -234,7 +136,8 @@ function ListOfBoards() {
             </Box>
           </Box>
         ))}
-      </Box>
+      </Box> */}
+      <NewTask open={openTask}></NewTask>
     </Box>
   );
 }

@@ -41,5 +41,10 @@ export default {
             ///api/v1/admin/users/admins  /admin/users
             this.api.main.get("/admin/users/admins",data).then(resolve).catch(reject);
         });
+    },
+    getAllProfile(data={}) {
+        return new Promise((resolve,reject)=>{
+            this.api.main.get("/profile",data).then(resolve).catch(reject);
+        });
     }
 }

@@ -26,6 +26,7 @@ export function MixinProvider({ children }) {
     const readables = {
         sidemnu:sidemenuProvider,
         api,
+        urlparams:()=>[...new URL(globalThis?.location?.href).searchParams].reduce((c,[key,value])=>({...c,[key]:value}),{}),
         service:serviceProvider,
         $store,
         setStore:setStoreMethod,
