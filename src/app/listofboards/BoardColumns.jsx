@@ -2,93 +2,134 @@
 
 import { useMixin } from "@/providers/mixin.provider";
 import { useEffect, useState } from "react";
-import { Box, Typography, Card, CardContent, Avatar, Grid, Button, Tabs, Tab, Divider, IconButton } from '@mui/material';
-
-import { HiMenuAlt2, HiFlag } from "react-icons/hi";
+import { Box, Typography, Card, CardContent } from "@mui/material";
+import { HiMenuAlt2 } from "react-icons/hi";
 import { BiCalendar } from "react-icons/bi";
 import { FaFlag } from "react-icons/fa";
-import { IoIosCloseCircleOutline } from "react-icons/io";
-import { FaCheckCircle } from "react-icons/fa";
 
-const sponsoredProjects = [
-    { title: 'Task', description: 'Collection of soil Samples from forest', dueDate: 'Tomorrow', priority: 'Urgent' },
-    { title: 'Experiment', description: 'Collection of soil Samples from forest', dueDate: 'Aug 9', priority: 'Normal' },
-];
+export default function BoardColumns() {
+	const { api, $store, urlparams, setComponent } = useMixin();
+	const { statusOptions } = $store;
 
-export default function BoardColumns(props) {
-    const { api, $store, service, urlparams, setComponent } = useMixin();
-    const { statusOptions } = $store;
-    const board_id = urlparams().id;
-    const project_id = urlparams().project_id;
-    const { } = props;
-    const [data, setData] = useState([]);
-    const [tasks, setTasks] = useState([]);
-    const columnsColors = statusOptions.reduce((c, o) => ({ ...c, [o.value]: o.color }), {});
+	const board_id = urlparams().id;
+	const project_id = urlparams().project_id;
 
-    setComponent("BoardColumns", { props, columnsColors, data, tasks });
+	const [columns, setColumns] = useState([]);
+	const [tasks, setTasks] = useState([]);
 
-    useEffect(() => {
-        api.get("/columns").then((responseList) => {
-            let filteredList = responseList.filter(v => v.board_id == board_id);
-            setData(filteredList);
-            console.log(filteredList);
-        });
-        api.get("/tasks").then((responseTaskTilst) => {
-            setTasks(responseTaskTilst.filter(v => v.project_id == project_id));
-        })
-    }, []);
+	const columnsColors = statusOptions.reduce(
+		(colors, option) => ({ ...colors, [option.value]: option.color }),
+		{}
+	);
 
-    return (<Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'initial', }}>
-        <Box sx={{ display: 'flex', gap: 2, }}>
-            {data.map((column) => (
-                <Box sx={{ flex: 1, backgroundColor: '#D9D9D940', borderRadius: '8px', p: 1, border: '1px solid #ddd', flexShrink: 1, minWidth: '300px', minHeight: '50vh' }}>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', borderRadius: '8px', backgroundColor: columnsColors[column.name], paddingX: '5px', paddingY: '5px', border: '1px solid #ddd' }}>
-                            <img src="Ellipse02.png" alt="ecllipse" />
-                            <Box sx={{ paddingLeft: '8px' }}> <Typography sx={{ fontSize: '14px', fontWeight: '600', color: "#B3ABAB", }}>{column.name}</Typography></Box>
+	// Set the component metadata
+	setComponent("BoardColumns", { columnsColors, columns, tasks });
+
+	useEffect(() => {
+		// Fetch columns and tasks for the current board and project
+		api.get("/columns").then((response) => {
+			setColumns(response.filter((col) => col.board_id === board_id));
+		});
+
+		api.get("/tasks").then((response) => {
+			setTasks(response.filter((task) => task.project_id === project_id));
+		});
+	}, [api, board_id, project_id]);
+
+	return (
+		<Box sx={{ display: "flex", flexDirection:'column',gap:'5px'}}>
+            <Box sx={{display:'flex',px:2,py:1}}>
+                <div style={{flexGrow:1}}></div>
+                <button style={{ backgroundColor:'none',outline:'none',fontWeight:'600'}} >+ Add Column</button>
+            </Box>
+			<Box sx={{ display: "flex", justifyContent:'space-between',alignItems:'center'}} >
+                <Box sx={{ display: "flex", gap: 2 }}>
+                    {columns.map((column) => (
+                        <Box
+                            key={column.id}
+                            sx={{
+                                flex: 1,
+                                backgroundColor: "#D9D9D940",
+                                borderRadius: "8px",
+                                p: 1,
+                                border: "1px solid #ddd",
+                                minWidth: "300px",
+                                minHeight: "50vh",
+                                flexShrink: 1,
+                            }}>
+                            {/* Column Header */}
+                            <Box sx={{ display: "flex", alignItems: "center" }}>
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        borderRadius: "8px",
+                                        backgroundColor: columnsColors[column.name],
+                                        px: 1,
+                                        py: 0.5,
+                                        border: "1px solid #ddd",
+                                    }}>
+                                    <Typography sx={{ fontSize: "14px", fontWeight: "600", color: "#B3ABAB" }}>
+                                        {column.name}
+                                    </Typography>
+                                </Box>
+                            </Box>
+
+                            {/* Column Tasks */}
+                            {tasks
+                                .filter((task) => task.column_id === column.id)
+                                .map((task, index) => (
+                                    <Card
+                                        key={index}
+                                        sx={{
+                                            my: 1,
+                                            boxShadow: "none",
+                                            border: "1px solid #ddd",
+                                            borderRadius: "8px",
+                                            backgroundColor: "#ffffff",
+                                            cursor:'pointer'
+                                        }}>
+                                        <CardContent>
+                                            <Box sx={{ display: "flex", color: "#5F6368", gap: "5px" }}>
+                                                <img src="work_schedule.png" alt="clock" />
+                                                <Typography fontWeight="400" fontSize="12px">
+                                                    {task.title}
+                                                </Typography>
+                                            </Box>
+
+                                            <Typography fontWeight="600" fontSize="14px" color="#5F6368" pt={1}>
+                                                {task.description}
+                                            </Typography>
+                                            <Box sx={{ paddingTop: "8px" }}>
+                                                <HiMenuAlt2 />
+                                            </Box>
+                                            <Box sx={{ paddingTop: "8px", display: "flex", gap: "5px" }}>
+                                                <BiCalendar />
+                                                <span className="icon-rounded-small">
+                                                    {service.string(task.Assignee.full_name).toProfile(2)}
+                                                </span>
+                                            </Box>
+
+                                            <Box sx={{ display: "flex", gap: 1, pt: 1 }}>
+                                                <BiCalendar />
+                                                <Typography sx={{ color: "#9ca3af" }}>
+                                                    {service.date(new Date()).duration(task.due_date)}
+                                                </Typography>
+                                            </Box>
+
+                                            <Box sx={{ display: "flex", gap: 1, pt: 1 }}>
+                                                <FaFlag style={{ color: "#E70C0C" }} />
+                                                <Typography fontSize="12px" color="#5F6368">
+                                                    {task.priority}
+                                                </Typography>
+                                            </Box>
+                                        </CardContent>
+                                    </Card>
+                                ))}
                         </Box>
-                        <Box sx={{ fontSize: '14px', fontWeight: '600', color: "#B3ABAB", paddingLeft: '10px' }}>12</Box>
-                    </Box>
-
-                    {tasks.filter(v => v.column_id == column.id).map((task, index) => (
-                        <Card key={index} sx={{ my: 1, boxShadow: 'none', border: '1px solid #ddd', backgroundColor: '#ffffff' }}>
-                            <CardContent>
-                                <Box sx={{ display: 'flex', flexDirection: 'row', color: '#5F6368' }}>
-                                    <img src="work_schedule.png" alt='clock' />
-                                    <Typography fontWeight="400" fontSize="12px" paddingLeft="10px" >
-                                        {task.title}</Typography>
-                                </Box>
-
-                                <Typography fontWeight="600" fontSize="14px" color='#5F6368' paddingTop='10px' >
-                                    {task.description}</Typography>
-
-                                <Box sx={{ paddingTop: '8px' }}><HiMenuAlt2 /></Box>
-                                <Box sx={{ paddingTop: '8px',display: 'flex',gap:'5px' }}>
-                                    <BiCalendar />
-                                    <span className="icon-rounded-small">
-                                        {service.string(task.Assignee.full_name).toProfile(2)}
-                                    </span>
-                                </Box>
-                                <Box sx={{ display: 'flex', flexDirection: 'row', paddingTop: '8px', gap:'5px' }}>
-                                    <Box><BiCalendar /></Box>
-                                    <Typography sx={{ color: '#9ca3af' }}>
-                                        {service.date(new Date()).duration(task.due_date)}
-                                    </Typography>
-                                </Box>
-                                <Box sx={{ display: 'flex', flexDirection: 'row', paddingTop: '5px' }}>
-                                    <FaFlag sx={{ color: '#E70C0C' }} />
-                                    <Typography sx={{ fontWeight: "400", fontSize: "12px", color: '#5F6368', paddingLeft: '10px' }}>
-                                        {task.priority}
-                                    </Typography>
-                                </Box>
-
-
-                            </CardContent>
-                        </Card>
                     ))}
                 </Box>
-            ))}
-
-        </Box>
-    </Box>);
+            </Box>
+		</Box>
+	);
 }
