@@ -462,3 +462,12 @@
   body *  {
     color: #565656;
   }
+
+  .rounded-ibutton {
+    background-color: none;
+    outline: none;
+    font-weight: 400;
+    border-radius: 12px;
+    color: #9266F5;
+    margin: 5px 10px;
+  }

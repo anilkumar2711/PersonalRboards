@@ -75,15 +75,15 @@ export default function BoardColumns() {
                 <Box sx={{ display: 'flex', gap: 1 }}>
                     <Box  sx={{display:'flex', flexDirection:'row', alignItems:'center',border: '1px solid #ddd',borderRadius: '20px',paddingRight:'4px',paddingLeft:'4px'}}>
                         <UserRound/>
-                    <Button sx={{ color: '#9266F5' }}>Assignee</Button>
+                        <button className="rounded-ibutton">Assignee</button>
                     </Box>
                     <Box  sx={{display:'flex', flexDirection:'row', alignItems:'center',border: '1px solid #ddd',borderRadius: '20px',paddingRight:'4px',paddingLeft:'4px'}}>
                         <Flag/>
-                    <Button sx={{ color: '#9266F5' }}>Priority</Button>
+                        <button  className="rounded-ibutton" >Priority</button>
                     </Box>
                     <Box  sx={{display:'flex', flexDirection:'row', alignItems:'center',border: '1px solid #ddd',borderRadius: '20px',paddingRight:'4px',paddingLeft:'4px'}}>
                         <ArrowDownWideNarrow/>
-                    <Button sx={{ color: '#9266F5' }}>Sort</Button>
+                        <button className="rounded-ibutton" >Sort</button>
                     </Box>
                 </Box>
                 <div style={{ flexGrow: 1 }}></div>
