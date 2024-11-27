@@ -1,13 +1,14 @@
 "use client"
 import { Input } from "@/components/ui/Input";
-import { Box, Typography } from '@mui/material';
-import { ChevronsRight, MoveDiagonal2, ChevronsUpDown } from "lucide-react"
+import { Box, Typography,IconButton } from '@mui/material';
+import { ChevronsRight, MoveDiagonal2,Minimize2, ChevronsUpDown } from "lucide-react"
 import { useState } from "react"
 import { MdAdd, MdOutlineSearch, MdMoreHoriz } from "react-icons/md";
 import { BsLayoutSidebarInsetReverse } from "react-icons/bs";
 import DynamicTable from "@/components/ui/DynamicTable";
 import { useMixin } from "@/providers/mixin.provider";
 import ProjectForm from "./ProjectForm";
+
 
 
 export default function ProjectDetailsPanel(props) {
@@ -132,7 +133,8 @@ export default function ProjectDetailsPanel(props) {
     };
 
     console.log({ project });
-
+    const [isFullScreen, setIsFullScreen] = useState(false);
+    const toggleFullScreen = () => setIsFullScreen(!isFullScreen);
 
     return (
         <>
@@ -159,7 +161,7 @@ export default function ProjectDetailsPanel(props) {
                     top: 0,
                     right: 0,
                     height: '100%',
-                    width: '50%', // equivalent to w-3/6
+                    width: isFullScreen ? "100%" : "50%",// equivalent to w-3/6
                     backgroundColor: 'background.default', // equivalent to bg-background, use your theme's background color
                     boxShadow: 3, // shadow-lg equivalent
                     transition: 'transform 300ms ease-in-out',
@@ -191,7 +193,7 @@ export default function ProjectDetailsPanel(props) {
                         <button>
                             <ChevronsRight sx={{ width: 32, height: 32 }} onClick={onClose} />
                         </button>
-                        <MoveDiagonal2 sx={{ width: 24, height: 32, display: 'flex', alignItems: 'center' }} />
+                        <span onClick={toggleFullScreen} style={{ width: 24, height: 32, display: 'flex', alignItems: 'center',cursor:'pointer' }} > {isFullScreen ? <Minimize2 /> : <MoveDiagonal2 />}</span>
                         <BsLayoutSidebarInsetReverse sx={{ width: 24, height: 32, marginLeft: 2, display: 'flex', alignItems: 'center' }} />
                         <ChevronsUpDown sx={{ width: 24, height: 32, marginLeft: 2, display: 'flex', alignItems: 'center' }} />
 
