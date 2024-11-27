@@ -443,14 +443,15 @@
 
   .icon-rounded-small {
     border-radius: 50%;
-    width: 15px;
-    height: 15px;
-    color: #F8E6E6;
+    width: 20px;
+    height: 20px;
+    background: #F8E6E6;
+    color: black;
     border: 1px solid #F8E6E6;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: small;
+    font-size: x-small;
   }
 
   .vmiddle {
