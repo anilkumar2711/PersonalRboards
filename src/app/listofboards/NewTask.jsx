@@ -31,7 +31,7 @@ export default function NewTask(props) {
         <Form onSubmit={handleSubmit} >
             <div style={{display:'flex',flexDirection:'column',gap:'10px'}}>
                 <div>
-                    <Input label="Task Title" name="title" plachoder="Please enter your task title" type="text" minWidth={"100%"}></Input>
+                    <Input label="Task Title" name="title" placeholder="Please enter your task title" type="text" minWidth={"100%"}></Input>
                 </div>
                 <div style={{ display:'flex', gap:2 }}>
                     <Input label="Select Status" name="status" type="search" options={taskStatusOptions} renderOption={renderColorOption} icon={ColorTag} ></Input>
