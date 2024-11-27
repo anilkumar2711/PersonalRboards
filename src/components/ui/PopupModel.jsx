@@ -18,7 +18,7 @@ const PopupModel = (props) => {
   },[props.open]);
 
   useEffect(()=>{
-    console.log("Mounted");
+    // console.log("Mounted");
   },[]);
 
   return (
@@ -45,8 +45,8 @@ const PopupModel = (props) => {
       >
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
           {title && (
-            <Typography id="popup-modal-title" variant="h6" component="h2">
-              {title}
+            <Typography id="popup-modal-title" variant="h6" component="h3">
+              <span style={{fontWeight:'bold'}} >{title}</span>
             </Typography>
           )}
           <IconButton id={`${name?name+'-':''}closepopup`} sx={{ marginLeft:'auto'}} onClick={handelClose}>

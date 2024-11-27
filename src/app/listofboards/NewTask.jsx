@@ -27,11 +27,11 @@ export default function NewTask(props) {
 
     const ColorTag = (props) => <span style={{ backgroundColor: props.option?.color, display: 'block', borderRadius: '4px', width: '16px', height: '16px', marginRight: '10px' }} ></span>;
 
-    return <PopupModel open={open} width={"50%"}>
+    return <PopupModel title='Create Task' open={open} width={"50%"}>
         <Form onSubmit={handleSubmit} >
             <div style={{display:'flex',flexDirection:'column',gap:'10px'}}>
                 <div>
-                    <Input label="Task Title" name="title" plachoder="Please enter your task title" type="text" minWidth={"100%"}></Input>
+                    <Input label="Task Title" name="title" placeholder="Please enter your task title" type="text" minWidth={"100%"}></Input>
                 </div>
                 <div style={{ display:'flex', gap:2 }}>
                     <Input label="Select Status" name="status" type="search" options={taskStatusOptions} renderOption={renderColorOption} icon={ColorTag} ></Input>

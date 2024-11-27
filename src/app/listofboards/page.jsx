@@ -12,6 +12,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import PopupModel from '@/components/ui/PopupModel';
 import NewTask from './NewTask';
 import BoardColumns from './BoardColumns';
+import NewColumn from './NewColumn';
 const sponsoredProjects = [
   { title: 'Task', description:'Collection of soil Samples from forest', dueDate: 'Tomorrow', priority: 'Urgent' },
   { title: 'Experiment', description:'Collection of soil Samples from forest', dueDate: 'Aug 9', priority: 'Normal' },
@@ -33,6 +34,8 @@ const assignees = [
 
 function ListOfBoards() {
   const [openTask,setOpenTask] = useState(false);
+  const [openColumn,setOpenColumn] = useState(false);
+  console.log("ListOfBoards",openColumn);
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', p: 0.5, backgroundColor: 'white', minHeight: '100vh' }}>
       
@@ -75,7 +78,7 @@ function ListOfBoards() {
 
       {/* Filter/Search Buttons Under Top Row */}
       
-      <BoardColumns></BoardColumns>
+      <BoardColumns onAdd={()=>setOpenColumn(true)} ></BoardColumns>
       {/* Dashboard List with Tabs */}
       {/* <Box sx={{ mt: 4 }}>
         <Tabs value={0} variant="scrollable" scrollButtons="auto">
@@ -122,6 +125,7 @@ function ListOfBoards() {
           </Box>
         ))}
       </Box> */}
+      <NewColumn open={openColumn} ></NewColumn>
       <NewTask open={openTask}></NewTask>
     </Box>
   );

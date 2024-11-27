@@ -7,9 +7,9 @@ import { Box, Typography, Card, CardContent } from "@mui/material";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { BiCalendar } from "react-icons/bi";
 import { FaFlag } from "react-icons/fa";
-import { List,LayoutPanelLeft,UserRound,AlignJustify,Flag,ArrowDownWideNarrow,ChartNoAxesCombined,CircleChevronDown } from "lucide-react";
+import { List,LayoutPanelLeft,UserRound,AlignJustify,Flag,ArrowDownWideNarrow,ChartNoAxesCombined,CircleChevronDown,Trash } from "lucide-react";
 
-export default function BoardColumns() {
+export default function BoardColumns(props) {
     const { api, $store, urlparams, setComponent } = useMixin();
     const { statusOptions } = $store;
 
@@ -24,6 +24,10 @@ export default function BoardColumns() {
         (colors, option) => ({ ...colors, [option.value]: option.color }),
         {}
     );
+
+    const handelOnAddColumn = () => {
+        props.onAdd && props.onAdd();
+    }
 
     // Set the component metadata
     setComponent("BoardColumns", { columnsColors, columns, tasks });
@@ -93,6 +97,7 @@ export default function BoardColumns() {
                         outline: "none",
                         fontWeight: "600",
                     }}
+                    onClick={()=>handelOnAddColumn()}
                 >
                     + Add Column
                 </button>
@@ -132,6 +137,9 @@ export default function BoardColumns() {
                                         {column.name}
                                     </Typography>
                                 </Box>
+                                {
+                                    column.position>=5 ? <span style={{marginLeft:"auto",cursor:"pointer"}}><Trash ></Trash></span> :""
+                                }
                             </Box>
 
                             {/* Column Tasks */}

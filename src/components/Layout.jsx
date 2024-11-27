@@ -3,6 +3,7 @@ import React from 'react';
 import Sidebar from './ui/Sidebar';
 import Header from './ui/Header';
 import { Box } from '@mui/material';
+import Alert from './ui/Alert';
 
 function Layout({ children }) {
   return (
@@ -33,6 +34,7 @@ function Layout({ children }) {
           >
             {children}
           </Box>
+          <Alert/>
         </Box>
       </Box>
     </>
