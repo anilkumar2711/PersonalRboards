@@ -200,42 +200,6 @@ function ProjectPage(props) {
           </Typography>
         </Box>
       </Box>
-      <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '5px 10px', ml: 1 }}>
-        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-          <Box
-            component="img"
-            src="star 2.png"
-            alt="star"
-            sx={{ mr: 1, height: 16, width: 20 }}
-          />
-          <Typography variant="h6" sx={{ fontSize: "14px", fontWeight: '700', color: '#B3ABAB' }}>
-            Active
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            pr: 2,
-          }}
-        >
-          <Search sx={{ mr: 1, height: 16, width: 16, }} />
-          <Box sx={{ pr: 2, pl: 2 }}><ListFilter sx={{ mr: 1, height: 16, width: 16, paddingLeft: '8px' }} /></Box>
-          <Link href="/createproject">
-            <Button
-              sx={{
-                fontSize: "12px",
-                fontWeight: "700",
-                color: "white",
-              }}
-            >
-              New
-            </Button>
-          </Link>
-        </Box>
-      </Box>
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', mt: 1, width: '100%' }} >
         <DynamicTable
           data={state.projects.data}
@@ -244,6 +208,7 @@ function ProjectPage(props) {
           currentPage={state.projects.current_page}
           columns={projectColumns}
           fields={projectColumnFields}
+          hasToolbar={true}
         >
         </DynamicTable>
       </Box>
