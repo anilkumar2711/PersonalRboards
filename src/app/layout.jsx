@@ -19,8 +19,8 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: 'My Next.js App',
-  description: 'A modern Next.js app with MUI, SEO, and global layout.',
+  title: 'RBoards',
+  description: 'RBoards: Your Platform for Progress',
 };
 
 export default function RootLayout({ children }) {
