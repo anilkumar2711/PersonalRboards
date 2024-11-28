@@ -34,11 +34,11 @@ const assignees = [
   { name: 'Bhaskar P', tasks: 1, initials: 'BP', backgroundColor:'#F81111'},
 ];
 
-function ListOfBoards() {
+function Board() {
   const { $emit,setComponent, query,api } = useMixin();
   const board_id = query.get("id");
   const project_id = query.get("project_id");
-  const node = setComponent("ListOfBoards");
+  const node = setComponent("Board");
   const router = useRouter();
   
   useEffect(()=>{
@@ -46,7 +46,7 @@ function ListOfBoards() {
       api.get(`/boards/${project_id}`).then((boardsList)=>{
         let selectedBoard = boardsList.find(row=>true);
         if(selectedBoard) {
-          router.push(`/listofboards?id=${selectedBoard.id}&project_id=${project_id}`);
+          router.push(`/board?id=${selectedBoard.id}&project_id=${project_id}`);
         } else {
           alert("There is no board this current project");
         }
@@ -148,4 +148,4 @@ function ListOfBoards() {
   );
 }
 
-export default ListOfBoards;
+export default Board;

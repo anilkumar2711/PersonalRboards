@@ -56,7 +56,7 @@ function BoardsPage() {
     api.get("/boards").then((boardsList)=>{
       let selectedBoard = boardsList.find(row=>row.project_id==project.id);
       if(selectedBoard) {
-        router.push(`/listofboards?id=${selectedBoard.id}&project_id=${project.id}`);
+        router.push(`/board?id=${selectedBoard.id}&project_id=${project.id}`);
       } else {
         alert("There is no board this current project");
       }

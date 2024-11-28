@@ -70,7 +70,7 @@ function ProjectPage(props) {
     });
   }, []);
 
-  const projectColumns = ["name", "status", "owner", "startDate", "priority", "completion"];
+  const projectColumns = ["name", "status","owner", "startDate", "priority", "completion"];//"type",
 
   const projectColumnFields = {
     "name": {
@@ -83,7 +83,7 @@ function ProjectPage(props) {
           display: 'flex'
         }}>
           <span style={{ flexGrow: 1 }}>
-            <Link href={`/listofboards?project_id=${row.id}`} >
+            <Link href={`/board?project_id=${row.id}`} >
               {value}
             </Link>
           </span>
@@ -161,6 +161,9 @@ function ProjectPage(props) {
       headerIcon: <icons.CompletionPie />,
       label: "Completion",
       render: ({ value }) => (<Input name="completion" type="progress" disabled={true} value={value} />)
+    },
+    "type": {
+      "label":"Type"
     }
   };
 
