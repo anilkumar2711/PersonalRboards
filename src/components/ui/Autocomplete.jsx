@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Autocomplete as MuiAutocomplete, TextField, InputAdornment } from '@mui/material';
 import { styled } from '@mui/system';
 
-const StyledAutocomplete = styled(MuiAutocomplete,{
+const StyledAutocomplete = styled(MuiAutocomplete, {
   shouldForwardProp: (prop) => !["icon"].includes(prop) // Prevent `icon` from being forwarded to the DOM
-})(({ theme,icon,value }) => ({
+})(({ theme, icon, value }) => ({
   '&': {
-    width:'100%'
+    width: '100%'
   },
   '& .MuiInputBase-root': {
-    ...(icon&&value?{paddingLeft:'40px'}:{}),
+    ...(icon ? { paddingLeft: '40px' } : {}),
     height: '35px',
     borderRadius: theme.shape?.borderRadius ?? 4,
     // backgroundColor: theme.palette?.background?.paper ?? '#fff',
@@ -48,12 +48,12 @@ const StyledAutocomplete = styled(MuiAutocomplete,{
   },
 }));
 
-const getOptionValue = (option,attrib='value')=>(typeof option == "string"?option:(option && option[attrib] || ""));
-const getOption = (options,value)=>(options.find(v => typeof v=='string'? v==value : v.value == value));
+const getOptionValue = (option, attrib = 'value') => (typeof option == "string" ? option : (option && option[attrib] || ""));
+const getOption = (options, value) => (options.find(v => typeof v == 'string' ? v == value : v.value == value));
 
-const Autocomplete = React.forwardRef(({ 
-  className = '', 
-  options = [], 
+const Autocomplete = React.forwardRef(({
+  className = '',
+  options = [],
   renderInput,
   renderOption,
   value: propValue,
@@ -61,18 +61,22 @@ const Autocomplete = React.forwardRef(({
   inputValue: propInputValue,
   onInputChange: propOnInputChange,
   hasPlacehoderColor = false,
-  ...props 
+  ...props
 }, ref) => {
   const [localValue, setLocalValue] = useState(propValue ?? null);
   const [localInputValue, setLocalInputValue] = useState(propInputValue ?? '');
-  const [selectedOption, setSelectedOption] = useState(getOption(options,propValue)||{});
-  const placeholderColor = getOptionValue(selectedOption,'color');
+  const [selectedOption, setSelectedOption] = useState(getOption(options, propValue) || {});
+  const placeholderColor = getOptionValue(selectedOption, 'color');
+  const localLabelValue = selectedOption?.label || localValue;
   useEffect(() => {
     if (propValue !== undefined) {
       setLocalValue(propValue);
-      setSelectedOption(getOption(options,propValue));
+      setSelectedOption(getOption(options, propValue));
     }
   }, [propValue]);
+
+
+  console.log({localLabelValue,localInputValue});
 
   useEffect(() => {
     if (propInputValue !== undefined) {
@@ -80,11 +84,12 @@ const Autocomplete = React.forwardRef(({
     }
   }, [propInputValue]);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (event, newValue,...args) => {
     let selectedValue = typeof newValue === "string" ? newValue : newValue.value;
     setLocalValue(selectedValue);
     setSelectedOption(newValue);
-    propOnChange && propOnChange(event, selectedValue,newValue);
+    // console.log({newValue,args});
+    propOnChange && propOnChange(event, selectedValue, newValue);
   };
 
   const handleInputChange = (event, newInputValue) => {
@@ -94,31 +99,38 @@ const Autocomplete = React.forwardRef(({
 
   const defaultRenderOption = (props, option) => (
     <li {...props} key={option.value} >
-      {typeof option == "string"? option: option.label}
+      {typeof option == "string" ? option : option.label}
     </li>
   );
 
-  const defaultRenderInput = (params) => <span style={{position:'relative'}}>
-      <TextField 
-        {...params} 
-        {...props} 
-        sx={{
-          ...(hasPlacehoderColor?{backgroundColor:placeholderColor}:{})
-        }} 
+  const handelSearch = (event, value) => {
+    const searched = event.target.value;
+    props.onSearch && props.onSearch(value, event);
+    console.log({ event, value });
+  }
+
+  const defaultRenderInput = (params) => <span style={{ position: 'relative' }}>
+    <TextField
+      {...params}
+      {...props}
+      sx={{
+        ...(hasPlacehoderColor ? { backgroundColor: placeholderColor } : {})
+      }}
+      onChange={(...args) => handelSearch(...args)}
     />
-    {props.icon?<span style={{
-        position: 'absolute',
-        left:'0px',
-        top: '50%',
-        transform: 'translate(50%, 0%)'
-      }}>
+    {props.icon ? <span style={{
+      position: 'absolute',
+      left: '0px',
+      top: '50%',
+      transform: 'translate(50%, -25%)'
+    }}>
       <props.icon option={selectedOption} />
-    </span>:""}
+    </span> : ""}
   </span>;
 
 
-  const wrapperRederInput = (...args)=>{
-    return (renderInput ? renderInput(...args,selectedOption) : defaultRenderInput(...args));
+  const wrapperRederInput = (...args) => {
+    return (renderInput ? renderInput(...args, selectedOption) : defaultRenderInput(...args));
   }
 
   return (
@@ -126,7 +138,7 @@ const Autocomplete = React.forwardRef(({
       options={options}
       renderInput={wrapperRederInput || defaultRenderInput}
       renderOption={renderOption || defaultRenderOption}
-      value={localValue}
+      value={localLabelValue}
       onChange={handleChange}
       inputValue={localInputValue}
       onInputChange={handleInputChange}
