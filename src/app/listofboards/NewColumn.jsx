@@ -7,8 +7,8 @@ import { useMixin } from "@/providers/mixin.provider";
 import { Button } from '@/components/ui/button';
 
 export default function NewColumn(props) {
-    const [open,setOpen] = useState(props.open);
-    const { $store, api, setComponent, urlparams } = useMixin();
+    const { $store, api, setComponent, urlparams, $emit } = useMixin();
+    const [open,setOpen] = useState(false);
     const { } = $store;
     const board_id = urlparams().id;
     setComponent("NewColumn",{props});
@@ -17,13 +17,15 @@ export default function NewColumn(props) {
             "name": data.name,
             "boardId": board_id
         }).then(()=>{
-            props.onAddColumn && props.onAddColumn();
+            $emit.trigger("getColumnlist");
+            setOpen(false);
         });
-        console.log({data});
     };
     useEffect(()=>{
-        setOpen(props.open);
-    },[props.open]);
+        $emit.onTrigger("openColumnCreate",()=>{
+            setOpen(true);
+        });
+    },[]);
 
     console.log("NewColumn",props.open);
 

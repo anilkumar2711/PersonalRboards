@@ -10,7 +10,7 @@ import { FaFlag } from "react-icons/fa";
 import { List,LayoutPanelLeft,UserRound,AlignJustify,Flag,ArrowDownWideNarrow,ChartNoAxesCombined,CircleChevronDown,Trash } from "lucide-react";
 
 export default function BoardColumns(props) {
-    const { api, $store, urlparams, setComponent } = useMixin();
+    const { api, $store, urlparams, setComponent, $emit } = useMixin();
     const { statusOptions } = $store;
 
     const board_id = urlparams().id;
@@ -26,21 +26,37 @@ export default function BoardColumns(props) {
     );
 
     const handelOnAddColumn = () => {
-        props.onAdd && props.onAdd();
+        $emit.trigger("openColumnCreate");
     }
+
+    const handelBoardDelete = (column)=>{
+        api.delete(`/columns/${column.id}`,{}).then((response) => {
+            $emit.trigger("getColumnlist");
+        });
+    };
 
     // Set the component metadata
     setComponent("BoardColumns", { columnsColors, columns, tasks });
 
-    useEffect(() => {
-        // Fetch columns and tasks for the current board and project
+    const getColumnList = ()=>{
         api.get("/columns").then((response) => {
             setColumns(response.filter((col) => col.board_id === board_id));
         });
+    };
+
+    useEffect(() => {
+        // Fetch columns and tasks for the current board and project
+        
+        getColumnList();
 
         api.get("/tasks").then((response) => {
             setTasks(response.filter((task) => task.project_id === project_id));
         });
+
+        $emit.onTrigger("getColumnlist",()=>{
+            getColumnList();
+        });
+
     }, [api, board_id, project_id]);
 
     // Handle drag start
@@ -74,7 +90,7 @@ export default function BoardColumns(props) {
     };
 
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "5px"}}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2,px:1 }}>
                 <Box sx={{ display: 'flex', gap: 1 }}>
                     <Box  sx={{display:'flex', flexDirection:'row', alignItems:'center',border: '1px solid #ddd',borderRadius: '20px',paddingRight:'4px',paddingLeft:'4px'}}>
@@ -102,7 +118,7 @@ export default function BoardColumns(props) {
                     + Add Column
                 </button>
             </Box>
-            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", maxWidth:"calc(100vw - 300px)", overflow:"auto"  }}>
                 <Box sx={{ display: "flex", gap: 2 }}>
                     {columns.map((column) => (
                         <Box
@@ -138,7 +154,10 @@ export default function BoardColumns(props) {
                                     </Typography>
                                 </Box>
                                 {
-                                    column.position>=5 ? <span style={{marginLeft:"auto",cursor:"pointer"}}><Trash ></Trash></span> :""
+                                    column.position>=5 ? <button onClick={()=>handelBoardDelete(column)}  style={{
+                                        marginLeft:"auto",
+                                        cursor:"pointer"
+                                    }}><Trash ></Trash></button> :""
                                 }
                             </Box>
 

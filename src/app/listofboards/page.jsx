@@ -13,6 +13,7 @@ import PopupModel from '@/components/ui/PopupModel';
 import NewTask from './NewTask';
 import BoardColumns from './BoardColumns';
 import NewColumn from './NewColumn';
+import { useMixin } from '@/providers/mixin.provider';
 const sponsoredProjects = [
   { title: 'Task', description:'Collection of soil Samples from forest', dueDate: 'Tomorrow', priority: 'Urgent' },
   { title: 'Experiment', description:'Collection of soil Samples from forest', dueDate: 'Aug 9', priority: 'Normal' },
@@ -33,9 +34,8 @@ const assignees = [
 ];
 
 function ListOfBoards() {
-  const [openTask,setOpenTask] = useState(false);
-  const [openColumn,setOpenColumn] = useState(false);
-  console.log("ListOfBoards",openColumn);
+  const { $emit,setComponent } = useMixin();
+  const node = setComponent("ListOfBoards");
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', p: 0.5, backgroundColor: 'white', minHeight: '100vh' }}>
       
@@ -69,7 +69,7 @@ function ListOfBoards() {
             <Search />
             <input type="text" placeholder="Search tasks..." style={{ border: 'none', outline: 'none' }} />
           </Box>
-          <Button onClick={()=>setOpenTask(true)}  color="#FFFFFF" startIcon={<Add />} sx={{fontSize:'12px',fontWeight:'700', backgroundColor: '#6EA6FF', color: '#FFFFFF' }}>
+          <Button onClick={()=>$emit.trigger("openTaskCreate")}  color="#FFFFFF" startIcon={<Add />} sx={{fontSize:'12px',fontWeight:'700', backgroundColor: '#6EA6FF', color: '#FFFFFF' }}>
             Add Task
           </Button>
           <Box sx={{ display:'flex',color:'#D9D9D9',alignItems:'center'}}><CircleChevronDown /></Box>
@@ -78,7 +78,7 @@ function ListOfBoards() {
 
       {/* Filter/Search Buttons Under Top Row */}
       
-      <BoardColumns onAdd={()=>setOpenColumn(true)} ></BoardColumns>
+      <BoardColumns></BoardColumns>
       {/* Dashboard List with Tabs */}
       {/* <Box sx={{ mt: 4 }}>
         <Tabs value={0} variant="scrollable" scrollButtons="auto">
@@ -125,8 +125,8 @@ function ListOfBoards() {
           </Box>
         ))}
       </Box> */}
-      <NewColumn open={openColumn} ></NewColumn>
-      <NewTask open={openTask}></NewTask>
+      <NewColumn></NewColumn>
+      <NewTask></NewTask>
     </Box>
   );
 }

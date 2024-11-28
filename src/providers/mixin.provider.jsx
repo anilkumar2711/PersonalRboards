@@ -5,8 +5,10 @@ import { setStore } from '@/redux/store';
 import { api,apiContext } from '@/libs/axios';
 import serviceProvider from './service.provider';
 import sidemenuProvider from './sidemenu.provider';
+import Emitter from './emit.provider';
 
 const MixinContext = createContext();
+const $emiter = new Emitter();
 
 export function MixinProvider({ children }) {
     const methods = serviceProvider.methods;
@@ -30,6 +32,7 @@ export function MixinProvider({ children }) {
         service:serviceProvider,
         $store,
         setStore:setStoreMethod,
+        $emit: $emiter
     };
     const setComponent = (name,node={})=>{
         globalThis[name] = {

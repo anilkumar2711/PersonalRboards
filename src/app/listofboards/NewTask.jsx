@@ -7,16 +7,18 @@ import { useMixin } from "@/providers/mixin.provider";
 import { Button } from '@/components/ui/button';
 
 export default function NewTask(props) {
-    const { open } = props;
-    const { $store, setComponent } = useMixin();
+    const { $store,$emit, setComponent } = useMixin();
+    const [open,setOpen] = useState(false);
     const { taskStatusOptions, taskPriorityOptions } = $store;
     setComponent("NewTask",{props});
     const handleSubmit = (data)=>{
         console.log({data});
     };
     useEffect(()=>{
-        console.log("Mounted",open);
-    },[open]);
+        $emit.onTrigger("openTaskCreate",()=>{
+            setOpen(true);
+        });
+    },[]);
 
     const renderColorOption = (props, option) => (
         <li {...props} key={option.value} >
@@ -27,7 +29,7 @@ export default function NewTask(props) {
 
     const ColorTag = (props) => <span style={{ backgroundColor: props.option?.color, display: 'block', borderRadius: '4px', width: '16px', height: '16px', marginRight: '10px' }} ></span>;
 
-    return <PopupModel title='Create Task' open={open} width={"50%"}>
+    return <PopupModel title='Create Task' open={open} width={"50%"} onClose={()=>setOpen(false)} >
         <Form onSubmit={handleSubmit} >
             <div style={{display:'flex',flexDirection:'column',gap:'10px'}}>
                 <div>
