@@ -10,11 +10,11 @@ import { FaFlag } from "react-icons/fa";
 import { List,LayoutPanelLeft,UserRound,AlignJustify,Flag,ArrowDownWideNarrow,ChartNoAxesCombined,CircleChevronDown,Trash } from "lucide-react";
 
 export default function BoardColumns(props) {
-    const { api, $store, urlparams, setComponent, $emit } = useMixin();
+    const { api, $store, query, setComponent, $emit } = useMixin();
     const { statusOptions } = $store;
 
-    const board_id = urlparams().id;
-    const project_id = urlparams().project_id;
+    const board_id = query.get("id");
+    const project_id = query.get("project_id");
 
     const [columns, setColumns] = useState([]);
     const [tasks, setTasks] = useState([]);
@@ -39,9 +39,14 @@ export default function BoardColumns(props) {
     setComponent("BoardColumns", { columnsColors, columns, tasks });
 
     const getColumnList = ()=>{
-        api.get("/columns").then((response) => {
-            setColumns(response.filter((col) => col.board_id === board_id));
-        });
+        if(project_id) {
+            api.get(`/boards/${project_id}`).then((boardList) => {
+                const selectedBoard = boardList.find(v=>v.id==board_id);
+                selectedBoard && setColumns(selectedBoard.Columns);
+            });
+        } else {
+            // alert("Project");
+        }
     };
 
     useEffect(() => {

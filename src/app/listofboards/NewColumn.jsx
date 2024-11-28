@@ -7,10 +7,11 @@ import { useMixin } from "@/providers/mixin.provider";
 import { Button } from '@/components/ui/button';
 
 export default function NewColumn(props) {
-    const { $store, api, setComponent, urlparams, $emit } = useMixin();
+    const { $store, api, setComponent, query, $emit } = useMixin();
     const [open,setOpen] = useState(false);
     const { } = $store;
-    const board_id = urlparams().id;
+    const board_id = query.get("id");
+    const project_id = query.get("project_id");
     setComponent("NewColumn",{props});
     const handleSubmit = (data)=>{
         api.post("/columns",{

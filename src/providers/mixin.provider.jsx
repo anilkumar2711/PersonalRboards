@@ -3,6 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setStore } from '@/redux/store';
 import { api,apiContext } from '@/libs/axios';
+import { useRouter,useSearchParams } from 'next/navigation';
 import serviceProvider from './service.provider';
 import sidemenuProvider from './sidemenu.provider';
 import Emitter from './emit.provider';
@@ -11,6 +12,8 @@ const MixinContext = createContext();
 const $emiter = new Emitter();
 
 export function MixinProvider({ children }) {
+    const router = useRouter();
+    const searchParams = useSearchParams();
     const methods = serviceProvider.methods;
     const $store = useSelector((state) => state.root);
     const dispatch = useDispatch();
@@ -25,14 +28,16 @@ export function MixinProvider({ children }) {
     };
     apiContext.service = serviceProvider;
     serviceProvider.methods = Object.assign({api,$store,setStore},methods);
+    console.log({router});
     const readables = {
         sidemnu:sidemenuProvider,
         api,
-        urlparams:()=>[...new URL(globalThis?.location?.href).searchParams].reduce((c,[key,value])=>({...c,[key]:value}),{}),
         service:serviceProvider,
         $store,
         setStore:setStoreMethod,
-        $emit: $emiter
+        $emit: $emiter,
+        router,
+        query:searchParams
     };
     const setComponent = (name,node={})=>{
         globalThis[name] = {

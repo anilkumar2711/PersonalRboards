@@ -53,7 +53,6 @@ function BoardsPage() {
   }, []);
   
   const handleCardClick = (project) => {
-   //  /boards/{project_id}?name=DEFAULT BOARD
     api.get("/boards").then((boardsList)=>{
       let selectedBoard = boardsList.find(row=>row.project_id==project.id);
       if(selectedBoard) {

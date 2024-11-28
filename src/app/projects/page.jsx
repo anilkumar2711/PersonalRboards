@@ -46,8 +46,8 @@ function ProjectPage(props) {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState({});
   const [state, setState] = useState({
-    projects:{
-      data:[],
+    projects: {
+      data: [],
       current_page: 1,
       total_page: 1,
       total_records: 1
@@ -62,11 +62,11 @@ function ProjectPage(props) {
     setIsPanelOpen(true);
   }
   useEffect(() => {
-    api.get("/projects",{
+    api.get("/projects", {
       limit: 10,
       page: 1
     }).then((projects) => {
-      setState((v)=>({...v,projects}));
+      setState((v) => ({ ...v, projects }));
     });
   }, []);
 
@@ -76,87 +76,91 @@ function ProjectPage(props) {
     "name": {
       headerIcon: "",
       label: "Project Name",
-      render : ({ value,row }) => (
+      render: ({ value, row }) => (
         <Box sx={{
-            fontWeight:'700',
-            paddingLeft:'10px',
-            display:'flex'
+          fontWeight: '700',
+          paddingLeft: '10px',
+          display: 'flex'
         }}>
-            <span style={{flexGrow:1}}>{value}</span>
-            <span onClick={()=>handleProjectSelect(row)} style={{cursor:'pointer',marginRight:'10px'}}>
-              <Input value={value} type="switch" readonly={true} trueLabel={"OPEN"} falseLabel={"CLOSE"} />
-            </span>
+          <span style={{ flexGrow: 1 }}>
+            <Link href={`/listofboards?project_id=${row.id}`} >
+              {value}
+            </Link>
+          </span>
+          <span onClick={() => handleProjectSelect(row)} style={{ cursor: 'pointer', marginRight: '10px' }}>
+            <Input value={value} type="switch" readonly={true} trueLabel={"OPEN"} falseLabel={"CLOSE"} />
+          </span>
         </Box>
-      
+
       )
     },
     "status": {
-      headerIcon: <icons.ProjectStatus/>,
+      headerIcon: <icons.ProjectStatus />,
       label: "Status",
       render: ({ value }) => (
         <Box
-            variant="secondary"
-            sx={{
-                backgroundColor:  $store.statusOptions?.find(o => o.value == value)?.color,
-                padding: '4px 15px',
-                borderRadius: '15px',
-                alignItems: 'center',
-                display: 'flex',
-                gap: '5px',
-                maxWidth: 'fit-content'
-            }}
+          variant="secondary"
+          sx={{
+            backgroundColor: $store.statusOptions?.find(o => o.value == value)?.color,
+            padding: '4px 15px',
+            borderRadius: '15px',
+            alignItems: 'center',
+            display: 'flex',
+            gap: '5px',
+            maxWidth: 'fit-content'
+          }}
         >
-            {/* <span style={{ width: '15px', height: '15px', borderRadius: '15px', backgroundColor: '#8c8c8c', display: 'inline-block' }}></span> */}
-            <Box sx={{paddingLeft: '10px'}}>{value}</Box>
+          {/* <span style={{ width: '15px', height: '15px', borderRadius: '15px', backgroundColor: '#8c8c8c', display: 'inline-block' }}></span> */}
+          <Box sx={{ paddingLeft: '10px' }}>{value}</Box>
         </Box>
-    )
+      )
     },
     "owner": {
-      headerIcon: <icons.ProjectOwner/>,
+      headerIcon: <icons.ProjectOwner />,
       label: "Owner",
-      render: ({value}) =>{
+      render: ({ value }) => {
         if (value) {
           return (
-              <div>
-                {value.full_name || ""}
-              </div>
-            )
+            <div>
+              {value.full_name || ""}
+            </div>
+          )
+        }
       }
-    }
-  },
+    },
     "startDate": {
-      headerIcon: <icons.ProjectCalendar/>,
+      headerIcon: <icons.ProjectCalendar />,
       label: "Dates",
-      render: ({value,row})=>(<div className='vmiddle' style={{gap:'5px'}} >
+      render: ({ value, row }) => (<div className='vmiddle' style={{ gap: '5px' }} >
         <span>{service.date(value).toHumanString()}</span>
         <span>To</span>
         <span>{service.date(row.endDate).toHumanString()}</span>
       </div>)
     },
     "priority": {
-      headerIcon: <icons.ProjectPriority/>,
+      headerIcon: <icons.ProjectPriority />,
       label: "Priority",
       render: ({ value }) => (
         <Box
-            variant="secondary"
-            sx={{
-                backgroundColor: $store.taskPriorityOptions?.find(o => o.value == value)?.color,
-                padding: '4px 15px',
-                borderRadius: '5px',
-                alignItems: 'center',
-                display: 'flex',
-                justifyContent:'center',
-                gap: '5px'
-            }}
+          variant="secondary"
+          sx={{
+            backgroundColor: $store.taskPriorityOptions?.find(o => o.value == value)?.color,
+            padding: '4px 15px',
+            borderRadius: '5px',
+            alignItems: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '5px'
+          }}
         >
-            <span>{value}</span>
+          <span>{value}</span>
         </Box>
-    )
+      )
     },
-    "completion":{
-      headerIcon: <icons.CompletionPie/>,
+    "completion": {
+      headerIcon: <icons.CompletionPie />,
       label: "Completion",
-      render: ({value})=>(<Input name="completion" type="progress" disabled={true} value={value} />)
+      render: ({ value }) => (<Input name="completion" type="progress" disabled={true} value={value} />)
     }
   };
 
@@ -166,7 +170,7 @@ function ProjectPage(props) {
         backgroundColor: 'white',
         borderRadius: 2,
         boxShadow: 3,
-        margin:2
+        margin: 2
       }}
     >
 
@@ -176,24 +180,24 @@ function ProjectPage(props) {
         project={selectedProject}
       />
       <Box sx={{ padding: 1, paddingTop: '50px' }} >
-        <Box sx={{display:'flex',flexDirection:'row',paddingLeft:'5px' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'row', paddingLeft: '5px' }}>
           <icons.RocketLaun
             sx={{ height: 25, width: 25, fontSize: "20px", fontWeight: "700" }}
           /><Typography
-          variant="h6"
-          sx={{
-            fontWeight: 'bold',
-            display: 'flex',
-            alignItems: 'center',
-            ml:2
-          }}
-        >
-          
-          Projects
-        </Typography>
+            variant="h6"
+            sx={{
+              fontWeight: 'bold',
+              display: 'flex',
+              alignItems: 'center',
+              ml: 2
+            }}
+          >
+
+            Projects
+          </Typography>
         </Box>
       </Box>
-      <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '5px 10px', ml:1 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '5px 10px', ml: 1 }}>
         <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
           <Box
             component="img"

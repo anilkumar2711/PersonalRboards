@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Typography, Card, CardContent, Avatar, Grid, Button, Tabs, Tab, Divider, IconButton } from '@mui/material';
 import { AccessTime, People, Add, Search } from '@mui/icons-material';
 import { List,LayoutPanelLeft,UserRound,AlignJustify,Flag,ArrowDownWideNarrow,ChartNoAxesCombined,CircleChevronDown } from "lucide-react";
@@ -14,6 +14,7 @@ import NewTask from './NewTask';
 import BoardColumns from './BoardColumns';
 import NewColumn from './NewColumn';
 import { useMixin } from '@/providers/mixin.provider';
+import { useRouter } from 'next/navigation';
 const sponsoredProjects = [
   { title: 'Task', description:'Collection of soil Samples from forest', dueDate: 'Tomorrow', priority: 'Urgent' },
   { title: 'Experiment', description:'Collection of soil Samples from forest', dueDate: 'Aug 9', priority: 'Normal' },
@@ -34,8 +35,24 @@ const assignees = [
 ];
 
 function ListOfBoards() {
-  const { $emit,setComponent } = useMixin();
+  const { $emit,setComponent, query,api } = useMixin();
+  const board_id = query.get("id");
+  const project_id = query.get("project_id");
   const node = setComponent("ListOfBoards");
+  const router = useRouter();
+  
+  useEffect(()=>{
+    if(!board_id&&project_id) {
+      api.get(`/boards/${project_id}`).then((boardsList)=>{
+        let selectedBoard = boardsList.find(row=>true);
+        if(selectedBoard) {
+          router.push(`/listofboards?id=${selectedBoard.id}&project_id=${project_id}`);
+        } else {
+          alert("There is no board this current project");
+        }
+      });
+    }
+  },[board_id,project_id]);
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', p: 0.5, backgroundColor: 'white', minHeight: '100vh' }}>
       
