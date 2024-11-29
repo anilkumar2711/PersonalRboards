@@ -10,7 +10,7 @@ import { FaFlag } from "react-icons/fa";
 import { List,LayoutPanelLeft,UserRound,AlignJustify,Flag,ArrowDownWideNarrow,ChartNoAxesCombined,CircleChevronDown,Trash } from "lucide-react";
 
 export default function BoardColumns(props) {
-    const { api, $store, query, setComponent, $emit } = useMixin();
+    const { api, $store, query, setComponent, $emit, setStore } = useMixin();
     const { statusOptions } = $store;
 
     const board_id = query.get("id");
@@ -62,7 +62,15 @@ export default function BoardColumns(props) {
             getColumnList();
         });
 
-    }, [api, board_id, project_id]);
+    }, [board_id, project_id]);
+
+
+    useEffect(()=>{
+        setStore("current_columns",columns.map(v=>({
+            ...v,
+            color: columnsColors[v.name] || "#D9D9D940"
+        })));
+    },[columns]);
 
     // Handle drag start
     const handleDragStart = (task) => {

@@ -27,7 +27,7 @@ export function MixinProvider({ children }) {
         dispatchPayload && dispatch(dispatchPayload);
     };
     apiContext.service = serviceProvider;
-    serviceProvider.methods = Object.assign({api,$store,setStore},methods);
+    serviceProvider.methods = Object.assign({api,$store,setStore:setStoreMethod},methods);
     console.log({router});
     const readables = {
         sidemnu:sidemenuProvider,

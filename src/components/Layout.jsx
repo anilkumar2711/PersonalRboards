@@ -1,11 +1,18 @@
 "use client"
-import React from 'react';
+import React, { useEffect } from 'react';
 import Sidebar from './ui/Sidebar';
 import Header from './ui/Header';
 import { Box } from '@mui/material';
 import Alert from './ui/Alert';
+import { useMixin } from '@/providers/mixin.provider';
 
 function Layout({ children }) {
+  const { service } = useMixin();
+  
+  useEffect(()=>{
+    service.methods.getLoggedUser();
+  },[]);
+
   return (
     <>
       <Header />

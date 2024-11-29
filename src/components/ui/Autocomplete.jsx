@@ -75,9 +75,6 @@ const Autocomplete = React.forwardRef(({
     }
   }, [propValue]);
 
-
-  console.log({localLabelValue,localInputValue});
-
   useEffect(() => {
     if (propInputValue !== undefined) {
       setLocalInputValue(propInputValue);
@@ -88,7 +85,7 @@ const Autocomplete = React.forwardRef(({
     let selectedValue = typeof newValue === "string" ? newValue : newValue.value;
     setLocalValue(selectedValue);
     setSelectedOption(newValue);
-    // console.log({newValue,args});
+    console.log({newValue,args});
     propOnChange && propOnChange(event, selectedValue, newValue);
   };
 
@@ -134,17 +131,21 @@ const Autocomplete = React.forwardRef(({
   }
 
   return (
-    <StyledAutocomplete
-      options={options}
-      renderInput={wrapperRederInput || defaultRenderInput}
-      renderOption={renderOption || defaultRenderOption}
-      value={localLabelValue}
-      onChange={handleChange}
-      inputValue={localInputValue}
-      onInputChange={handleInputChange}
-      ref={ref}
-      {...props}
-    />
+    <>
+      <StyledAutocomplete
+        options={options}
+        renderInput={wrapperRederInput || defaultRenderInput}
+        renderOption={renderOption || defaultRenderOption}
+        value={localLabelValue}
+        onChange={handleChange}
+        inputValue={localInputValue}
+        onInputChange={handleInputChange}
+        ref={ref}
+        {...props}
+        name=""
+      />
+      <input type='hidden' name={props.name} value={selectedOption.value} ></input>
+    </>
   );
 });
 

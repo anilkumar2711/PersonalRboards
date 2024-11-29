@@ -29,8 +29,9 @@ export default {
     getLoggedUser(force=false) {
         return new Promise((resolve,reject)=>{
             if(!this.$store.loggedUser||force) {
-                this.api.main.get("/profile").then((response)=>{
-                    this.setStore("loggedUser",response.model);
+                this.api.main.get("/admin/users/profile").then((response)=>{
+                    console.log("$store",this,response);
+                    this.setStore("loggedUser",response);
                     resolve(response);
                 }).catch(reject);
             }
