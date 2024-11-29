@@ -35,7 +35,7 @@ const StyledInputField = styled('div',{
     
 }));
 
-const InputWrapper = React.forwardRef(({ ...props }, ref) => {
+const InputWrapper = React.forwardRef((props, ref) => {
     return (
         <StyledInputField style={{width:'100%'}} className='InputWrapper' {...props} >
             <div style={{display:'inline-block'}} className='InputWrapperBlock' >

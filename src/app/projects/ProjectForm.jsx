@@ -6,12 +6,14 @@ import { Form } from "@/components/ui/Form";
 import { Box } from '@mui/material';
 import { User, Flag, CalendarDays, Clock, CircleFadingArrowUp, Tag, Text } from "lucide-react"
 import { useMixin } from "@/providers/mixin.provider";
+import { useEffect, useRef } from "react";
 
 export default function ProjectForm(props) {
-    const { project,submitLabel="SAVE" } = props;
+    const form = props.ref||useRef(0);
+    const { project, submitLabel = "SAVE" } = props;
     const { service, $store } = useMixin();
     const { icons } = service;
-    const { statusOptions, priorityOptions, labelOptions, projectTypeOptions  } = $store;
+    const { statusOptions, priorityOptions, labelOptions, projectTypeOptions } = $store;
 
     const ColorTag = (props) => <span style={{ backgroundColor: props.option?.color, display: 'block', borderRadius: '4px', width: '16px', height: '16px', marginRight: '10px' }} ></span>;
 
@@ -32,12 +34,17 @@ export default function ProjectForm(props) {
     );
 
     const handleSubmit = (data, event) => {
-        props.onSubmit && props.onSubmit(data,event);
+        props.onSubmit && props.onSubmit(data, event);
     };
+
+    useEffect(()=>{
+        console.log({project});
+    },[project]);
+
     return (
         <Box sx={{}}>
-            <Form onSubmit={handleSubmit}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', fontWeight: '600' }}>
+            <Form ref={form} onSubmit={handleSubmit}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', fontWeight: '600' }}>
                     <User sx={{ width: 16, height: 16, color: 'text.secondary' }} />
                     <span style={{ fontSize: '14px', fontWeight: '600', width: 96 }}>Type</span>
                     <Input name="type" type="search" options={projectTypeOptions} value={project.type} />
@@ -88,8 +95,8 @@ export default function ProjectForm(props) {
 
                 <Box sx={{ '& > * + *': { marginTop: 8 } }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', fontWeight: '600' }}>
-                        <span style={{ alignSelf:'start' }}><Text /></span>
-                        <span style={{ fontSize: '14px', fontWeight: '600', width: 96, alignSelf:'start' }} >Summary</span>
+                        <span style={{ alignSelf: 'start' }}><Text /></span>
+                        <span style={{ fontSize: '14px', fontWeight: '600', width: 96, alignSelf: 'start' }} >Summary</span>
                         <Input name="description" type="textarea" value={project.description} />
                     </Box>
                 </Box>

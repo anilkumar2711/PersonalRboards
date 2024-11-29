@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { Input } from "@/components/ui/InputWrapper";
 import { api } from '@/libs/axios';
@@ -7,11 +7,13 @@ import ProjectForm from '../projects/ProjectForm';
 import { useMixin } from '@/providers/mixin.provider';
 
 const NewProjectForm = (props) => {
+    const form = useRef(0);
     const { $store, service } = useMixin();
-    const [project, setProject] = useState({
+    const defaultProject = {
         name: "New Project",
         completion: 0,
-    });
+    };
+    const [project, setProject] = useState(defaultProject);
 
     const [coverImage, setCoverImage] = useState("addcover.png");
 
@@ -38,16 +40,18 @@ const NewProjectForm = (props) => {
             headers: {
                 'Content-Type': 'multipart/form-data',
             }
-        })
-        .then((projectResponse) => {
+        }).then((projectResponse) => {
             api.post("/boards", {
                 "projectId": projectResponse.id,
                 "name": "DEFAULT BOARD"
             }).then(()=>{
                 alert("Project Created");
+                form.current.reset();
             })
         })
         .catch((err) => {
+            alert("Please fill valid fields to create project");
+            form.current.reset();
             console.error(err);
         });
     };
@@ -104,7 +108,7 @@ const NewProjectForm = (props) => {
                                 ></Input>
                             </Box>
                         </Box>
-                        <ProjectForm onSubmit={handleSubmit} project={project} submitLabel={"CREATE"}></ProjectForm>
+                        <ProjectForm ref={form} onSubmit={handleSubmit} project={project} submitLabel={"CREATE"}></ProjectForm>
                     </Box>
                 </Box>
             </Box>

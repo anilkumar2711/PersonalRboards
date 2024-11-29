@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/system';
 
 const StyledForm = styled('form')(({ theme }) => ({
@@ -8,6 +8,7 @@ const StyledForm = styled('form')(({ theme }) => ({
 }));
 
 export const Form = React.forwardRef(({ children, onSubmit, ...props }, ref) => {
+  const [display,setDisplay] = useState(true);
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -18,9 +19,15 @@ export const Form = React.forwardRef(({ children, onSubmit, ...props }, ref) => 
     }
   };
 
+  const handleReset = (event) => {
+    setDisplay(false);
+    setTimeout(()=>{setDisplay(true);},0);
+    console.log({event});
+  };
+
   return (
-    <StyledForm ref={ref} onSubmit={handleSubmit} {...props}>
-      {children}
+    <StyledForm ref={ref} onSubmit={handleSubmit} onReset={handleReset} {...props}>
+      {display && children}
     </StyledForm>
   );
 });
