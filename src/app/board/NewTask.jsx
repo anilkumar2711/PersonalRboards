@@ -15,10 +15,11 @@ export default function NewTask(props) {
     });
     const project_id = query.get("project_id");
     const taskStatusOptions = currentColumns.map(v=>({value:v.id, label:service.string(v.name).toTitleCase(), color: v.color}))
-    setComponent("NewTask",{props});
+    setComponent("NewTask",{props,state});
     const handleSubmit = (data)=>{
         api.post("/tasks",data).then((response)=>{
-            console.log({response});
+            setOpen(false);
+            $emit.trigger("getTasklist");
         })
     };
     useEffect(()=>{
@@ -28,6 +29,7 @@ export default function NewTask(props) {
     },[]);
 
     const handelStatusChange = (event, value, option)=> {
+        console.log("changes",option);
         setState((v)=>({...v,current_status: option.label.toUpperCase()}));
     }
 

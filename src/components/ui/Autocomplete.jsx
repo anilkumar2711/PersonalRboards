@@ -86,12 +86,12 @@ const Autocomplete = React.forwardRef(({
     setLocalValue(selectedValue);
     setSelectedOption(newValue);
     console.log({newValue,args});
-    // propOnChange && propOnChange(event, selectedValue, newValue);
+    propOnChange && propOnChange(event, selectedValue, newValue);
   };
 
   const handleInputChange = (event, newInputValue) => {
     setLocalInputValue(newInputValue);
-    // propOnInputChange && propOnInputChange(event, newInputValue);
+    propOnInputChange && propOnInputChange(event, newInputValue);
   };
 
   const defaultRenderOption = (props, option) => (

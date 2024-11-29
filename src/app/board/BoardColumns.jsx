@@ -49,18 +49,27 @@ export default function BoardColumns(props) {
         }
     };
 
+    const getTasklist = ()=> {
+        api.get("/tasks").then((response) => {
+            setTasks(response.filter((task) => task.project_id === project_id));
+        });
+    }
+
     useEffect(() => {
         // Fetch columns and tasks for the current board and project
         
         getColumnList();
-
-        api.get("/tasks").then((response) => {
-            setTasks(response.filter((task) => task.project_id === project_id));
-        });
+        getTasklist();
+        
 
         $emit.onTrigger("getColumnlist",()=>{
             getColumnList();
         });
+        $emit.onTrigger("getTasklist",()=>{
+            getTasklist();
+        });
+
+        
 
     }, [board_id, project_id]);
 
