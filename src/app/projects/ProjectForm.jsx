@@ -1,15 +1,15 @@
 
 "use client"
+import React, { useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/InputWrapper"
 import { Form } from "@/components/ui/Form";
 import { Box } from '@mui/material';
 import { User, Flag, CalendarDays, Clock, CircleFadingArrowUp, Tag, Text } from "lucide-react"
 import { useMixin } from "@/providers/mixin.provider";
-import { useEffect, useRef } from "react";
 
-export default function ProjectForm(props) {
-    const form = props.ref||useRef(0);
+export function ProjectForm(props,ref) {
+    const form = ref||useRef(0);
     const { project, submitLabel = "SAVE" } = props;
     const { service, $store } = useMixin();
     const { icons } = service;
@@ -108,3 +108,5 @@ export default function ProjectForm(props) {
         </Box>
     )
 }
+
+export default React.forwardRef(ProjectForm);
