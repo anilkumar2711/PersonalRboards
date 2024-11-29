@@ -20,7 +20,10 @@ export default function NewTask(props) {
         api.post("/tasks",data).then((response)=>{
             setOpen(false);
             $emit.trigger("getTasklist");
-        })
+        }).catch((err)=>{
+            alert("Please fill valid fields to create task");
+            $emit.trigger("getTasklist");
+        });
     };
     useEffect(()=>{
         $emit.onTrigger("openTaskCreate",()=>{
