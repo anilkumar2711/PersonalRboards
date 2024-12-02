@@ -14,6 +14,22 @@ import ProjectStatus from "@public/svgs/ProjectStatus.svg";
 import ProjectOwner from "@public/svgs/ProjectOwner.svg";
 import ProjectCalendar from "@public/svgs/ProjectCalendar.svg";
 import ProjectPriority from "@public/svgs/ProjectPriority.svg";
+import ProjectType from "@public/svgs/ProjectType.svg";
+import ProjectPerson from "@public/svgs/ProjectPerson.svg";
+import ProjectNewStatus from "@public/svgs/ProjectNewStatus.svg";
+import ProjectNewCompletion from "@public/svgs/ProjectNewCompletion.svg";
+import ProjectNewDates from "@public/svgs/ProjectNewDates.svg";
+import ProjectNewFlag from "@public/svgs/ProjectNewFlag.svg";
+import ProjectNewLabel from "@public/svgs/ProjectNewLabel.svg";
+import ProjectNewDescription from "@public/svgs/ProjectNewDescription.svg";
+import TaskList from "@public/svgs/TaskList.svg";
+import BoardList from "@public/svgs/BoardList.svg";
+import BarChart from "@public/svgs/BarChart.svg";
+import AssigneeIcon from "@public/svgs/AssigneeIcon.svg";
+import TaskFlag from "@public/svgs/TaskFlag.svg";
+import TaskSort from "@public/svgs/TaskSort.svg";
+import TaskDropdown from "@public/svgs/TaskDropdown.svg";
+
 export default {
     AddFile,
     CompletionPie,
@@ -30,5 +46,19 @@ export default {
     ProjectStatus,
     ProjectOwner,
     ProjectCalendar,
-    ProjectPriority
+    ProjectPriority,
+    ProjectType,
+    ProjectPerson,
+    ProjectNewStatus,
+    ProjectNewCompletion,
+    ProjectNewDates,
+    ProjectNewFlag,ProjectNewLabel,
+    ProjectNewDescription,
+    TaskList,
+    BoardList,
+    BarChart,
+    AssigneeIcon,
+    TaskFlag,
+    TaskSort,
+    TaskDropdown
 }

@@ -9,6 +9,7 @@ import { useMixin } from '@/providers/mixin.provider';
 const NewProjectForm = (props) => {
     const form = useRef(0);
     const { $store, service } = useMixin();
+    const { icons } = service;
     const defaultProject = {
         name: "New Project",
         completion: 0,

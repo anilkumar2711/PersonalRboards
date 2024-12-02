@@ -10,9 +10,9 @@ import { FaFlag } from "react-icons/fa";
 import { List,LayoutPanelLeft,UserRound,AlignJustify,Flag,ArrowDownWideNarrow,ChartNoAxesCombined,CircleChevronDown,Trash } from "lucide-react";
 
 export default function BoardColumns(props) {
-    const { api, $store, query, setComponent, $emit, setStore } = useMixin();
+    const { api, $store, query, setComponent, $emit, setStore,service } = useMixin();
     const { statusOptions } = $store;
-
+    const { icons } = service;
     const board_id = query.get("id");
     const project_id = query.get("project_id");
 
@@ -116,15 +116,15 @@ export default function BoardColumns(props) {
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2,px:1 }}>
                 <Box sx={{ display: 'flex', gap: 1 }}>
                     <Box  sx={{display:'flex', flexDirection:'row', alignItems:'center',border: '1px solid #ddd',borderRadius: '20px',paddingRight:'4px',paddingLeft:'4px'}}>
-                        <UserRound/>
+                        <icons.AssigneeIcon/>
                         <button className="rounded-ibutton">Assignee</button>
                     </Box>
                     <Box  sx={{display:'flex', flexDirection:'row', alignItems:'center',border: '1px solid #ddd',borderRadius: '20px',paddingRight:'4px',paddingLeft:'4px'}}>
-                        <Flag/>
+                        <icons.TaskFlag/>
                         <button  className="rounded-ibutton" >Priority</button>
                     </Box>
                     <Box  sx={{display:'flex', flexDirection:'row', alignItems:'center',border: '1px solid #ddd',borderRadius: '20px',paddingRight:'4px',paddingLeft:'4px'}}>
-                        <ArrowDownWideNarrow/>
+                        <icons.TaskSort/>
                         <button className="rounded-ibutton" >Sort</button>
                     </Box>
                 </Box>

@@ -2,9 +2,10 @@
 "use client"
 import { Input } from '@/components/ui/Input';
 import { useMixin } from '@/providers/mixin.provider';
-import { Box, Typography, Card, CardContent, Grid } from '@mui/material';
+import { Box, Typography, Card, CardContent, Grid, } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const phdProjects = [
     { title: 'Isolation and Identification of bacterial strains in the forest soils of Bhadrachalam', owner: 'Jéssica Texiera', duration: '3 Years 2 months' },
@@ -13,7 +14,7 @@ const phdProjects = [
 ];
 
 export function BoardsPage(props) {
-    const { $store, setStore,router, setComponent, api, service } = useMixin();
+    const { $store,$emit, setStore,router, setComponent, api, service } = useMixin();
     const [ state,setState] = useState({
         selectedProject: null,
         projects:[],
@@ -69,7 +70,8 @@ export function BoardsPage(props) {
     },[]);
 
     return (<Box sx={{ margin: 2 }}>
-        <Box>
+        <Box sx={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
+          <Box>
             <div style={{ position:'relative', width: '300px'}}>
                 <Input 
                     onSearch={()=>handleProjectSearch()} 
@@ -82,6 +84,17 @@ export function BoardsPage(props) {
                 </Input>
                 {/* <Search style={{ position:'absolute', top:0, left:0, transform:'translate(50%, 25%)' }}/> */}
             </div>
+            </Box>
+             
+            <Box sx={{marginRight:'10px'}}>
+            <Button onClick={()=>$emit.trigger("openBoardCreate")} 
+                sx={{
+                    fontSize: "12px",
+                    fontWeight: "700",
+                    color: "white",
+                  }}
+            >New</Button>
+            </Box>
         </Box>
         <Box sx={{ mb: 4, pt: 4 }}>
             <Typography fontWeight="600" fontSize='14px' color='#B3ABAB'>Ph.D Projects</Typography>

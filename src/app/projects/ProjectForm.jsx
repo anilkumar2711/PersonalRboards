@@ -45,38 +45,38 @@ export function ProjectForm(props,ref) {
         <Box sx={{}}>
             <Form ref={form} onSubmit={handleSubmit}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', fontWeight: '600' }}>
-                    <User sx={{ width: 16, height: 16, color: 'text.secondary' }} />
-                    <span style={{ fontSize: '14px', fontWeight: '600', width: 96 }}>Type</span>
+                    <icons.ProjectType sx={{ width: 16, height: 16, color: 'text.secondary' }} />
+                    <span style={{ fontSize: '12px', fontWeight: '600', width: 96 }}>Type</span>
                     <Input name="type" type="search" options={projectTypeOptions} value={project.type} />
                 </Box>
 
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', fontWeight: '600' }}>
-                    <User sx={{ width: 16, height: 16, color: 'text.secondary' }} />
-                    <span style={{ fontSize: '14px', fontWeight: '600', width: 96 }}>Owner</span>
+                    <icons.ProjectPerson sx={{ width: 16, height: 16, color: 'text.secondary' }} />
+                    <span style={{ fontSize: '12px', fontWeight: '600', width: 96 }}>Owner</span>
                     <Input name="owner" value={project.owner?.full_name} />
                 </Box>
 
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', fontWeight: '600' }}>
-                    <Clock />
-                    <span style={{ fontSize: '14px', fontWeight: '600', width: 96 }}>Status</span>
+                    <icons.ProjectNewStatus />
+                    <span style={{ fontSize: '12px', fontWeight: '600', width: 96 }}>Status</span>
                     <Input name="status" type="search" options={statusOptions} renderOption={renderColorOption} value={project.status} icon={ColorTag} />
                 </Box>
 
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', fontWeight: '600' }}>
-                    <CircleFadingArrowUp />
-                    <span style={{ fontSize: '14px', fontWeight: '600', width: 96 }}>Completion</span>
+                    <icons.ProjectNewCompletion />
+                    <span style={{ fontSize: '12px', fontWeight: '600', width: 96 }}>Completion</span>
                     <Input name="completion" type="progress" value={project.completion} />
                 </Box>
 
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', fontWeight: '600' }}>
-                    <CalendarDays />
-                    <span style={{ fontSize: '14px', fontWeight: '600', width: 96 }}>Dates</span>
+                    <icons.ProjectNewDates />
+                    <span style={{ fontSize: '12px', fontWeight: '600', width: 96 }}>Dates</span>
                     <Input name="dates" type="datestartend" value={project.dates} />
                 </Box>
 
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', fontWeight: '600' }}>
-                    <Flag />
-                    <span style={{ fontSize: '14px', fontWeight: '600', width: 96 }}>Priority</span>
+                    <icons.ProjectNewFlag/>
+                    <span style={{ fontSize: '12px', fontWeight: '600', width: 96 }}>Priority</span>
                     <Input
                         name="priority"
                         type="search"
@@ -88,21 +88,21 @@ export function ProjectForm(props,ref) {
                 </Box>
 
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', fontWeight: '600' }}>
-                    <Tag />
-                    <span style={{ fontSize: '14px', fontWeight: '600', width: 96 }}>Label</span>
+                    <icons.ProjectNewLabel/>
+                    <span style={{ fontSize: '12px', fontWeight: '600', width: 96 }}>Label</span>
                     <Input name="label" value={project.label} type="tags" options={labelOptions} renderOption={renderIconOption} icon={Tag} />
                 </Box>
 
                 <Box sx={{ '& > * + *': { marginTop: 8 } }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: '12px', fontWeight: '600' }}>
-                        <span style={{ alignSelf: 'start' }}><Text /></span>
-                        <span style={{ fontSize: '14px', fontWeight: '600', width: 96, alignSelf: 'start' }} >Summary</span>
+                        <span style={{ alignSelf: 'start' }}><icons.ProjectNewDescription/></span>
+                        <span style={{ fontSize: '12px', fontWeight: '600', width: 96, alignSelf: 'start' }} >Summary</span>
                         <Input name="description" type="textarea" value={project.description} />
                     </Box>
                 </Box>
                 <input type="hidden" name="name" value={project.name} ></input>
                 <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2, justifyContent: 'flex-end' }} >
-                    <Button type="submit" sx={{ paddingX: 2, color: '#FFF' }} >{submitLabel}</Button>
+                    <Button type="submit" sx={{ paddingX: 2, fontSize: '12px',color: '#FFF' }} >{submitLabel}</Button>
                 </Box>
             </Form>
         </Box>

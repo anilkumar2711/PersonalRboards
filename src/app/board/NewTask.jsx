@@ -14,7 +14,7 @@ export default function NewTask(props) {
         current_status:""
     });
     const project_id = query.get("project_id");
-    const taskStatusOptions = currentColumns.map(v=>({value:v.id, label:service.string(v.name).toTitleCase(), color: v.color}))
+    const taskStatusOptions = currentColumns?.map(v=>({value:v.id, label:service.string(v.name).toTitleCase(), color: v.color}))
     setComponent("NewTask",{props,state});
     const handleSubmit = (data)=>{
         api.post("/tasks",data).then((response)=>{

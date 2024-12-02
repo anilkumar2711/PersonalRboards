@@ -35,8 +35,9 @@ const assignees = [
 ];
 
 function Board() {
-  const { $emit,setComponent, query,api } = useMixin();
+  const { $emit,setComponent, query,api,service } = useMixin();
   const board_id = query.get("id");
+  const { icons } = service;
   const project_id = query.get("project_id");
   const node = setComponent("Board");
   const router = useRouter();
@@ -62,17 +63,17 @@ function Board() {
         <Box sx={{ display: 'flex',flexDirection:'row', gap: 2 }}>
          <Box>
           <Box sx={{display:'flex', flexDirection:'row', alignItems:'center',color:'#B3ABAB'}}>
-           <List/>
-           <Button variant="text" sx={{ fontSize:'16px',fontWeight:'600',color: '#B3ABAB' }}>List</Button>
+           <icons.TaskList/> 
+           <Button variant="text" sx={{ fontSize:'16px',fontWeight:'600',color: '#B3ABAB',fontFamily:'Roboto' }}>List</Button>
           </Box>
          </Box>
          <Box sx={{display:'flex', flexDirection:'row', alignItems:'center',color:'#B3ABAB'}}>       
-           <LayoutPanelLeft/>
+         <icons.BoardList/> 
            <Button variant="text" sx={{fontSize:'16px',fontWeight:'600', color: '#B3ABAB' }}>Board</Button>
           </Box>
         
-         <Box sx={{display:'flex', flexDirection:'row', alignItems:'center',color:'#B3ABAB'}}>
-           <ChartNoAxesCombined/>
+         <Box sx={{display:'flex', flexDirection:'row',justifyContent:'center', alignItems:'center',color:'#B3ABAB'}}>
+           <icons.BarChart/>
            <Button variant="text" sx={{fontSize:'16px',fontWeight:'600', color:'#B3ABAB'}}>Dashboard</Button>
           </Box>
          
@@ -86,10 +87,10 @@ function Board() {
             <Search />
             <input type="text" placeholder="Search tasks..." style={{ border: 'none', outline: 'none' }} />
           </Box>
-          <Button onClick={()=>$emit.trigger("openTaskCreate")}  color="#FFFFFF" startIcon={<Add />} sx={{fontSize:'12px',fontWeight:'700', backgroundColor: '#6EA6FF', color: '#FFFFFF' }}>
+          <Button onClick={()=>$emit.trigger("openTaskCreate")}  color="#FFFFFF"sx={{fontSize:'12px',fontWeight:'700', backgroundColor: '#6EA6FF', color: '#FFFFFF' }}>
             Add Task
           </Button>
-          <Box sx={{ display:'flex',color:'#D9D9D9',alignItems:'center'}}><CircleChevronDown /></Box>
+          <Box sx={{ display:'flex',color:'#D9D9D9',alignItems:'center'}}><icons.TaskDropdown/></Box>
         </Box>
       </Box>
 

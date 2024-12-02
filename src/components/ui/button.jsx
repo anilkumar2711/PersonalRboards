@@ -13,8 +13,12 @@ const StyledButton = styled(MuiButton)(({ theme, size, variant }) => {
     fontWeight: theme.typography?.fontWeightMedium ?? 500,
     fontSize: theme.typography?.pxToRem?.(defaultFontSize) ?? `${defaultFontSize}px`,
     transition: theme.transitions?.create?.(['background-color', 'box-shadow', 'border-color', 'color'], {
-      duration: theme.transitions?.duration?.short ?? 250,
+    duration: theme.transitions?.duration?.short ?? 250,
     }),
+    '&.MuiButtonBase-root-MuiButton-root ': {
+      padding: '6px 8px 4px'
+      },
+
     '&:focus-visible': {
       outline: 'none',
       boxShadow: `0 0 0 2px ${theme.palette?.background?.paper ?? '#fff'}, 0 0 0 4px ${theme.palette?.primary?.main ?? '#1976d2'}`,
