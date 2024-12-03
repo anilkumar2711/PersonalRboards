@@ -140,7 +140,7 @@ export function BoardsPage(props) {
                 ))}
             </Grid>
         </Box>
-        <NewBoard/>
+        <NewBoard projects={state.projects} selectedProject={state.selectedProject} setState={setState} />
     </Box>);
 }
 
