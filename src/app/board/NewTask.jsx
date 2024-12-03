@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 export default function NewTask(props) {
     const { $store,$emit,service, setComponent, query, api } = useMixin();
     const [open,setOpen] = useState(false);
-    const { taskPriorityOptions, current_columns:currentColumns, loggedUser } = $store;
+    const { taskPriorityOptions, current_columns:currentColumns = [], loggedUser } = $store;
     const [ state, setState] = useState({
         current_status:""
     });

@@ -6,6 +6,7 @@ import { Box, Typography, Card, CardContent, Grid, } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import NewBoard from './NewBoard';
 
 const phdProjects = [
     { title: 'Isolation and Identification of bacterial strains in the forest soils of Bhadrachalam', owner: 'Jéssica Texiera', duration: '3 Years 2 months' },
@@ -139,6 +140,7 @@ export function BoardsPage(props) {
                 ))}
             </Grid>
         </Box>
+        <NewBoard/>
     </Box>);
 }
 
