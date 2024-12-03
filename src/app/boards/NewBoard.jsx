@@ -13,7 +13,7 @@ export default function NewBoard(props) {
     const [open,setOpen] = useState(false);
 
     const [ state,setState] = useState({
-        selectedProject: props?.selectedProject || null,
+        selectedProject: props?.selectedProject || {id:"9e18627a-90ab-4d86-9579-e998c19cf53a"},
         projects:props?.projects || []
     });
 
@@ -35,7 +35,7 @@ export default function NewBoard(props) {
     };
 
     const handelProjectSelect = (event,value,option)=>{
-        const selectedProject = v.projects.find(p=>p.id==value);
+        const selectedProject = state.projects.find(p=>p.id==value);
         setState((v) => ({ ...v,  selectedProject }));
         props.setState((v)=>({...v, selectedProject }));
     }
@@ -44,16 +44,23 @@ export default function NewBoard(props) {
         console.log({data});
         api.post("/boards",data).then((response)=>{
             setOpen(false);
+            $emit.trigger("Boards.getBoards");
         }).catch((err)=>{
             
         });
     };
 
     useEffect(()=>{
+        setState((v) => ({ ...v,  selectedProject:props.selectedProject }));
+    },[props.selectedProject])
+
+    useEffect(()=>{
         $emit.onTrigger("openBoardCreate",()=>{
             setOpen(true);
         });
     },[]);
+
+    setComponent("NewBoard",{props,state});
 
     return (
         <PopupModel title='Create Board' open={open} width={"50%"} onClose={() => setOpen(false)} >
@@ -67,6 +74,7 @@ export default function NewBoard(props) {
                             options={projectOptions} 
                             icon={Search}
                             onChange={(...args)=>handelProjectSelect(...args)} 
+                            value={state?.selectedProject?.id}
                             name="projectId"
                             >
                         </Input>

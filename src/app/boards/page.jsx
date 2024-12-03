@@ -64,6 +64,9 @@ export function BoardsPage(props) {
 
     useEffect(()=>{
         getBoards(state.selectedProject?.id);
+        $emit.onTrigger("Boards.getBoards",()=>{
+            getBoards(state.selectedProject?.id);
+        });
     },[state.selectedProject]);
 
     useEffect(()=>{
@@ -81,6 +84,7 @@ export function BoardsPage(props) {
                     options={projectOptions} 
                     icon={Search}
                     onChange={(...args)=>handelProjectSelect(...args)} 
+                    value={state?.selectedProject?.id}
                     >
                 </Input>
                 {/* <Search style={{ position:'absolute', top:0, left:0, transform:'translate(50%, 25%)' }}/> */}
