@@ -7,12 +7,19 @@ import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import NewBoard from './NewBoard';
+import { MdClear } from "react-icons/md";
 
 const phdProjects = [
     { title: 'Isolation and Identification of bacterial strains in the forest soils of Bhadrachalam', owner: 'Jéssica Texiera', duration: '3 Years 2 months' },
     { title: 'Isolation and Identification of bacterial strains in the forest soils of Bhadrachalam', owner: 'Jéssica Texiera', duration: '3 Years 2 months' },
     { title: 'Isolation and Identification of bacterial strains in the forest soils of Bhadrachalam', owner: 'Jéssica Texiera', duration: '3 Years 2 months' },
 ];
+
+const sponsoredProjects = [
+    { title: 'Department of Science & Tech.', endDate: '2nd March 2025', amount: '$5000' },
+    { title: 'Department of Biotechnology', endDate: '2nd March 2025', amount: '$5000' },
+    { title: 'University Grants Commission', endDate: '2nd March 2025', amount: '$5000' },
+  ];
 
 export function BoardsPage(props) {
     const { $store,$emit, setStore,router, setComponent, api, service } = useMixin();
@@ -101,6 +108,54 @@ export function BoardsPage(props) {
             >New</Button>
             </Box>
         </Box>
+        <Box sx={{}}>
+        <Box sx={{ backgroundColor: '#EDF4FF47', border: '1px solid #D9D9D9', borderRadius: '10px', paddingBottom: '10px', paddingRight: '10px', paddingLeft: '10px',marginTop:'10px' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingRight: '10px', paddingLeft: '10px', paddingTop: '10px' }}>
+            <Box sx={{}}>
+              <Typography color='#B3ABAB' fontWeight='600' fontSize='14px' paddingBottom='10px' >Sponsored projects</Typography>
+            </Box>
+            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', color: '#B3ABAB', fontWeight: '400', fontSize: '12px' }}>
+              <Box sx={{ paddingRight: '10px' }}> View all</Box>
+              <Box sx={{}}>
+                <MdClear />
+              </Box>
+            </Box>
+          </Box>
+
+          <Box sx={{ display: 'flex', gap: 2, }}>
+            {sponsoredProjects.map((project, index) => (
+              <Card
+                key={index}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  // p: 2,
+                  flex: '1 1 0',
+                  border: '1px solid #E0E0E0',
+                  boxShadow: 'none',
+                }}
+              >
+                <CardContent sx={{}}>
+                  <Box sx={{}}>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', color: '#B3ABAB', fontWeight: '400', fontSize: '12px' }}>
+                      <img src="dashboards_science.png" alt='' />
+                      <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'initial', paddingBottom: '5px' }}>
+                        <Typography fontWeight="400" paddingLeft='10px' fontSize='12px'>{project.title}</Typography>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', color: '#6EA6FF', paddingTop: '10px' }}>
+                          <Typography fontWeight="400" paddingLeft='10px' fontSize='12px' color='#6EA6FF'>Ends by {project.endDate}</Typography>
+                          <Typography fontWeight="400" paddingLeft='10px' fontSize='12px' color='#6EA6FF'>{project.amount}</Typography>
+                        </Box>
+
+                      </Box>
+                    </Box>
+
+                  </Box>
+                </CardContent>
+              </Card>
+            ))}
+          </Box>
+        </Box>
+      </Box>
         <Box sx={{ mb: 4, pt: 4 }}>
             <Typography fontWeight="600" fontSize='14px' color='#B3ABAB'>Ph.D Projects</Typography>
             <Grid container spacing={2} sx={{ mt: 2 }}>

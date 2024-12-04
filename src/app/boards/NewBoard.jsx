@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Box, Typography, Card, CardContent, Grid, } from '@mui/material';
 import { Search } from 'lucide-react';
 
+
 export default function NewBoard(props) {
     const { $store,$emit,service, setComponent, query, api } = useMixin();
     const [open,setOpen] = useState(false);

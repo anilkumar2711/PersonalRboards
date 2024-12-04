@@ -134,6 +134,8 @@ export default function BoardColumns(props) {
                         backgroundColor: "none",
                         outline: "none",
                         fontWeight: "600",
+                        fontSize:'14px',
+                        color:'#B3ABAB'
                     }}
                     onClick={()=>handelOnAddColumn()}
                 >
