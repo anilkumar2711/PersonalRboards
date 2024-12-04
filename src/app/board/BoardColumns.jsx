@@ -204,7 +204,7 @@ export default function BoardColumns(props) {
                                     >
                                         <CardContent>
                                             <Box sx={{ display: "flex", color: "#5F6368", gap: "5px" }}>
-                                                <img src="work_schedule.png" alt="clock" />
+                                                <icons.WorkSchedule/>
                                                 <Typography fontWeight="400" fontSize="12px">
                                                     {task.title}
                                                 </Typography>
@@ -214,17 +214,17 @@ export default function BoardColumns(props) {
                                                 {task.description}
                                             </Typography>
                                             <Box sx={{ paddingTop: "8px" }}>
-                                                <HiMenuAlt2 />
+                                                <icons.TaskMenu/>
                                             </Box>
-                                            <Box sx={{ paddingTop: "8px", display: "flex", gap: "5px" }}>
-                                                <BiCalendar />
+                                            <Box sx={{ paddingTop: "8px", display: "flex", gap: "5px",fontSize:'7px',fontWeight:'700'}}>
+                                                <icons.TaskProfile/>
                                                 <span className="icon-rounded-small">
                                                     {service.string(task.Assignee.full_name).toProfile(2)}
                                                 </span>
                                             </Box>
 
-                                            <Box sx={{ display: "flex", gap: 1, pt: 1 }}>
-                                                <BiCalendar />
+                                            <Box sx={{ display: "flex", gap: 1, pt: 1 ,alignItems:'center'}}>
+                                                <icons.TaskDateRange/>
                                                 <Typography sx={{ color: "#9ca3af" }}>
                                                     {service.date(new Date()).duration(task.due_date)}
                                                 </Typography>
