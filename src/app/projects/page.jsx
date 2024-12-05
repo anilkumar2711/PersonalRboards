@@ -95,7 +95,7 @@ function ProjectPage(props) {
       )
     },
     "status": {
-      headerIcon: <icons.ProjectStatus />,
+      headerIcon: <icons.ProjectStatus/>,
       label: "Status",
       render: ({ value }) => (
         <Box
@@ -116,7 +116,7 @@ function ProjectPage(props) {
       )
     },
     "owner": {
-      headerIcon: <icons.ProjectOwner />,
+      headerIcon: <icons.ProjectOwner/>,
       label: "Owner",
       render: ({ value }) => {
         if (value) {
@@ -129,7 +129,7 @@ function ProjectPage(props) {
       }
     },
     "startDate": {
-      headerIcon: <icons.ProjectCalendar />,
+      headerIcon: <icons.ProjectCalendar/>,
       label: "Dates",
       render: ({ value, row }) => (<div className='vmiddle' style={{ gap: '5px' }} >
         <span>{service.date(value).toHumanString()}</span>
@@ -138,7 +138,7 @@ function ProjectPage(props) {
       </div>)
     },
     "priority": {
-      headerIcon: <icons.ProjectPriority />,
+      headerIcon: <icons.ProjectPriority/>,
       label: "Priority",
       render: ({ value }) => (
         <Box
@@ -158,7 +158,7 @@ function ProjectPage(props) {
       )
     },
     "completion": {
-      headerIcon: <icons.CompletionPie />,
+      headerIcon: <icons.CompletionPie/>,
       label: "Completion",
       render: ({ value }) => (<Input name="completion" type="progress" disabled={true} value={value} />)
     },
