@@ -11,6 +11,25 @@ import { Settings, Menu } from "lucide-react";
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isMobile = useMediaQuery("(max-width:600px)");
+  
+  const [ state,setState] = useState({
+    selectedProject: null,
+    projects:[],
+   });
+
+  const handleGlobalSearch = (searchText)=>{
+    searchGlobal(searchText);
+  };
+
+  const searchGlobal = (search)=>{
+    api.get("/search", {
+      search
+    }).then(({data:projects}) => {
+      setState((v) => ({ ...v, projects }));
+      // console.log(projects)
+    });
+  };
+  const globalOptions = state.projects.map(v => ({value: v.id, label: v.name}));
 
   const options = [
     { value: "option1", label: "Option 1" },
@@ -59,6 +78,8 @@ function Header() {
           <div style={{ width: '30%', position:'relative'}}>
             <Input
                 type="text"
+                onSearch={() => handleGlobalSearch()}
+                options ={globalOptions}
                 placeholder="Search..."
                 sx={{
                   paddingLeft: "10px",
