@@ -40,7 +40,7 @@ const ogprojects = [
 ];
 
 function ProjectPage(props) {
-  const { $store, setStore, setComponent, api, service } = useMixin();
+  const { $store, setStore, setComponent, api, service, $emit } = useMixin();
   const { icons } = service;
   const node = setComponent("ProjectPage", { props });
   const [isPanelOpen, setIsPanelOpen] = useState(false);
@@ -56,7 +56,6 @@ function ProjectPage(props) {
   node.state = state;
   node.selectedProject = selectedProject;
   const handleProjectSelect = (project) => {
-    ;
     project.dates = `${service.date(project.startDate).toDbDate()},${service.date(project.endDate).toDbDate()}`;
     setSelectedProject(project);
     setIsPanelOpen(true);
@@ -68,6 +67,17 @@ function ProjectPage(props) {
     }).then((projects) => {
       setState((v) => ({ ...v, projects }));
     });
+
+    $emit.onTrigger("GlobalSearch:onSelect:Projects",({option})=>{
+      api.get(`/projects/${option.id}`).then((response)=>{
+        console.log("GlobalSearch:onSelect:Projects",response);
+        //  handleProjectSelect(option);
+      })
+      
+    
+    });
+
+
   }, []);
 
   const projectColumns = ["name", "status","owner", "startDate", "priority", "completion"];//"type",

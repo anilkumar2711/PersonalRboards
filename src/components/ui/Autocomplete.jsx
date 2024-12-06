@@ -102,8 +102,8 @@ const Autocomplete = React.forwardRef(({
 
   const handelSearch = (event, value) => {
     const searched = event.target.value;
-    props.onSearch && props.onSearch(value, event);
-    console.log({ event, value });
+    props.onSearch && props.onSearch(searched,value, event);
+    // console.log({ event, value });
   }
 
   const defaultRenderInput = (params) => <span style={{ position: 'relative' }}>

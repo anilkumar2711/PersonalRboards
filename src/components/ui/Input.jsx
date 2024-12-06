@@ -70,8 +70,7 @@ const Input = React.forwardRef(({ classNameProp = '', type = 'text', ...props },
   };
 
   useEffect(() => {
-    console.log(props.name,props.value);
-    setValue(props.value);
+    value!=props.value && setValue(props.value);
   }, [props.value]);
 
   console.log("rerender",props.name,props.value);

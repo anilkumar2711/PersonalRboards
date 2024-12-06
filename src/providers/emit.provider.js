@@ -5,6 +5,11 @@ export default class Emitter {
         this.nodecallbacks = {};
         this.emittedData = {};
         this.pendingcallbacks = {};
+        this.rootName = "root";
+    }
+
+    setRootname(name) {
+        this.rootName = name;
     }
 
     remove(key) {
@@ -76,7 +81,11 @@ export default class Emitter {
         }
     }
 
-    trigger(key, name, ...arg) {
+    trigger(key,...arg) {
+        return this.triggerWithName(key, this.rootName, ...arg);
+    }
+
+    triggerWithName(key, name, ...arg) {
         let callback = this.listners[key] || (() => (''));
         let tochedNodes = this.nodes[key] || [];
         let triggredTime = new Date().getTime();
@@ -91,6 +100,7 @@ export default class Emitter {
         });
         this.emittedData[key] = {
             triggred: true,
+            name:name,
             params: arg
         };
         let ret = callback(...arg);

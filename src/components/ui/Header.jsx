@@ -7,29 +7,50 @@ import { Button } from "./button";
 import { Input } from "./Input";
 import Dropdown from "./Dropdown";
 import { Settings, Menu } from "lucide-react";
+import { useMixin } from "@/providers/mixin.provider";
 
 function Header() {
+  const { service,api, $emit } = useMixin();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isMobile = useMediaQuery("(max-width:600px)");
   
   const [ state,setState] = useState({
     selectedProject: null,
-    projects:[],
+    searchResults:{},
    });
 
-  const handleGlobalSearch = (searchText)=>{
-    searchGlobal(searchText);
+  const handleGlobalSearch = (searched)=>{
+    searchGlobal(searched);
+  };
+
+  const handleGlobalSearchSelect = (event, id, option)=>{
+    $emit.trigger(`GlobalSearch:onSelect:${option.group}`,{id,option});
+    console.log(`GlobalSearch:onSelect:${option.group}`,{id,option});
   };
 
   const searchGlobal = (search)=>{
-    api.get("/search", {
-      search
-    }).then(({data:projects}) => {
-      setState((v) => ({ ...v, projects }));
-      // console.log(projects)
-    });
+    if(search) {
+      api.get("/search", {
+        query:search
+      }).then((response) => {
+        setState((v)=>({...v,searchResults:response}));
+      });
+    }
   };
-  const globalOptions = state.projects.map(v => ({value: v.id, label: v.name}));
+  let divider = "";
+  const globalOptions = Object.keys(state.searchResults)
+  .reduce((c,key)=> ([
+    ...c,
+    ...state.searchResults[key].map(v=>({
+      ...v,
+      group:service.string(key).toTitleCase()
+    }))]),
+  [])
+  .map((v,i) => {
+    let hasDivider = divider != v.group;
+    divider = v.group;
+    return ({ ...v,value: v.id, label: v.name||v.title,group:v.group, hasDivider });
+  });
 
   const options = [
     { value: "option1", label: "Option 1" },
@@ -40,6 +61,19 @@ function Header() {
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
+
+  const renderSearchOption = (props, option) => (
+      <li {...props} key={option.value} >
+          <div>
+            {
+              option.hasDivider && <label style={{ fontSize:'small', fontColor:'grey', marginBottom:'5px', display:'block', fontWeight:600 }} >{option.group||"Group"}</label>
+            }
+            <span>{option.label}</span>
+          </div>
+      </li>
+  );
+
+  console.log({globalOptions});
 
   return (
     <Box
@@ -77,9 +111,11 @@ function Header() {
         >
           <div style={{ width: '30%', position:'relative'}}>
             <Input
-                type="text"
-                onSearch={() => handleGlobalSearch()}
+                type="search"
+                onSearch={(...args) => handleGlobalSearch(...args)}
+                onChange={(...args) => handleGlobalSearchSelect(...args)}
                 options ={globalOptions}
+                renderOption={renderSearchOption}
                 placeholder="Search..."
                 sx={{
                   paddingLeft: "10px",
