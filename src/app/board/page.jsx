@@ -50,6 +50,7 @@ function Board() {
           router.push(`/board?id=${selectedBoard.id}&project_id=${project_id}`);
         } else {
           alert("There is no board this current project");
+          router.push(`/boards?project_id=${project_id}`);
         }
       });
     }

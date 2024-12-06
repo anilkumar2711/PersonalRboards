@@ -66,18 +66,7 @@ export default function NewBoard(props) {
         <PopupModel title='Create Board' open={open} width={"50%"} onClose={() => setOpen(false)} >
             <Form onSubmit={handleSubmit} >
                     <Box sx={{display:'flex',gap:"10px"}} >
-                        <Input 
-                            onSearch={()=>handleProjectSearch()} 
-                            label="Select Project"
-                            type="search" 
-                            placeholder="Search projects for boards"  
-                            options={projectOptions} 
-                            icon={Search}
-                            onChange={(...args)=>handelProjectSelect(...args)} 
-                            value={state?.selectedProject?.id}
-                            name="projectId"
-                            >
-                        </Input>
+                        <input type='hidden' name="projectId" value={state?.selectedProject?.id} ></input>
                         {state.selectedProject && <Input type="text" name="name" label="Board Name" placeholder="Enter Board Name" ></Input>}
                     </Box>
                     <div style={{ display:'flex'}}>

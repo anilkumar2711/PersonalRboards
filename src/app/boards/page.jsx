@@ -15,23 +15,24 @@ const phdProjects = [
 ];
 
 export function BoardsPage(props) {
-    const { $store,$emit, setStore,router, setComponent, api, service } = useMixin();
-    const [ state,setState] = useState({
+    const { $store, $emit, setStore, router, setComponent, api, service, query } = useMixin();
+    const project_id = query.get("project_id");
+    const [state, setState] = useState({
         selectedProject: null,
-        projects:[],
-        boards:[]
+        projects: [],
+        boards: []
     });
 
-    const node = setComponent("BoardsPage",{state});
-    
-    const projectOptions = state.projects.map(v => ({value: v.id, label: v.name}));
+    const node = setComponent("BoardsPage", { state });
 
-    const searchProjects = (search)=>{
+    const projectOptions = state.projects.map(v => ({ value: v.id, label: v.name }));
+
+    const searchProjects = (search) => {
         api.get("/projects", {
             limit: 10,
             page: 1,
             search
-        }).then(({data:projects}) => {
+        }).then(({ data: projects }) => {
             setState((v) => ({ ...v, projects }));
             // console.log(projects)
         });
@@ -41,64 +42,76 @@ export function BoardsPage(props) {
         router.push(`/board?id=${board.id}&project_id=${board.project_id}`);
     };
 
-    const handleProjectSearch = (searchText)=>{
+    const handleProjectSearch = (searchText) => {
         searchProjects(searchText);
     };
 
-    const handelProjectSelect = (event,value,option)=>{
-        setState((v) => ({ ...v, selectedProject: v.projects.find(p=>p.id==value) }));
+    const handelProjectSelect = (event, value, option) => {
+        setState((v) => ({ ...v, selectedProject: v.projects.find(p => p.id == value) }));
     }
 
-    const getBoards = (projectId)=>{
-        if(!projectId) return;
-        api.get(`/boards/${state.selectedProject?.id}`).then((boardsList)=>{
+    const getBoards = (projectId) => {
+        if (!projectId) return;
+        api.get(`/boards/${state.selectedProject?.id}`).then((boardsList) => {
             setState((v) => ({ ...v, boards: boardsList }));
         });
     }
 
-    const getAllBoards = ()=>{
-        api.get(`/boards`).then((boardsList)=>{
+    const getAllBoards = () => {
+        api.get(`/boards`).then((boardsList) => {
             setState((v) => ({ ...v, boards: boardsList }));
         });
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         getBoards(state.selectedProject?.id);
-        $emit.onTrigger("Boards.getBoards",()=>{
+        $emit.onTrigger("Boards.getBoards", () => {
             getBoards(state.selectedProject?.id);
         });
-    },[state.selectedProject]);
+    }, [state.selectedProject]);
+
+    useEffect(() => {
+        getAllBoards();
+        searchProjects("");
+    }, []);
 
     useEffect(()=>{
-        getAllBoards();
-    },[]);
+        if(project_id && state.projects.length) {
+            let selectedProject = state.projects.find(v=>v.id==project_id);
+            selectedProject && setState(v=>({...v,selectedProject}));
+        }
+    },[project_id,state.projects]);
 
     return (<Box sx={{ margin: 2 }}>
-        <Box sx={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
-          <Box>
-            <div style={{ position:'relative', width: '300px'}}>
-                <Input 
-                    onSearch={()=>handleProjectSearch()} 
-                    type="search" 
-                    placeholder="Search projects for boards"  
-                    options={projectOptions} 
-                    icon={Search}
-                    onChange={(...args)=>handelProjectSelect(...args)} 
-                    value={state?.selectedProject?.id}
+        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Box>
+                <div style={{ position: 'relative', width: '300px' }}>
+                    <Input
+                        onSearch={() => handleProjectSearch()}
+                        type="search"
+                        placeholder="Search projects for boards"
+                        options={projectOptions}
+                        icon={Search}
+                        onChange={(...args) => handelProjectSelect(...args)}
+                        value={state?.selectedProject?.id}
                     >
-                </Input>
-                {/* <Search style={{ position:'absolute', top:0, left:0, transform:'translate(50%, 25%)' }}/> */}
-            </div>
+                    </Input>
+                    {/* <Search style={{ position:'absolute', top:0, left:0, transform:'translate(50%, 25%)' }}/> */}
+                </div>
             </Box>
-             
-            <Box sx={{marginRight:'10px'}}>
-            <Button onClick={()=>$emit.trigger("openBoardCreate")} 
-                sx={{
-                    fontSize: "12px",
-                    fontWeight: "700",
-                    color: "white",
-                  }}
-            >New</Button>
+
+            <Box sx={{ marginRight: '10px' }}>
+                {
+                    state.selectedProject && !state.boards.length && <Button onClick={() => $emit.trigger("openBoardCreate")}
+                    sx={{
+                        fontSize: "12px",
+                        fontWeight: "700",
+                        color: "white",
+                    }}
+                >
+                    New
+                </Button>
+                }
             </Box>
         </Box>
         <Box sx={{ mb: 4, pt: 4 }}>
@@ -144,7 +157,11 @@ export function BoardsPage(props) {
                 ))}
             </Grid>
         </Box>
-        <NewBoard projects={state.projects} selectedProject={state.selectedProject} setState={setState} />
+        <NewBoard 
+            projects={state.projects} 
+            selectedProject={state.selectedProject} 
+            setState={setState} 
+        />
     </Box>);
 }
 

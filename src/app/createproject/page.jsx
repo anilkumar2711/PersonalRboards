@@ -42,13 +42,17 @@ const NewProjectForm = (props) => {
                 'Content-Type': 'multipart/form-data',
             }
         }).then((projectResponse) => {
+            alert("Project Created");
+            /*
             api.post("/boards", {
                 "projectId": projectResponse.id,
                 "name": "DEFAULT BOARD"
             }).then(()=>{
-                alert("Project Created");
+                
                 form.current.reset();
             })
+
+            */
         })
         .catch((err) => {
             alert("Please fill valid fields to create project");
