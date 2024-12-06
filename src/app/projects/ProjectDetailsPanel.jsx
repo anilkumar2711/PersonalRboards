@@ -46,23 +46,24 @@ export default function ProjectDetailsPanel(props) {
     ]);
     // const [relatedProjects, setRelatedProjects] = useState([]);
 
-    // const fetchRelatedProjects = () => {
-    //     api
-    //       .get(`/projects/${project.id}/tasks`) // Assume this API endpoint returns related tasks
-    //       .then((response) => {
-    //         console.log(response.data);
-    //         // setRelatedProjects(response.data);
+    const fetchRelatedProjects = () => {
+        api
+          .get(`/projects/${project.id}/tasks`) // Assume this API endpoint returns related tasks
+          .then((response) => {
+            console.log(response.data);
+            // setRelatedProjects(response.data);
            
-    //       })
-    //       .catch((err) => {
-    //         console.error("Error fetching related projects:", err);
-    //       });
-    //   };
-    //   useEffect(() => {
-    //     if (isOpen) {
-    //       fetchRelatedProjects();
-    //     }
-    //   }, [isOpen, project]);
+          })
+          .catch((err) => {
+            console.error("Error fetching related projects:", err);
+          });
+    };
+
+    useEffect(() => {
+        if (isOpen) {
+            //fetchRelatedProjects();
+        }
+    }, [isOpen, project]);
 
     const relatedProjectsFields = {
         name: {
@@ -147,8 +148,8 @@ export default function ProjectDetailsPanel(props) {
             label: data.label
         }).then((response) => {
             console.log({ createProject: response });
-            // window.location.reload();
-            // fetchRelatedProjects();
+            alert("Project Saved.");
+            onClose && onClose();
         })
         .catch((err) => {
             console.error(err);

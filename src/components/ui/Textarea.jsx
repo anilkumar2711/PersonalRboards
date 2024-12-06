@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TextField } from '@mui/material';
 import { styled } from '@mui/system';
 
@@ -51,6 +51,12 @@ const StyledTextarea = styled(TextField)(({ theme }) => ({
 }));
 
 const Textarea = React.forwardRef(({ className = '', ...props }, ref) => {
+    const [value, setValue] = useState(props.value);
+    const handleChange = (...args) => {
+        let [e] = args;
+        setValue(e.target.value);
+        props.onChange && props.onChange(...args);
+    };
     return (
         <StyledTextarea
             multiline
@@ -64,6 +70,8 @@ const Textarea = React.forwardRef(({ className = '', ...props }, ref) => {
                 },
             }}
             {...props}
+            onChange={(...args)=>handleChange(...args)}
+            value={value}
         />
     );
 });
