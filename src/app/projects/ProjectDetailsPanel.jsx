@@ -2,7 +2,7 @@
 import { Input } from "@/components/ui/Input";
 import { Box, Typography,IconButton } from '@mui/material';
 import { ChevronsRight, MoveDiagonal2,Minimize2, ChevronsUpDown } from "lucide-react"
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { MdAdd, MdOutlineSearch, MdMoreHoriz } from "react-icons/md";
 import { BsLayoutSidebarInsetReverse } from "react-icons/bs";
 import DynamicTable from "@/components/ui/DynamicTable";
@@ -20,6 +20,7 @@ export default function ProjectDetailsPanel(props) {
         onClose,
         project
     } = props;
+
 
     const taskStatusOptions = [
         { value: "TO DO", label: "TO DO", color: "#BFC5D2" },
@@ -43,6 +44,25 @@ export default function ProjectDetailsPanel(props) {
         { name: "Sample Task 4", status: "COMPLETED", owner: "Dr. Divakar Sadam", priority: "LOW", action: false },
         { name: "Sample Task 5", status: "TO DO", owner: "Dr. Divakar Sadam", priority: "MEDIUM", action: true }
     ]);
+    // const [relatedProjects, setRelatedProjects] = useState([]);
+
+    // const fetchRelatedProjects = () => {
+    //     api
+    //       .get(`/projects/${project.id}/tasks`) // Assume this API endpoint returns related tasks
+    //       .then((response) => {
+    //         console.log(response.data);
+    //         // setRelatedProjects(response.data);
+           
+    //       })
+    //       .catch((err) => {
+    //         console.error("Error fetching related projects:", err);
+    //       });
+    //   };
+    //   useEffect(() => {
+    //     if (isOpen) {
+    //       fetchRelatedProjects();
+    //     }
+    //   }, [isOpen, project]);
 
     const relatedProjectsFields = {
         name: {
@@ -111,6 +131,7 @@ export default function ProjectDetailsPanel(props) {
             )
         }
     };
+   
 
     const handleSubmit = (data, event) => {
         console.log({ data });
@@ -126,6 +147,8 @@ export default function ProjectDetailsPanel(props) {
             label: data.label
         }).then((response) => {
             console.log({ createProject: response });
+            // window.location.reload();
+            // fetchRelatedProjects();
         })
         .catch((err) => {
             console.error(err);

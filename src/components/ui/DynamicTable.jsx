@@ -23,8 +23,28 @@ const DynamicTable = ({ data: dataProp = [], columns: columnsProp = [], extras =
     const hasField = (column, key) => (!!(fields[column] && fields[column][key]));
     const getField = (column) => (fields[column] || {});
 
-    const handleSearch = ()=>{
+    const [ state,setState] = useState({
+        selectedProject: null,
+        projects:[],
+    });
+    const projectOptions = state.projects.map(v => ({value: v.id, label: v.name}));
+    const handleProjectSearch = (searchText)=>{
+        searchProjects(searchText);
+    };
 
+    // const handelProjectSelect = (event,value,option)=>{
+    //     setState((v) => ({ ...v, selectedProject: v.projects.find(p=>p.id==value) }));
+    // }
+
+    const searchProjects = (search)=>{
+        api.get("/projects", {
+            limit: 10,
+            page: 1,
+            search
+        }).then(({data:projects}) => {
+            setState((v) => ({ ...v, projects }));
+            // console.log(projects)
+        });
     };
 
     useEffect(() => {
@@ -56,10 +76,12 @@ const DynamicTable = ({ data: dataProp = [], columns: columnsProp = [], extras =
                 
                 <div style={{width:'300px'}}>
                     <Input 
-                        onSearch={()=>handleSearch()} 
+                        onSearch={()=>handleProjectSearch()} 
                         type="search" 
                         placeholder="Search"
+                        options={projectOptions} 
                         icon={Search}
+                        // onChange={(...args)=>handelProjectSelect(...args)} 
                         >
                     </Input>
                 </div>

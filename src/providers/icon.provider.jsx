@@ -29,6 +29,10 @@ import AssigneeIcon from "@public/svgs/AssigneeIcon.svg";
 import TaskFlag from "@public/svgs/TaskFlag.svg";
 import TaskSort from "@public/svgs/TaskSort.svg";
 import TaskDropdown from "@public/svgs/TaskDropdown.svg";
+import WorkSchedule from "@public/svgs/WorkSchedule.svg";
+import TaskMenu from "@public/svgs/TaskMenu.svg";
+import TaskProfile from "@public/svgs/TaskProfile.svg";
+import TaskDateRange from "@public/svgs/TaskDateRange.svg";
 
 export default {
     AddFile,
@@ -60,5 +64,9 @@ export default {
     AssigneeIcon,
     TaskFlag,
     TaskSort,
-    TaskDropdown
+    TaskDropdown,
+    WorkSchedule,
+    TaskMenu,
+    TaskProfile,
+    TaskDateRange
 }
