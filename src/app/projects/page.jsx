@@ -192,9 +192,7 @@ function ProjectPage(props) {
       }}
     >
 
-    <Backdrop
-        open={projectsLoading}
-      >
+    <Backdrop open={projectsLoading} >
         <CircularProgress color="inherit" />
     </Backdrop>
 
