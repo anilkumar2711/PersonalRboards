@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Search, ListFilter, } from 'lucide-react';
 import ProjectDetailsPanel from './ProjectDetailsPanel';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Backdrop, CircularProgress } from '@mui/material';
 import { useMixin } from '@/providers/mixin.provider';
 import DynamicTable from '@/components/ui/DynamicTable';
 import Link from "next/link";
@@ -54,7 +54,7 @@ function ProjectPage(props) {
     },
   });
 
-  const { callApi:getProjects } = useApi("get:projects",{setState,key:"projects"});
+  const { callApi:getProjects, loading:projectsLoading } = useApi("get:projects",{setState,key:"projects"});
 
   node.state = state;
   node.selectedProject = selectedProject;
@@ -191,6 +191,12 @@ function ProjectPage(props) {
         margin: 2
       }}
     >
+
+    <Backdrop
+        open={projectsLoading}
+      >
+        <CircularProgress color="inherit" />
+    </Backdrop>
 
       <ProjectDetailsPanel
         isOpen={isPanelOpen}
