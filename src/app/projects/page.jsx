@@ -40,7 +40,7 @@ const ogprojects = [
 ];
 
 function ProjectPage(props) {
-  const { $store, setStore, setComponent, api, service, $emit } = useMixin();
+  const { $store, setStore, setComponent, api, service, $emit, useApi } = useMixin();
   const { icons } = service;
   const node = setComponent("ProjectPage", { props });
   const [isPanelOpen, setIsPanelOpen] = useState(false);
@@ -49,10 +49,13 @@ function ProjectPage(props) {
     projects: {
       data: [],
       current_page: 1,
-      total_page: 1,
-      total_records: 1
+      pages: 1,
+      total: 1
     },
   });
+
+  const { callApi:getProjects } = useApi("get:projects",{setState,key:"projects"});
+
   node.state = state;
   node.selectedProject = selectedProject;
   const handleProjectSelect = (project) => {
@@ -61,12 +64,14 @@ function ProjectPage(props) {
     setIsPanelOpen(true);
   }
   useEffect(() => {
-    api.get("/projects", {
-      limit: 10,
-      page: 1
-    }).then((projects) => {
-      setState((v) => ({ ...v, projects }));
-    });
+    // api.get("/projects", {
+    //   limit: 10,
+    //   page: 1
+    // }).then((projects) => {
+    //   setState((v) => ({ ...v, projects }));
+    // });
+
+    getProjects({limit:10,page:1});
 
     $emit.onTrigger("GlobalSearch:onSelect:Projects",({option})=>{
       api.get(`/projects/${option.id}`).then((response)=>{
