@@ -1,7 +1,7 @@
 export default {
     login(data={
-        "email": "anilkumarkrishna027@gmail.com",
-        "password": "1234@anil"
+        "email": "anilkumarkmurthy707@gmail.com",
+        "password": "1234@Anil"
       }) {
         return new Promise((resolve,reject)=>{
             this.api.main.post("/auth/login",data).then((response)=>{
