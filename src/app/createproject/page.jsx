@@ -88,7 +88,6 @@ const NewProjectForm = (props) => {
                     alignItems: 'center', mb: 2
                 }}>
                     <Box sx={{ width: '600px' }}>
-                        {/* Project Details */}
                         <Box>
                             <Tooltip title="Add Cover">
                                 <IconButton
